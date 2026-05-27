@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificado de Conclusão · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(212,168,83,.12); border: 1px solid rgba(212,168,83,.3); color: var(--gold); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+
+    /* FORM CARD */
+    .form-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2rem 2.5rem; margin-bottom: 3rem; max-width: 720px; margin-left: auto; margin-right: auto;
+    }
+    .form-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; }
+    .field label { display: block; font-size: .82rem; font-weight: 600; color: var(--dark); margin-bottom: .5rem; }
+    .field input { width: 100%; padding: .9rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--dark); transition: all .2s; }
+    .field input:focus { outline: none; border-color: var(--em); box-shadow: 0 0 0 3px rgba(13,148,136,.1); }
+    .form-actions { margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+    .btn { padding: .9rem 2rem; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 700; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; border: none; }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover { background: var(--gold-dk); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212,168,83,.3); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--gray); color: var(--dark); }
+
+    /* CERTIFICATE — LANDSCAPE A4 */
+    .certificate-wrap { display: flex; justify-content: center; margin-bottom: 2rem; }
+    .certificate {
+      width: 1080px; max-width: 100%; aspect-ratio: 1.414 / 1;
+      background: #FAFAF7; position: relative; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.15);
+      border-radius: 8px;
+    }
+    /* BORDA DUPLA DOURADA */
+    .certificate::before {
+      content: ''; position: absolute; inset: 18px;
+      border: 1.5px solid var(--gold);
+      border-radius: 4px; pointer-events: none;
+    }
+    .certificate::after {
+      content: ''; position: absolute; inset: 22px;
+      border: 0.5px solid var(--gold); opacity: .4;
+      border-radius: 2px; pointer-events: none;
+    }
+    /* CANTOS DECORATIVOS */
+    .cert-corner {
+      position: absolute; width: 55px; height: 55px; border-style: solid; border-color: var(--gold);
+    }
+    .cert-corner-tl { top: 32px; left: 32px; border-width: 2px 0 0 2px; }
+    .cert-corner-tr { top: 32px; right: 32px; border-width: 2px 2px 0 0; }
+    .cert-corner-bl { bottom: 32px; left: 32px; border-width: 0 0 2px 2px; }
+    .cert-corner-br { bottom: 32px; right: 32px; border-width: 0 2px 2px 0; }
+
+    /* CONTEÚDO INTERNO */
+    .cert-content {
+      position: relative; height: 100%;
+      padding: 60px 80px;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+    }
+    .cert-top {
+      display: flex; align-items: center; gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .cert-seal {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dk));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+      color: var(--dark); font-size: 1.6rem;
+      box-shadow: 0 4px 15px rgba(212,168,83,.35); flex-shrink: 0;
+    }
+    .cert-logo-block { text-align: left; }
+    .cert-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700; color: var(--dark); letter-spacing: -.01em;
+    }
+    .cert-brand .gold { color: var(--gold); font-style: italic; }
+    .cert-school {
+      font-family: 'Inter', sans-serif;
+      font-size: .72rem; color: var(--muted); letter-spacing: .12em;
+      text-transform: uppercase; font-weight: 600; margin-top: .15rem;
+    }
+    .cert-title-section { margin-top: 1.25rem; }
+    .cert-eyebrow {
+      font-family: 'Inter', sans-serif; font-size: .8rem;
+      color: var(--em); letter-spacing: .25em; text-transform: uppercase; font-weight: 700;
+      margin-bottom: .65rem;
+    }
+    .cert-title {
+      font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+      font-size: 3.3rem; font-weight: 700; color: var(--dark);
+      letter-spacing: -0.01em; line-height: 1; margin-bottom: 0;
+    }
+    .cert-title em { font-style: italic; color: var(--gold); font-weight: 700; }
+    .cert-text-1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1.1rem; color: #4b5563;
+      margin: 2.25rem 0 1rem;
+    }
+    .cert-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.85rem; font-weight: 900; font-style: italic;
+      color: var(--dark);
+      position: relative; display: inline-block;
+      padding: 0 1.5rem .35rem; line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+    .cert-name::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 80%; height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+    }
+    .cert-desc {
+      max-width: 700px;
+      font-family: 'Inter', sans-serif; font-size: .98rem; line-height: 1.7;
+      color: #374151;
+    }
+    .cert-desc strong { color: var(--dark); font-weight: 700; }
+    .cert-meta {
+      margin-top: 2rem;
+      display: flex; gap: 3.5rem; align-items: flex-start;
+    }
+    .cert-meta-item { text-align: center; }
+    .cert-meta-label {
+      font-family: 'Inter', sans-serif; font-size: .65rem;
+      color: var(--muted); letter-spacing: .15em; text-transform: uppercase;
+      font-weight: 600; margin-bottom: .35rem;
+    }
+    .cert-meta-value {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: 1.05rem; color: var(--dark);
+    }
+    .cert-bottom {
+      margin-top: auto; padding-top: 1.5rem;
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem;
+    }
+    .cert-signature {
+      text-align: center; flex: 1;
+      max-width: 320px;
+    }
+    .cert-sig-line {
+      width: 100%; height: 1px; background: var(--dark); margin-bottom: .5rem;
+    }
+    .cert-sig-name {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: .95rem; color: var(--dark);
+    }
+    .cert-sig-role {
+      font-family: 'Inter', sans-serif; font-size: .72rem;
+      color: var(--muted); margin-top: .15rem;
+    }
+    .cert-id {
+      font-family: 'Inter', sans-serif; font-size: .7rem;
+      color: var(--muted); letter-spacing: .1em;
+    }
+    .cert-id strong { color: var(--gold-dk); font-family: 'Playfair Display', serif; font-weight: 700; }
+
+    .actions-row { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+
+    /* PRINT — A4 LANDSCAPE */
+    @media print {
+      nav, .oa-header, .form-card, .actions-row, footer { display: none !important; }
+      body { background: #fff; }
+      .container { padding: 0 !important; max-width: none; }
+      .certificate-wrap { margin: 0; }
+      .certificate { box-shadow: none !important; border-radius: 0; width: 100% !important; max-width: 297mm !important; aspect-ratio: 1.414 / 1; }
+      @page { size: A4 landscape; margin: 0; }
+    }
+
+    @media (max-width: 700px) {
+      .container { padding: 3rem 1.25rem 4rem; }
+      .form-card { padding: 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .cert-content { padding: 35px 28px; }
+      .cert-title { font-size: 1.6rem; }
+      .cert-name { font-size: 1.5rem; }
+      .cert-text-1 { font-size: .92rem; margin: 1.5rem 0 .75rem; }
+      .cert-desc { font-size: .82rem; }
+      .cert-meta { gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; }
+      .cert-bottom { flex-direction: column; align-items: center; gap: 1rem; }
+      .cert-corner { width: 30px; height: 30px; }
+      .cert-corner-tl, .cert-corner-tr { top: 25px; }
+      .cert-corner-bl, .cert-corner-br { bottom: 25px; }
+      .cert-corner-tl, .cert-corner-bl { left: 25px; }
+      .cert-corner-tr, .cert-corner-br { right: 25px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">🏆 OA 08 · Certificado · Conclusão do curso</span>
+    <h1>Seu certificado <span class="gold">Saint Paul.</span></h1>
+    <p>Preencha seu nome completo e a data de conclusão. O certificado é gerado em tempo real — clique em "Salvar como PDF" pra imprimir ou guardar.</p>
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="form-card">
+    <div class="form-grid">
+      <div class="field">
+        <label for="iName">Seu nome completo</label>
+        <input type="text" id="iName" placeholder="Ex: Maria Silva Souza" oninput="updateCert()" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="iDate">Data de conclusão</label>
+        <input type="date" id="iDate" oninput="updateCert()">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-ghost" onclick="useToday()">📅 Usar data de hoje</button>
+      <button class="btn btn-gold" onclick="window.print()">📄 Salvar como PDF</button>
+    </div>
+  </div>
+
+  <div class="certificate-wrap">
+    <div class="certificate" id="cert">
+      <div class="cert-corner cert-corner-tl"></div>
+      <div class="cert-corner cert-corner-tr"></div>
+      <div class="cert-corner cert-corner-bl"></div>
+      <div class="cert-corner cert-corner-br"></div>
+
+      <div class="cert-content">
+        <div class="cert-top">
+          <div class="cert-seal">SP</div>
+          <div class="cert-logo-block">
+            <div class="cert-brand">✦ Venda Mais. <span class="gold">Gaste Menos.</span></div>
+            <div class="cert-school">Saint Paul Escola de Negócios</div>
+          </div>
+        </div>
+
+        <div class="cert-title-section">
+          <div class="cert-eyebrow">Certificado de Conclusão</div>
+          <h1 class="cert-title">Inteligência Artificial<br><em>nas Vendas</em></h1>
+        </div>
+
+        <p class="cert-text-1">Certificamos que</p>
+
+        <div class="cert-name" id="cName">Seu Nome Aqui</div>
+
+        <p class="cert-desc">
+          concluiu com aproveitamento o curso <strong>"Venda Mais. Gaste Menos. — IA para Pequenos Negócios"</strong>,
+          totalizando <strong>8 horas</strong> de carga horária prática, distribuídas em 4 módulos com 12 vídeos curtos,
+          8 objetos de aprendizagem interativos e atividades aplicadas ao próprio negócio.
+        </p>
+
+        <div class="cert-meta">
+          <div class="cert-meta-item">
+            <div class="cert-meta-label">Carga horária</div>
+            <div class="cert-meta-value">8 horas</div>
+          </div>
+          <div class="cert-meta-item">
+            <div class="cert-meta-label">Módulos</div>
+            <div class="cert-meta-value">4 / 4</div>
+          </div>
+          <div class="cert-meta-item">
+            <div class="cert-meta-label">Concluído em</div>
+            <div class="cert-meta-value" id="cDate">—</div>
+          </div>
+        </div>
+
+        <div class="cert-bottom">
+          <div class="cert-id">ID: <strong id="cId">VMGM-XXXXXX</strong></div>
+          <div class="cert-signature">
+            <div class="cert-sig-line"></div>
+            <div class="cert-sig-name">Equipe do Projeto Extensionista</div>
+            <div class="cert-sig-role">Saint Paul · Bacharel em Administração · Turma 02</div>
+          </div>
+          <div class="cert-id" style="text-align:right">Conferência:<br><strong>vendamaisgastemenos.com/verificar</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions-row">
+    <button class="btn btn-ghost" onclick="resetCert()">↻ Limpar</button>
+    <button class="btn btn-gold" onclick="window.print()">📄 Salvar como PDF (Ctrl+P)</button>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'vmgm-oa-certificado';
+
+  function formatDate(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr + 'T00:00:00');
+    if (isNaN(d.getTime())) return '—';
+    const months = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    return `${d.getDate()} de ${months[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
+  function generateId(name, date) {
+    const seed = (name + date).replace(/\s/g, '').toUpperCase();
+    let hash = 0;
+    for (let i = 0; i < seed.length; i++) hash = ((hash << 5) - hash + seed.charCodeAt(i)) | 0;
+    const id = Math.abs(hash).toString(36).slice(0, 6).toUpperCase().padStart(6, '0');
+    return 'VMGM-' + id;
+  }
+
+  function updateCert() {
+    const name = document.getElementById('iName').value.trim() || 'Seu Nome Aqui';
+    const dateRaw = document.getElementById('iDate').value;
+    document.getElementById('cName').textContent = name;
+    document.getElementById('cDate').textContent = formatDate(dateRaw);
+    document.getElementById('cId').textContent = name.trim() && dateRaw ? generateId(name, dateRaw) : 'VMGM-XXXXXX';
+    save({ name, date: dateRaw });
+  }
+
+  function useToday() {
+    const d = new Date();
+    const iso = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    document.getElementById('iDate').value = iso;
+    updateCert();
+  }
+
+  function resetCert() {
+    if (!confirm('Limpar os dados do certificado?')) return;
+    document.getElementById('iName').value = '';
+    document.getElementById('iDate').value = '';
+    localStorage.removeItem(STORAGE_KEY);
+    updateCert();
+  }
+
+  function save(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+  function load() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) try {
+      const d = JSON.parse(saved);
+      if (d.name) document.getElementById('iName').value = d.name;
+      if (d.date) document.getElementById('iDate').value = d.date;
+    } catch(e) {}
+  }
+
+  load();
+  updateCert();
+</script>
+
+</body>
+</html>

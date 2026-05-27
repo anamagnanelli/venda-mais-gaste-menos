@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist de Implementação — Do curso à prática · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3); color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+    /* PROGRESS CARD */
+    .progress-section { max-width: 720px; margin: -2.5rem auto 0; padding: 0 2rem; position: relative; z-index: 10; }
+    .progress-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,.08);
+    }
+    .progress-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+    .progress-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800; margin-bottom: .25rem; }
+    .progress-info p { color: var(--muted); font-size: .88rem; }
+    .progress-stats { text-align: right; }
+    .progress-pct { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg, var(--gold), var(--em-lt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .progress-count { color: var(--muted); font-size: .8rem; margin-top: .15rem; }
+    .progress-bar { height: 10px; background: var(--gray); border-radius: 999px; overflow: hidden; margin-top: .5rem; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 999px; transition: width .4s ease; width: 0%; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+
+    /* PHASE GROUP */
+    .phase {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      margin-bottom: 1.5rem; overflow: hidden; transition: all .2s;
+    }
+    .phase-head {
+      padding: 1.5rem 1.85rem; cursor: pointer; user-select: none;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+      border-bottom: 1px solid transparent; transition: all .2s;
+    }
+    .phase[data-open="true"] .phase-head { border-bottom-color: var(--border); }
+    .phase-head:hover { background: var(--gray); }
+    .phase-title { display: flex; align-items: center; gap: 1rem; }
+    .phase-num {
+      width: 40px; height: 40px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--em-lt));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-weight: 900; color: var(--dark); flex-shrink: 0;
+    }
+    .phase-title h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+    .phase-title p { font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+    .phase-meta { display: flex; align-items: center; gap: 1rem; }
+    .phase-progress { font-size: .82rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .phase-progress strong { color: var(--em); }
+    .phase-toggle { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); transition: transform .2s; line-height: 1; }
+    .phase[data-open="true"] .phase-toggle { transform: rotate(45deg); }
+    .phase-tasks { padding: .5rem 1.85rem 1.5rem; display: none; }
+    .phase[data-open="true"] .phase-tasks { display: block; }
+
+    /* TASK ITEM */
+    .task {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: .85rem 0; border-bottom: 1px solid var(--gray);
+      cursor: pointer; user-select: none; transition: all .2s;
+    }
+    .task:last-child { border-bottom: none; }
+    .task:hover { background: rgba(212,168,83,.03); margin: 0 -1.85rem; padding-left: 1.85rem; padding-right: 1.85rem; }
+    .task-check {
+      width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 7px;
+      flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+      transition: all .2s; margin-top: 2px; background: #fff;
+    }
+    .task-check svg { width: 14px; height: 14px; opacity: 0; transition: opacity .2s; }
+    .task[data-done="true"] .task-check { background: var(--em); border-color: var(--em); }
+    .task[data-done="true"] .task-check svg { opacity: 1; }
+    .task-content { flex: 1; min-width: 0; }
+    .task-text { font-size: .95rem; color: var(--dark); line-height: 1.5; transition: all .2s; }
+    .task[data-done="true"] .task-text { color: var(--muted); text-decoration: line-through; }
+    .task-desc { font-size: .82rem; color: var(--muted); margin-top: .2rem; line-height: 1.5; }
+    .task-tools { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .35rem; }
+    .task-tool { font-size: .68rem; color: var(--gold-dk); background: rgba(212,168,83,.1); padding: .15rem .5rem; border-radius: 6px; font-weight: 600; }
+
+    /* CELEBRATION */
+    .celebration {
+      display: none; background: linear-gradient(135deg, var(--gold), var(--em));
+      color: #fff; border-radius: 22px; padding: 2.5rem 2rem; text-align: center; margin-bottom: 1.5rem;
+    }
+    .celebration.show { display: block; animation: fadeIn .5s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .celebration h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; margin-bottom: .5rem; font-style: italic; }
+    .celebration p { font-size: .98rem; opacity: .95; }
+
+    /* CONTROLS */
+    .controls-bar { display: flex; gap: .75rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap; }
+    .btn { padding: .75rem 1.5rem; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .85rem; font-weight: 700; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; border: none; }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--gray); color: var(--dark); }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover { background: var(--gold-dk); }
+
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+
+    @media (max-width: 600px) {
+      .progress-section { padding: 0 1.25rem; }
+      .progress-card { padding: 1.5rem; }
+      .container { padding: 2rem 1.25rem 4rem; }
+      .phase-head { padding: 1.25rem 1.5rem; }
+      .phase-tasks { padding: .5rem 1.5rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">✅ OA 06 · Checklist de Implementação · Pós-curso</span>
+    <h1>Do curso <span class="gold">à prática.</span></h1>
+    <p>32 tarefas organizadas em 4 fases pra você sair do "aprendi" para o "estou usando". Marque conforme avança — tudo salvo localmente.</p>
+  </div>
+</section>
+
+<div class="progress-section">
+  <div class="progress-card">
+    <div class="progress-head">
+      <div class="progress-info">
+        <h3>Seu progresso geral</h3>
+        <p id="progressMsg">Comece marcando a primeira tarefa.</p>
+      </div>
+      <div class="progress-stats">
+        <div class="progress-pct"><span id="pctNum">0</span>%</div>
+        <div class="progress-count"><strong id="doneNum">0</strong> de <strong id="totalNum">32</strong> concluídas</div>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="celebration" id="celebration">
+    <h3>🎉 Parabéns! Você completou TUDO!</h3>
+    <p>Você não só aprendeu — você implementou. Isso é o que a banca da Saint Paul chama de "aprender fazendo".</p>
+  </div>
+
+  <div id="phasesContainer"></div>
+
+  <div class="controls-bar">
+    <button class="btn btn-ghost" onclick="resetChecklist()">↻ Resetar tudo</button>
+    <button class="btn btn-gold" onclick="exportChecklist()">📋 Exportar progresso</button>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'vmgm-oa-checklist';
+
+  const PHASES = [
+    {
+      num: '01',
+      title: 'Antes do curso — Preparação',
+      desc: '7 ações pra você começar com tudo organizado',
+      tasks: [
+        { id:'p1-1', text:'Reservar 1h fixa na agenda toda semana pra estudar', desc:'Sem isso, o curso vira "vou ver quando der" — e nunca dá.' },
+        { id:'p1-2', text:'Criar conta no ChatGPT (gratuita basta)', desc:'Vai usar em quase todos os módulos.', tools:['ChatGPT'] },
+        { id:'p1-3', text:'Criar conta no Perplexity AI (gratuita)', desc:'Pra pesquisa de mercado nos exercícios.', tools:['Perplexity'] },
+        { id:'p1-4', text:'Criar conta no Canva (gratuita)', desc:'Pros exercícios de design no Módulo 3.', tools:['Canva'] },
+        { id:'p1-5', text:'Fazer o Quiz Diagnóstico (OA 01)', desc:'Pra saber seu ponto de partida — vai refazer no fim pra comparar.', tools:['OA 01'] },
+        { id:'p1-6', text:'Anotar 1 meta concreta com o curso', desc:'Ex: "Aumentar 30% em vendas em 90 dias" — sem meta, sem foco.' },
+        { id:'p1-7', text:'Avisar pessoas próximas que estará menos disponível nas próximas 4 semanas', desc:'Reduz culpa e protege seu tempo de estudo.' }
+      ]
+    },
+    {
+      num: '02',
+      title: 'Durante o curso — Aplicação semanal',
+      desc: '12 ações distribuídas ao longo dos 4 módulos',
+      tasks: [
+        { id:'p2-1', text:'Módulo 1: Assistir os 3 vídeos da Aula 1', desc:'Tour pelas 8 ferramentas + IA pra pesquisa de mercado.' },
+        { id:'p2-2', text:'Módulo 1: Fazer o mini-diagnóstico do seu negócio', desc:'Atividade prática do M01 — usa o OA 01.', tools:['OA 01'] },
+        { id:'p2-3', text:'Módulo 2: Assistir os 3 vídeos da Aula 2', desc:'Persona + alinhamento estratégico.' },
+        { id:'p2-4', text:'Módulo 2: Gerar SUA persona com o OA 02', desc:'Atividade prática — você terá persona pronta pra usar nos próximos módulos.', tools:['OA 02'] },
+        { id:'p2-5', text:'Módulo 3: Assistir os 3 vídeos da Aula 3', desc:'Estrutura de campanha + copywriting + conteúdo.' },
+        { id:'p2-6', text:'Módulo 3: Criar mini-campanha com o OA 03', desc:'Use SUA persona do M02 como público da campanha.', tools:['OA 03'] },
+        { id:'p2-7', text:'Módulo 3: Executar 1 dia do calendário da campanha', desc:'Não deixe brief só no papel — publique pelo menos 1 post da campanha.' },
+        { id:'p2-8', text:'Módulo 4: Assistir os 3 vídeos da Aula 4', desc:'Engenharia de prompts + iteração + plano de marketing.' },
+        { id:'p2-9', text:'Módulo 4: Salvar 5 prompts favoritos na sua Biblioteca', desc:'Use o OA 04 — favorite os que mais combinam com seu negócio.', tools:['OA 04'] },
+        { id:'p2-10', text:'Módulo 4: Montar SEU plano de marketing de 1 semana', desc:'Aplique o método da Aula 4 com a Biblioteca de Prompts.', tools:['OA 04'] },
+        { id:'p2-11', text:'Módulo 4: Configurar 1 automação simples no n8n', desc:'Pode ser triagem de email, post agendado, etc. Veja a página de Automação n8n.' },
+        { id:'p2-12', text:'Concluir o curso e gerar Certificado (OA 08)', desc:'Você merece — comemore!', tools:['OA 08'] }
+      ]
+    },
+    {
+      num: '03',
+      title: 'Primeiros 30 dias após o curso',
+      desc: '8 ações pra consolidar o aprendizado em prática real',
+      tasks: [
+        { id:'p3-1', text:'Refazer o Quiz Diagnóstico e comparar com o "antes"', desc:'Ver a evolução é o que mantém motivação alta.', tools:['OA 01'] },
+        { id:'p3-2', text:'Executar o plano de marketing montado no M04 por 1 semana completa', desc:'Não pula nenhum dia. Disciplina vence intensidade.' },
+        { id:'p3-3', text:'Publicar pelo menos 8 posts usando prompts da Biblioteca', desc:'Foco em ALTERNAR formatos (Reels, Carrossel, Stories).', tools:['OA 04'] },
+        { id:'p3-4', text:'Rodar 1 análise de métricas com o prompt 19 da Biblioteca', desc:'Diagnóstico do que está funcionando ou não.', tools:['OA 04'] },
+        { id:'p3-5', text:'Calcular o ROI do curso usando o OA 07', desc:'Quanto você ganhou em tempo? Em receita? Em conversão?', tools:['OA 07'] },
+        { id:'p3-6', text:'Pedir feedback a 3 pessoas próximas sobre suas mudanças', desc:'Validação externa é o que mostra que algo realmente mudou.' },
+        { id:'p3-7', text:'Documentar 3 aprendizados que mais te impactaram', desc:'Quanto mais você ensina, mais aprende. Mesmo que seja só pra você.' },
+        { id:'p3-8', text:'Revisar a meta inicial — está mais perto?', desc:'Compare com a meta que você anotou na fase 1.' }
+      ]
+    },
+    {
+      num: '04',
+      title: '60-90 dias pós-curso — Consolidação',
+      desc: '5 ações pra fazer da IA parte da sua rotina pra sempre',
+      tasks: [
+        { id:'p4-1', text:'Customizar 3 prompts da Biblioteca pra seu negócio específico', desc:'Substitua as variáveis [assim] por dados reais e salve como seus.', tools:['OA 04'] },
+        { id:'p4-2', text:'Criar 1 automação intermediária no n8n (3+ steps)', desc:'Ex: email → classifica com IA → planilha → notifica WhatsApp.' },
+        { id:'p4-3', text:'Treinar 1 pessoa do seu time/família no método', desc:'Quem ensina, fixa o aprendizado em outro nível.' },
+        { id:'p4-4', text:'Calcular ROI total dos 90 dias e comparar com o investimento', desc:'Mostre os números pra você mesma. É a prova final.', tools:['OA 07'] },
+        { id:'p4-5', text:'Indicar o curso pra 1 pessoa que vai se beneficiar', desc:'Não por marketing — porque é a melhor forma de dar suporte a um projeto extensionista.' }
+      ]
+    }
+  ];
+
+  let state = {};
+
+  function loadState() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) { try { state = JSON.parse(saved); } catch(e) { state = {}; } }
+  }
+  function saveState() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function getStats() {
+    let total = 0, done = 0;
+    PHASES.forEach(p => p.tasks.forEach(t => { total++; if (state[t.id]) done++; }));
+    return { total, done, pct: total ? Math.round((done / total) * 100) : 0 };
+  }
+  function getPhaseStats(phase) {
+    const total = phase.tasks.length;
+    const done = phase.tasks.filter(t => state[t.id]).length;
+    return { total, done };
+  }
+
+  function updateProgress() {
+    const s = getStats();
+    document.getElementById('pctNum').textContent = s.pct;
+    document.getElementById('doneNum').textContent = s.done;
+    document.getElementById('totalNum').textContent = s.total;
+    document.getElementById('progressFill').style.width = s.pct + '%';
+    const msgs = [
+      { min: 0, max: 0, text: 'Comece marcando a primeira tarefa.' },
+      { min: 1, max: 24, text: 'Boa! Você deu o primeiro passo.' },
+      { min: 25, max: 49, text: 'Já passou de 25% — está pegando ritmo.' },
+      { min: 50, max: 74, text: 'Mais da metade! Está a um passo de ficar pronta.' },
+      { min: 75, max: 99, text: 'Reta final — tá quase!' },
+      { min: 100, max: 100, text: 'Você completou tudo! 🎉' }
+    ];
+    document.getElementById('progressMsg').textContent = msgs.find(m => s.pct >= m.min && s.pct <= m.max).text;
+    document.getElementById('celebration').classList.toggle('show', s.pct === 100);
+  }
+
+  function renderPhases() {
+    document.getElementById('phasesContainer').innerHTML = PHASES.map((phase, idx) => {
+      const ps = getPhaseStats(phase);
+      const isOpen = idx === 0 || ps.done > 0 && ps.done < ps.total;
+      return `
+        <section class="phase" data-open="${isOpen}">
+          <div class="phase-head" onclick="togglePhase(this.parentElement)">
+            <div class="phase-title">
+              <div class="phase-num">${phase.num}</div>
+              <div>
+                <h3>${phase.title}</h3>
+                <p>${phase.desc}</p>
+              </div>
+            </div>
+            <div class="phase-meta">
+              <span class="phase-progress"><strong>${ps.done}</strong>/${ps.total}</span>
+              <span class="phase-toggle">+</span>
+            </div>
+          </div>
+          <div class="phase-tasks">
+            ${phase.tasks.map(t => `
+              <div class="task" data-done="${!!state[t.id]}" onclick="toggleTask('${t.id}')">
+                <div class="task-check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                <div class="task-content">
+                  <div class="task-text">${t.text}</div>
+                  ${t.desc ? `<div class="task-desc">${t.desc}</div>` : ''}
+                  ${t.tools ? `<div class="task-tools">${t.tools.map(tool => `<span class="task-tool">${tool}</span>`).join('')}</div>` : ''}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </section>
+      `;
+    }).join('');
+  }
+
+  function togglePhase(phaseEl) {
+    phaseEl.dataset.open = phaseEl.dataset.open === 'true' ? 'false' : 'true';
+  }
+  function toggleTask(id) {
+    state[id] = !state[id];
+    saveState();
+    renderPhases();
+    updateProgress();
+  }
+  function resetChecklist() {
+    if (!confirm('Tem certeza? Você vai perder TODO o progresso.')) return;
+    state = {};
+    saveState();
+    renderPhases();
+    updateProgress();
+  }
+  function exportChecklist() {
+    const s = getStats();
+    let txt = `CHECKLIST DE IMPLEMENTAÇÃO\nProgresso: ${s.done}/${s.total} (${s.pct}%)\n\n`;
+    PHASES.forEach(p => {
+      const ps = getPhaseStats(p);
+      txt += `\n${p.num} ${p.title} (${ps.done}/${ps.total})\n`;
+      p.tasks.forEach(t => {
+        txt += `  ${state[t.id] ? '✅' : '⬜'} ${t.text}\n`;
+      });
+    });
+    navigator.clipboard.writeText(txt).then(() => alert('Progresso copiado!'));
+  }
+
+  loadState();
+  renderPhases();
+  updateProgress();
+</script>
+
+</body>
+</html>

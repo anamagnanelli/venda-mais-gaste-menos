@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de ROI — Quanto a IA pode te economizar · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3); color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+    .container { max-width: 920px; margin: 0 auto; padding: 4rem 2rem 5rem; }
+
+    /* INPUTS CARD */
+    .layout { display: grid; grid-template-columns: 380px 1fr; gap: 2rem; align-items: start; }
+    .inputs-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2rem; position: sticky; top: 90px;
+    }
+    .inputs-head { margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+    .inputs-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: var(--em); margin-bottom: .5rem; }
+    .inputs-head h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 800; }
+    .field { margin-bottom: 1.25rem; }
+    .field-label { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .5rem; }
+    .field-label label { font-size: .82rem; font-weight: 600; color: var(--dark); }
+    .field-value { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--gold-dk); font-size: 1rem; }
+    .field input[type="range"] { width: 100%; -webkit-appearance: none; appearance: none; background: transparent; cursor: pointer; }
+    .field input[type="range"]::-webkit-slider-runnable-track { height: 6px; background: var(--gray); border-radius: 999px; }
+    .field input[type="range"]::-moz-range-track { height: 6px; background: var(--gray); border-radius: 999px; }
+    .field input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; margin-top: -7px; height: 20px; width: 20px; border-radius: 50%; background: var(--gold); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(212,168,83,.4); cursor: pointer; }
+    .field input[type="range"]::-moz-range-thumb { height: 20px; width: 20px; border-radius: 50%; background: var(--gold); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(212,168,83,.4); cursor: pointer; border: none; }
+    .field input[type="number"] { width: 100%; padding: .75rem .85rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Inter', sans-serif; font-size: .95rem; transition: all .2s; }
+    .field input[type="number"]:focus { outline: none; border-color: var(--em); box-shadow: 0 0 0 3px rgba(13,148,136,.1); }
+    .field .hint { font-size: .75rem; color: var(--muted); margin-top: .3rem; font-style: italic; }
+
+    /* RESULTS */
+    .results-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+    .result-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2rem; transition: all .25s;
+    }
+    .result-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,.05); }
+    .result-card.featured {
+      background: var(--dark); color: #fff; border-color: var(--dark);
+      position: relative; overflow: hidden;
+    }
+    .result-card.featured::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 50px 50px; }
+    .result-card.featured .res-content { position: relative; z-index: 1; }
+    .result-card.featured .res-label { color: var(--gold); }
+    .result-card.featured h3 { color: #fff; }
+    .result-card.featured .res-value { background: linear-gradient(135deg, var(--gold), var(--em-lt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .result-card.featured .res-desc { color: rgba(255,255,255,.7); }
+    .res-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--em); margin-bottom: .5rem; }
+    .result-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: .85rem; line-height: 1.3; }
+    .res-value { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; line-height: 1; color: var(--dark); margin-bottom: .5rem; }
+    .res-value sup { font-size: 1.4rem; vertical-align: super; opacity: .7; }
+    .res-desc { color: var(--muted); font-size: .9rem; line-height: 1.6; }
+
+    /* BREAKDOWN */
+    .breakdown {
+      background: var(--gray); border-radius: 14px; padding: 1.5rem; margin-top: 1rem;
+    }
+    .breakdown h4 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .75rem; }
+    .breakdown-line { display: flex; justify-content: space-between; align-items: baseline; padding: .55rem 0; border-bottom: 1px solid rgba(0,0,0,.05); font-size: .9rem; }
+    .breakdown-line:last-child { border-bottom: none; }
+    .breakdown-line span { color: #374151; }
+    .breakdown-line strong { color: var(--dark); font-weight: 700; }
+    .breakdown-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: .75rem; border-top: 2px solid var(--dark); margin-top: .5rem; font-weight: 700; font-size: 1rem; }
+    .breakdown-total strong { color: var(--em); font-family: 'Playfair Display', serif; font-size: 1.2rem; }
+
+    .result-card.featured .breakdown { background: rgba(255,255,255,.05); }
+    .result-card.featured .breakdown h4 { color: rgba(255,255,255,.55); }
+    .result-card.featured .breakdown-line span { color: rgba(255,255,255,.7); }
+    .result-card.featured .breakdown-line strong { color: #fff; }
+    .result-card.featured .breakdown-line { border-bottom-color: rgba(255,255,255,.08); }
+    .result-card.featured .breakdown-total { border-top-color: var(--gold); }
+    .result-card.featured .breakdown-total span { color: #fff; }
+    .result-card.featured .breakdown-total strong { color: var(--gold); }
+
+    .cta-card {
+      background: linear-gradient(135deg, rgba(212,168,83,.06), rgba(13,148,136,.04));
+      border: 1px solid rgba(212,168,83,.2); border-radius: 22px;
+      padding: 2rem; text-align: center;
+    }
+    .cta-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: .75rem; font-weight: 700; }
+    .cta-card p { color: #374151; font-size: .95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+    .btn { padding: .9rem 2rem; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 700; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; border: none; }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover { background: var(--gold-dk); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212,168,83,.3); }
+
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+
+    @media (max-width: 800px) {
+      .layout { grid-template-columns: 1fr; }
+      .inputs-card { position: static; }
+    }
+    @media (max-width: 600px) {
+      .container { padding: 3rem 1.25rem 4rem; }
+      .inputs-card, .result-card { padding: 1.5rem; }
+      .res-value { font-size: 2.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">💰 OA 07 · Simulador de ROI · Validação financeira</span>
+    <h1>Quanto a IA <span class="gold">vai te economizar?</span></h1>
+    <p>Calcule o impacto financeiro de aplicar IA no seu negócio. Veja em quanto tempo o curso se paga e o ROI dos próximos 12 meses.</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="layout">
+
+    <!-- INPUTS -->
+    <div class="inputs-card">
+      <div class="inputs-head">
+        <div class="inputs-label">Sua realidade hoje</div>
+        <h2>Ajuste os números</h2>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><label>Horas/semana com marketing</label><span class="field-value" id="vHoras">10h</span></div>
+        <input type="range" id="iHoras" min="1" max="40" value="10" oninput="update()">
+        <div class="hint">Criando posts, respondendo DMs, planejando campanhas, etc.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><label>Valor da sua hora (R$)</label><span class="field-value" id="vHora">R$ 80</span></div>
+        <input type="range" id="iHora" min="20" max="500" step="10" value="80" oninput="update()">
+        <div class="hint">Quanto você cobra (ou vale) por hora de trabalho.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><label>Custo mensal com agência/freela (R$)</label><span class="field-value" id="vAgencia">R$ 0</span></div>
+        <input type="range" id="iAgencia" min="0" max="10000" step="100" value="0" oninput="update()">
+        <div class="hint">Coloque 0 se você faz tudo sozinha hoje.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><label>Faturamento mensal atual (R$)</label><span class="field-value" id="vFatu">R$ 5.000</span></div>
+        <input type="range" id="iFatu" min="1000" max="100000" step="500" value="5000" oninput="update()">
+        <div class="hint">Receita bruta média dos últimos 3 meses.</div>
+      </div>
+
+      <div class="field">
+        <div class="field-label"><label>Conversão esperada com IA</label><span class="field-value" id="vConv">+15%</span></div>
+        <input type="range" id="iConv" min="0" max="50" step="5" value="15" oninput="update()">
+        <div class="hint">Aumento estimado nas vendas após aplicar o método (conservador: 10-15%).</div>
+      </div>
+    </div>
+
+    <!-- RESULTADOS -->
+    <div class="results-stack">
+
+      <!-- Economia de tempo -->
+      <div class="result-card">
+        <div class="res-content">
+          <div class="res-label">⏰ Economia de tempo</div>
+          <h3>Quanto você ganha de volta por mês</h3>
+          <div class="res-value"><span id="rHorasMes">32h</span></div>
+          <p class="res-desc"><strong id="rHorasPctRedu">80%</strong> menos tempo gasto com marketing operacional. Equivalente a <strong id="rHorasReais">R$ 2.560</strong> em valor de hora.</p>
+          <div class="breakdown">
+            <h4>Como calculamos</h4>
+            <div class="breakdown-line"><span>Horas atuais por mês (4 sem)</span><strong id="bHorasAtual">40h</strong></div>
+            <div class="breakdown-line"><span>Horas com IA (redução de 80%)</span><strong id="bHorasIA">8h</strong></div>
+            <div class="breakdown-total"><span>Horas economizadas</span><strong id="bHorasEcon">32h</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Economia financeira -->
+      <div class="result-card">
+        <div class="res-content">
+          <div class="res-label">💸 Economia financeira mensal</div>
+          <h3>Quanto sai do seu bolso por mês</h3>
+          <div class="res-value">R$ <span id="rEconMes">2.560</span></div>
+          <p class="res-desc">Combinação de tempo de qualidade + economia com terceirização.</p>
+          <div class="breakdown">
+            <h4>Detalhamento</h4>
+            <div class="breakdown-line"><span>Valor das horas economizadas</span><strong>R$ <span id="bEconHoras">2.560</span></strong></div>
+            <div class="breakdown-line"><span>Economia com agência/freela</span><strong>R$ <span id="bEconAgencia">0</span></strong></div>
+            <div class="breakdown-total"><span>Total mês</span><strong>R$ <span id="bEconTotal">2.560</span></strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Receita extra -->
+      <div class="result-card">
+        <div class="res-content">
+          <div class="res-label">📈 Receita extra projetada</div>
+          <h3>Quanto a mais você fatura com IA</h3>
+          <div class="res-value">R$ <span id="rReceitaMes">750</span></div>
+          <p class="res-desc">Aumento de <strong id="rReceitaPct">15%</strong> sobre faturamento atual com melhor segmentação, copy e conteúdo.</p>
+        </div>
+      </div>
+
+      <!-- ROI FEATURED -->
+      <div class="result-card featured">
+        <div class="res-content">
+          <div class="res-label">🎯 ROI total — 12 meses</div>
+          <h3>O retorno do seu investimento de R$ 197 em 1 ano</h3>
+          <div class="res-value">R$ <span id="rROI">39.717</span></div>
+          <p class="res-desc">Em 12 meses, somando economia de tempo + redução de custos + receita extra. Curso se paga em <strong id="rPayback" style="color:var(--gold)">2 dias</strong>.</p>
+          <div class="breakdown">
+            <h4>Projeção anualizada</h4>
+            <div class="breakdown-line"><span>Economia (12 meses)</span><strong>R$ <span id="bAnualEcon">30.720</span></strong></div>
+            <div class="breakdown-line"><span>Receita extra (12 meses)</span><strong>R$ <span id="bAnualReceita">9.000</span></strong></div>
+            <div class="breakdown-line"><span>Investimento no curso (-)</span><strong>- R$ 197</strong></div>
+            <div class="breakdown-line"><span>Lucro líquido</span><strong>R$ <span id="bAnualLucro">39.523</span></strong></div>
+            <div class="breakdown-total"><span>ROI</span><strong><span id="bROIMult">201x</span> sobre investimento</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-card">
+        <h3>Pronto pra começar a recuperar esses números?</h3>
+        <p>O curso completo custa R$ 197 — pelos cálculos acima, ele se paga sozinho em poucos dias. Garantia incondicional de 7 dias.</p>
+        <a href="index.html#pricing" class="btn btn-gold">🚀 Ver o curso completo</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'vmgm-oa-roi';
+  const REDUCAO_TEMPO = 0.80; // IA reduz 80% do tempo gasto
+  const CUSTO_CURSO = 197;
+
+  function fmt(n) { return new Intl.NumberFormat('pt-BR').format(Math.round(n)); }
+
+  function load() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) try {
+      const d = JSON.parse(saved);
+      ['iHoras','iHora','iAgencia','iFatu','iConv'].forEach(k => { if (d[k] != null) document.getElementById(k).value = d[k]; });
+    } catch(e) {}
+  }
+  function save() {
+    const d = {};
+    ['iHoras','iHora','iAgencia','iFatu','iConv'].forEach(k => d[k] = document.getElementById(k).value);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(d));
+  }
+
+  function update() {
+    const horas = +document.getElementById('iHoras').value;
+    const valorHora = +document.getElementById('iHora').value;
+    const agencia = +document.getElementById('iAgencia').value;
+    const fatu = +document.getElementById('iFatu').value;
+    const conv = +document.getElementById('iConv').value;
+
+    // Labels
+    document.getElementById('vHoras').textContent = horas + 'h';
+    document.getElementById('vHora').textContent = 'R$ ' + fmt(valorHora);
+    document.getElementById('vAgencia').textContent = 'R$ ' + fmt(agencia);
+    document.getElementById('vFatu').textContent = 'R$ ' + fmt(fatu);
+    document.getElementById('vConv').textContent = '+' + conv + '%';
+
+    // Cálculos mensais
+    const horasMes = horas * 4;
+    const horasIA = Math.round(horasMes * (1 - REDUCAO_TEMPO));
+    const horasEconMes = horasMes - horasIA;
+    const econHoras = horasEconMes * valorHora;
+    const econAgencia = agencia;
+    const econMes = econHoras + econAgencia;
+    const receitaExtra = (fatu * conv) / 100;
+
+    // ROI 12 meses
+    const econAno = econMes * 12;
+    const receitaAno = receitaExtra * 12;
+    const ganhoTotal = econAno + receitaAno;
+    const lucroLiq = ganhoTotal - CUSTO_CURSO;
+    const roiMult = Math.round(lucroLiq / CUSTO_CURSO);
+    const paybackDias = ganhoTotal > 0 ? Math.max(1, Math.round((CUSTO_CURSO / (ganhoTotal / 365)))) : 999;
+
+    // Render
+    document.getElementById('rHorasMes').textContent = horasEconMes + 'h';
+    document.getElementById('rHorasPctRedu').textContent = Math.round(REDUCAO_TEMPO * 100) + '%';
+    document.getElementById('rHorasReais').textContent = 'R$ ' + fmt(econHoras);
+    document.getElementById('bHorasAtual').textContent = horasMes + 'h';
+    document.getElementById('bHorasIA').textContent = horasIA + 'h';
+    document.getElementById('bHorasEcon').textContent = horasEconMes + 'h';
+
+    document.getElementById('rEconMes').textContent = fmt(econMes);
+    document.getElementById('bEconHoras').textContent = fmt(econHoras);
+    document.getElementById('bEconAgencia').textContent = fmt(econAgencia);
+    document.getElementById('bEconTotal').textContent = fmt(econMes);
+
+    document.getElementById('rReceitaMes').textContent = fmt(receitaExtra);
+    document.getElementById('rReceitaPct').textContent = conv + '%';
+
+    document.getElementById('rROI').textContent = fmt(lucroLiq);
+    document.getElementById('bAnualEcon').textContent = fmt(econAno);
+    document.getElementById('bAnualReceita').textContent = fmt(receitaAno);
+    document.getElementById('bAnualLucro').textContent = fmt(lucroLiq);
+    document.getElementById('bROIMult').textContent = roiMult + 'x';
+    document.getElementById('rPayback').textContent = paybackDias < 30 ? paybackDias + ' dias' : Math.round(paybackDias / 30) + ' meses';
+
+    save();
+  }
+
+  load();
+  update();
+</script>
+
+</body>
+</html>

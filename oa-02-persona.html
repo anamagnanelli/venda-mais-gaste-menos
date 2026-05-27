@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Persona — Crie a persona do seu cliente ideal · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3); color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+    /* PROGRESS */
+    .progress-wrap { max-width: 720px; margin: 0 auto; padding: 2rem; position: sticky; top: 73px; background: rgba(250,250,250,.92); backdrop-filter: blur(10px); z-index: 50; border-bottom: 1px solid var(--border); display: none; }
+    .progress-label { display: flex; justify-content: space-between; margin-bottom: .65rem; font-size: .82rem; color: var(--muted); font-weight: 600; }
+    .progress-label strong { color: var(--dark); }
+    .progress-bar { width: 100%; height: 8px; background: var(--gray); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 999px; transition: width .35s ease; width: 0%; }
+
+    .container { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .intro-screen { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 3rem 2.5rem; text-align: center; }
+    .intro-screen .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .intro-screen h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem; font-weight: 800; }
+    .intro-screen p { color: #374151; font-size: 1.02rem; margin-bottom: 1.5rem; line-height: 1.75; }
+    .intro-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; padding: 1.75rem; background: var(--gray); border-radius: 16px; }
+    .intro-feat { text-align: center; }
+    .intro-feat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+    .intro-feat-label { font-size: .78rem; color: var(--muted); margin-top: .25rem; font-weight: 500; }
+
+    /* FORM CARD */
+    .form-card { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 2.5rem 2rem; transition: all .25s; display: none; }
+    .form-card.active { display: block; animation: fadeIn .35s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .q-num { display: inline-block; background: var(--gold); color: var(--dark); padding: .35rem .85rem; border-radius: 999px; font-family: 'Playfair Display', serif; font-weight: 800; font-size: .78rem; letter-spacing: .05em; margin-bottom: 1rem; }
+    .q-title { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; line-height: 1.3; margin-bottom: .5rem; color: var(--dark); }
+    .q-help { color: var(--muted); font-size: .92rem; margin-bottom: 1.75rem; line-height: 1.55; }
+    .field { margin-bottom: 1.25rem; }
+    .field label { display: block; font-size: .85rem; font-weight: 600; color: var(--dark); margin-bottom: .5rem; }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: .85rem 1rem; border: 1.5px solid var(--border);
+      border-radius: 12px; font-size: .96rem; font-family: 'Inter', sans-serif;
+      color: var(--dark); background: #fff; transition: all .2s;
+    }
+    .field input:focus, .field textarea:focus, .field select:focus {
+      outline: none; border-color: var(--em); box-shadow: 0 0 0 3px rgba(13,148,136,.1);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+    .field .hint { font-size: .78rem; color: var(--muted); margin-top: .35rem; font-style: italic; }
+
+    /* OPTIONS GRID */
+    .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .opt-btn {
+      padding: 1rem 1.15rem; background: #fff; border: 2px solid var(--border);
+      border-radius: 12px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 500;
+      color: var(--dark); cursor: pointer; transition: all .2s; text-align: left;
+    }
+    .opt-btn:hover { border-color: var(--gold); background: rgba(212,168,83,.04); }
+    .opt-btn.selected { border-color: var(--em); background: rgba(13,148,136,.06); color: var(--em); font-weight: 700; }
+
+    .nav-buttons { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .btn { padding: .9rem 1.75rem; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 700; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; border: none; }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover:not(:disabled) { background: var(--gold-dk); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212,168,83,.3); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--gray); color: var(--dark); }
+    .btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+
+    /* RESULT — PERSONA CARD */
+    .result-screen { display: none; }
+    .result-screen.active { display: block; animation: fadeIn .5s ease; }
+    .persona-result {
+      background: #fff; border: 1px solid var(--border); border-radius: 24px;
+      overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,.08);
+    }
+    .persona-head-section {
+      background: var(--dark); color: #fff; padding: 2.5rem 2rem;
+      position: relative; overflow: hidden; text-align: center;
+    }
+    .persona-head-section::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 50px 50px; }
+    .persona-head-inner { position: relative; z-index: 1; }
+    .persona-avatar {
+      width: 96px; height: 96px; border-radius: 50%; margin: 0 auto 1rem;
+      background: linear-gradient(135deg, var(--gold), var(--em-lt));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--dark);
+      border: 3px solid rgba(255,255,255,.15);
+    }
+    .persona-name { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; margin-bottom: .35rem; font-style: italic; color: #fff; }
+    .persona-name .gold { color: var(--gold); font-style: normal; }
+    .persona-tag { color: rgba(255,255,255,.65); font-size: 1rem; }
+    .persona-quote-section {
+      background: rgba(212,168,83,.08); padding: 2rem; text-align: center; border-bottom: 1px solid var(--border); position: relative;
+    }
+    .persona-quote-section::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 4rem; color: var(--gold); position: absolute; left: 2rem; top: 0.5rem; opacity: .3; line-height: 1; }
+    .persona-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--dark); line-height: 1.5; max-width: 500px; margin: 0 auto; }
+    .persona-blocks { padding: 2rem; }
+    .persona-block { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .persona-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .persona-block-label { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--em); margin-bottom: .75rem; padding: .25rem .65rem; background: rgba(13,148,136,.08); border-radius: 6px; }
+    .persona-block h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700; }
+    .persona-list { list-style: none; }
+    .persona-list li { padding: .75rem 0; border-bottom: 1px solid var(--gray); display: flex; gap: .85rem; align-items: flex-start; font-size: .95rem; color: #374151; line-height: 1.6; }
+    .persona-list li:last-child { border-bottom: none; }
+    .persona-list li::before { content: '▸'; color: var(--gold); font-weight: 900; flex-shrink: 0; margin-top: 2px; }
+    .persona-data-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .persona-data-item { padding: 1rem 1.25rem; background: var(--gray); border-radius: 12px; }
+    .persona-data-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); display: block; margin-bottom: .35rem; }
+    .persona-data-value { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark); font-size: 1.05rem; }
+
+    .result-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; padding-top: 1rem; }
+
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+    footer .logo { margin-bottom: .5rem; }
+
+    @media (max-width: 600px) {
+      .intro-features { grid-template-columns: 1fr; gap: .75rem; }
+      .form-card { padding: 1.75rem 1.5rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .nav-buttons { flex-direction: column-reverse; }
+      .nav-buttons .btn { width: 100%; justify-content: center; }
+      .persona-data-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">👤 OA 02 · Gerador de Persona · Módulo 02</span>
+    <h1>Crie a persona <span class="gold">do seu cliente ideal.</span></h1>
+    <p>Responda 7 perguntas sobre seu negócio e cliente. Em segundos você recebe uma persona completa com nome, dores, desejos, objeções e canais — pronta pra usar nos seus prompts.</p>
+  </div>
+</section>
+
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-label">
+    <span>Etapa <strong id="qCurrent">1</strong> de <strong id="qTotal">7</strong></span>
+    <span><strong id="qPct">14</strong>% completo</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="container">
+
+  <section class="intro-screen" id="introScreen">
+    <div class="icon">👤</div>
+    <h2>Vamos criar sua persona em 7 etapas</h2>
+    <p>Você vai responder perguntas básicas sobre seu negócio e público. Combino tudo com um modelo testado e gero uma persona detalhada — com nome, idade, dores, desejos, objeções e até a frase que ela mesma diria.</p>
+    <div class="intro-features">
+      <div class="intro-feat"><span class="intro-feat-num">7</span><span class="intro-feat-label">perguntas</span></div>
+      <div class="intro-feat"><span class="intro-feat-num">~4min</span><span class="intro-feat-label">de duração</span></div>
+      <div class="intro-feat"><span class="intro-feat-num">100%</span><span class="intro-feat-label">salvo localmente</span></div>
+    </div>
+    <p style="font-size:.88rem;color:var(--muted)">⚠️ Esta versão usa templates testados (sem API externa). Resultado consistente e funciona offline.</p>
+    <div class="nav-buttons" style="justify-content:center;border-top:none;padding-top:1rem">
+      <button class="btn btn-gold" onclick="startWizard()">Começar agora →</button>
+    </div>
+  </section>
+
+  <div id="wizardArea"></div>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="persona-result">
+      <div class="persona-head-section">
+        <div class="persona-head-inner">
+          <div class="persona-avatar" id="pAvatar">M</div>
+          <h2 class="persona-name" id="pName"><span class="gold">—</span></h2>
+          <div class="persona-tag" id="pTag">—</div>
+        </div>
+      </div>
+      <div class="persona-quote-section">
+        <p class="persona-quote" id="pQuote">—</p>
+      </div>
+      <div class="persona-blocks">
+        <div class="persona-block">
+          <span class="persona-block-label">📋 Dados</span>
+          <div class="persona-data-grid" id="pData"></div>
+        </div>
+        <div class="persona-block">
+          <span class="persona-block-label">😩 3 Dores principais</span>
+          <h3>O que tira o sono dela</h3>
+          <ul class="persona-list" id="pDores"></ul>
+        </div>
+        <div class="persona-block">
+          <span class="persona-block-label">✨ 3 Desejos profundos</span>
+          <h3>O que ela REALMENTE quer</h3>
+          <ul class="persona-list" id="pDesejos"></ul>
+        </div>
+        <div class="persona-block">
+          <span class="persona-block-label">🚫 3 Objeções</span>
+          <h3>O que pode impedir a compra</h3>
+          <ul class="persona-list" id="pObjecoes"></ul>
+        </div>
+        <div class="persona-block">
+          <span class="persona-block-label">📱 Canais</span>
+          <h3>Onde encontrar essa persona</h3>
+          <ul class="persona-list" id="pCanais"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button class="btn btn-ghost" onclick="resetWizard()">↻ Refazer</button>
+      <button class="btn btn-ghost" onclick="copyPersona()">📋 Copiar persona</button>
+      <button class="btn btn-gold" onclick="window.print()">📄 Salvar como PDF</button>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="logo" style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const STEPS = [
+    { key: 'segmento', title: 'Em qual segmento você atua?', help: 'Escolha o que mais se aproxima — vai influenciar o tipo de persona gerada.', type: 'options', options: [
+      'Moda / Vestuário', 'Beleza / Estética', 'Alimentação / Gastronomia', 'Consultoria / Serviços',
+      'Educação / Cursos', 'Saúde / Bem-estar', 'Tecnologia / Software', 'Artesanato / Manual',
+      'Pet / Animais', 'Decoração / Casa', 'Fitness / Esporte', 'Outro'
+    ]},
+    { key: 'produto', title: 'O que você vende exatamente?', help: 'Descreva em 1 frase. Ex: "Roupas femininas plus size com modelagem confortável".', type: 'text', placeholder: 'Ex: Cursos de marketing pra pequenos empreendedores' },
+    { key: 'preco', title: 'Qual a faixa de preço média?', help: 'Vai ajudar a definir a renda e classe da persona.', type: 'options', options: [
+      'Até R$ 50', 'R$ 50 a R$ 200', 'R$ 200 a R$ 500', 'R$ 500 a R$ 1.500', 'R$ 1.500 a R$ 5.000', 'Acima de R$ 5.000'
+    ]},
+    { key: 'genero', title: 'Seu cliente é predominantemente:', help: 'Pode escolher mesmo se atende todos — escolha o majoritário.', type: 'options', options: [
+      'Mulher', 'Homem', 'Ambos (50/50)', 'Não-binário / Outros'
+    ]},
+    { key: 'idade', title: 'Qual a faixa etária do seu cliente típico?', help: '', type: 'options', options: [
+      '18 a 25 anos', '26 a 35 anos', '36 a 45 anos', '46 a 55 anos', '55+ anos'
+    ]},
+    { key: 'localizacao', title: 'Onde seu cliente está?', help: '', type: 'options', options: [
+      'Capital de SP/RJ', 'Capital do Sul/Nordeste', 'Interior de SP/RJ', 'Cidades médias do Brasil', 'Internet (Brasil todo)'
+    ]},
+    { key: 'diferencial', title: 'Qual seu maior diferencial?', help: 'O que faz seu cliente escolher você e não a concorrência?', type: 'text', placeholder: 'Ex: atendimento personalizado, preço acessível, qualidade premium...' }
+  ];
+
+  const STORAGE_KEY = 'vmgm-oa-persona';
+  let data = {};
+  let currentStep = 0;
+
+  // ─── PERSONA TEMPLATES ─────────────────────
+  const NAMES = {
+    'Mulher': ['Maria Souza', 'Juliana Oliveira', 'Ana Costa', 'Camila Pereira', 'Fernanda Lima', 'Patrícia Almeida', 'Beatriz Santos', 'Larissa Rodrigues'],
+    'Homem': ['Carlos Mendes', 'Bruno Silva', 'Rafael Almeida', 'Marcos Pereira', 'Fernando Costa', 'André Oliveira', 'Pedro Henrique', 'Lucas Martins'],
+    'Ambos (50/50)': ['Alex Pereira', 'Sam Costa', 'Cris Oliveira', 'Dani Souza'],
+    'Não-binário / Outros': ['Vic Mendes', 'Bia Santos', 'Lu Costa', 'Sam Rodrigues']
+  };
+
+  const AGES = {
+    '18 a 25 anos': [21, 22, 24, 25],
+    '26 a 35 anos': [28, 31, 32, 34],
+    '36 a 45 anos': [37, 41, 43, 45],
+    '46 a 55 anos': [47, 50, 52, 54],
+    '55+ anos': [56, 58, 62, 65]
+  };
+
+  const PROFISSOES_POR_PRECO = {
+    'Até R$ 50': ['Estudante universitária', 'Estagiária em empresa de médio porte', 'Atendente de varejo', 'Auxiliar administrativa'],
+    'R$ 50 a R$ 200': ['Professora de escola pública', 'Atendente sênior', 'Recepcionista em clínica', 'Auxiliar técnica'],
+    'R$ 200 a R$ 500': ['Analista júnior em startup', 'Professora particular', 'Coordenadora administrativa', 'Vendedora externa'],
+    'R$ 500 a R$ 1.500': ['Empresária de pequeno negócio', 'Coordenadora de área', 'Analista sênior', 'Profissional liberal autônomo'],
+    'R$ 1.500 a R$ 5.000': ['Gerente de área em empresa média', 'Empresária com 2-5 funcionários', 'Consultora independente', 'Profissional sênior pleno'],
+    'Acima de R$ 5.000': ['Diretora executiva', 'Empresária com 10+ funcionários', 'Consultora sênior', 'Investidora ativa']
+  };
+
+  const RENDAS = {
+    'Até R$ 50': 'R$ 1.500 - R$ 2.500',
+    'R$ 50 a R$ 200': 'R$ 2.500 - R$ 4.500',
+    'R$ 200 a R$ 500': 'R$ 4.500 - R$ 7.500',
+    'R$ 500 a R$ 1.500': 'R$ 7.500 - R$ 12.000',
+    'R$ 1.500 a R$ 5.000': 'R$ 12.000 - R$ 25.000',
+    'Acima de R$ 5.000': 'R$ 25.000+'
+  };
+
+  const DORES_POR_SEGMENTO = {
+    'Moda / Vestuário': [
+      'Não encontra peças que vestem bem no corpo dela / dele',
+      'Cansou de marcas que sumem com o produto que ama',
+      'Quer se sentir bem vestida sem gastar fortuna'
+    ],
+    'Beleza / Estética': [
+      'Sente que precisa cuidar de si mas falta tempo e dinheiro',
+      'Já gastou em produtos que prometeram resultado e não entregaram',
+      'Quer se sentir mais segura com a própria imagem'
+    ],
+    'Alimentação / Gastronomia': [
+      'Não tem tempo de cozinhar mas quer comer bem',
+      'Já cansou de delivery sem graça e caro',
+      'Busca opções saudáveis sem ser sem-graça'
+    ],
+    'Consultoria / Serviços': [
+      'Está estagnada profissionalmente e não sabe o próximo passo',
+      'Tentou DIY e o resultado não saiu como esperado',
+      'Precisa de ajuda especializada mas tem medo do custo'
+    ],
+    'Educação / Cursos': [
+      'Quer aprender algo novo mas não tem tempo de fazer faculdade',
+      'Tentou cursos online e abandonou no meio',
+      'Sente que está ficando pra trás profissionalmente'
+    ],
+    'Saúde / Bem-estar': [
+      'Sente cansaço crônico e não sabe a causa',
+      'Tem dificuldade de manter hábitos saudáveis sozinha',
+      'Já tentou várias soluções genéricas sem resultado'
+    ],
+    'Tecnologia / Software': [
+      'Perde tempo com processos manuais que poderiam ser automatizados',
+      'Tem medo de adotar novas tecnologias e errar',
+      'Já comprou software caro que nunca usou de verdade'
+    ],
+    'Artesanato / Manual': [
+      'Quer presentes únicos mas as lojas vendem só o padrão',
+      'Apoia produção local mas tem dificuldade de encontrar quem produz',
+      'Cansou de produtos industriais sem alma'
+    ],
+    'Pet / Animais': [
+      'Quer o melhor pro pet mas com orçamento limitado',
+      'Já comprou produtos que o pet rejeitou',
+      'Busca uma marca em que pode confiar realmente'
+    ],
+    'Decoração / Casa': [
+      'Quer renovar a casa mas tem medo de errar',
+      'Não tem tempo de pesquisar peça por peça',
+      'Já comprou item que não combinou com o resto'
+    ],
+    'Fitness / Esporte': [
+      'Tenta treinar mas não consegue manter constância',
+      'Já gastou com personal/academia e não viu resultado',
+      'Sente que está sempre começando do zero'
+    ],
+    'Outro': [
+      'Tem um problema específico que poucos resolvem bem',
+      'Já tentou soluções genéricas que não atenderam',
+      'Busca alguém que entenda o contexto único dela'
+    ]
+  };
+
+  const DESEJOS_POR_GENERO = {
+    'Mulher': [
+      'Se sentir confiante e bem consigo mesma',
+      'Conquistar independência financeira',
+      'Ter uma rotina mais leve e prazerosa'
+    ],
+    'Homem': [
+      'Ser reconhecido pelo trabalho e competência',
+      'Construir patrimônio com segurança',
+      'Otimizar tempo para o que importa'
+    ],
+    'Ambos (50/50)': [
+      'Crescer profissionalmente sem perder qualidade de vida',
+      'Encontrar uma solução que realmente funcione',
+      'Sentir que está no controle da própria vida'
+    ],
+    'Não-binário / Outros': [
+      'Ser respeitada/o por quem realmente é',
+      'Construir uma vida autêntica e plena',
+      'Encontrar comunidade que acolhe e entende'
+    ]
+  };
+
+  const OBJECOES_POR_PRECO = {
+    'Até R$ 50': ['"Será que vale mesmo R$ X?"', '"Já tentei coisas baratas que não funcionaram"', '"E se eu pudesse fazer sozinha?"'],
+    'R$ 50 a R$ 200': ['"Está apertado esse mês, dá pra esperar?"', '"Tem outras opções mais baratas no mercado"', '"Será que vou conseguir manter o uso?"'],
+    'R$ 200 a R$ 500': ['"Esse valor compensa o resultado?"', '"E se eu não gostar e quiser meu dinheiro de volta?"', '"Cabe no meu orçamento mensal?"'],
+    'R$ 500 a R$ 1.500': ['"Esse é um investimento grande, preciso pensar"', '"Vou conseguir aplicar de verdade?"', '"Existe garantia se não der certo?"'],
+    'R$ 1.500 a R$ 5.000': ['"Preciso ver ROI claro antes de decidir"', '"Vou precisar convencer meu sócio/parceiro"', '"Tem cases reais de quem usou?"'],
+    'Acima de R$ 5.000': ['"Preciso aprovar internamente antes"', '"Quem mais com perfil similar usou?"', '"Tem contrato/SLA formal?"']
+  };
+
+  const CANAIS_POR_GENERO_IDADE = {
+    '18 a 25 anos': ['TikTok (uso diário)', 'Instagram (stories e reels)', 'YouTube (vídeos longos)', 'Discord/Comunidades'],
+    '26 a 35 anos': ['Instagram (feed + stories)', 'WhatsApp (grupos profissionais)', 'LinkedIn', 'YouTube (educacional)'],
+    '36 a 45 anos': ['WhatsApp (grupos família/trabalho)', 'Instagram (esporádico)', 'Facebook', 'YouTube'],
+    '46 a 55 anos': ['WhatsApp (principal canal)', 'Facebook (ativa)', 'YouTube', 'Email'],
+    '55+ anos': ['WhatsApp', 'Facebook', 'TV', 'Email + telefone']
+  };
+
+  // ─── PERSISTENCE ──────────────────────────
+  function loadSaved() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const obj = JSON.parse(saved);
+        if (obj.data) { data = obj.data; if (obj.completed) { renderResult(); return true; } }
+      } catch(e) {}
+    }
+    return false;
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, completed: STEPS.every(s => data[s.key]), savedAt: new Date().toISOString() }));
+  }
+
+  // ─── RENDER ──────────────────────────────
+  function startWizard() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'block';
+    renderStep();
+  }
+
+  function renderStep() {
+    const step = STEPS[currentStep];
+    const area = document.getElementById('wizardArea');
+    let inputHtml = '';
+    if (step.type === 'text') {
+      inputHtml = `<div class="field"><input type="text" id="inp" placeholder="${step.placeholder || ''}" value="${data[step.key] || ''}" oninput="onTextInput()"></div>`;
+    } else if (step.type === 'options') {
+      inputHtml = `<div class="options-grid">${step.options.map(o => `<button class="opt-btn ${data[step.key] === o ? 'selected' : ''}" onclick="selectOpt('${o.replace(/'/g, "\\'")}')">${o}</button>`).join('')}</div>`;
+    }
+    area.innerHTML = `
+      <section class="form-card active">
+        <span class="q-num">Etapa ${currentStep + 1} de ${STEPS.length}</span>
+        <h2 class="q-title">${step.title}</h2>
+        ${step.help ? `<p class="q-help">${step.help}</p>` : ''}
+        ${inputHtml}
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" ${currentStep === 0 ? 'disabled' : ''} onclick="prevStep()">← Anterior</button>
+          ${currentStep < STEPS.length - 1
+            ? `<button class="btn btn-gold" id="nextBtn" ${!data[step.key] ? 'disabled' : ''} onclick="nextStep()">Próxima →</button>`
+            : `<button class="btn btn-gold" id="nextBtn" ${!data[step.key] ? 'disabled' : ''} onclick="finish()">✨ Gerar persona</button>`
+          }
+        </div>
+      </section>
+    `;
+    updateProgress();
+  }
+
+  function onTextInput() {
+    const v = document.getElementById('inp').value.trim();
+    data[STEPS[currentStep].key] = v;
+    save();
+    document.getElementById('nextBtn').disabled = !v;
+  }
+  function selectOpt(opt) {
+    data[STEPS[currentStep].key] = opt;
+    save();
+    document.querySelectorAll('.opt-btn').forEach(b => b.classList.toggle('selected', b.textContent === opt));
+    document.getElementById('nextBtn').disabled = false;
+  }
+  function nextStep() { if (currentStep < STEPS.length - 1) { currentStep++; renderStep(); window.scrollTo({top:0,behavior:'smooth'}); } }
+  function prevStep() { if (currentStep > 0) { currentStep--; renderStep(); window.scrollTo({top:0,behavior:'smooth'}); } }
+  function updateProgress() {
+    const pct = Math.round(((currentStep + 1) / STEPS.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('qCurrent').textContent = currentStep + 1;
+    document.getElementById('qTotal').textContent = STEPS.length;
+    document.getElementById('qPct').textContent = pct;
+  }
+
+  // ─── GERAR PERSONA ───────────────────────
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function finish() { save(); renderResult(); }
+
+  function generatePersona() {
+    const nome = pick(NAMES[data.genero] || NAMES['Ambos (50/50)']);
+    const idade = pick(AGES[data.idade]);
+    const profissao = pick(PROFISSOES_POR_PRECO[data.preco]);
+    const renda = RENDAS[data.preco];
+    const dores = DORES_POR_SEGMENTO[data.segmento];
+    const desejos = DESEJOS_POR_GENERO[data.genero];
+    const objecoes = OBJECOES_POR_PRECO[data.preco];
+    const canais = CANAIS_POR_GENERO_IDADE[data.idade];
+
+    const quoteBase = {
+      'Mulher': `Eu queria muito ter ${data.segmento.includes('Saúde') ? 'tempo pra cuidar de mim' : 'algo que realmente funcionasse'}, mas a vida não para.`,
+      'Homem': `Eu sei que preciso resolver isso — só falta encontrar a solução certa.`,
+      'Ambos (50/50)': `Já tentei várias coisas, e dessa vez quero algo que entregue de verdade.`,
+      'Não-binário / Outros': `Busco algo que respeite quem eu sou e onde estou agora.`
+    };
+
+    return {
+      nome,
+      idade,
+      profissao,
+      renda,
+      localizacao: data.localizacao,
+      genero: data.genero,
+      dores,
+      desejos,
+      objecoes,
+      canais,
+      quote: quoteBase[data.genero] || quoteBase['Ambos (50/50)']
+    };
+  }
+
+  function renderResult() {
+    const p = generatePersona();
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('wizardArea').innerHTML = '';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('resultScreen').classList.add('active');
+
+    document.getElementById('pAvatar').textContent = p.nome.charAt(0);
+    document.getElementById('pName').innerHTML = `${p.nome.split(' ')[0]} <span class="gold">${p.nome.split(' ').slice(1).join(' ')}</span>`;
+    document.getElementById('pTag').textContent = `${p.idade} anos · ${p.profissao} · ${p.localizacao}`;
+    document.getElementById('pQuote').textContent = p.quote;
+
+    document.getElementById('pData').innerHTML = `
+      <div class="persona-data-item"><span class="persona-data-label">Idade</span><span class="persona-data-value">${p.idade} anos</span></div>
+      <div class="persona-data-item"><span class="persona-data-label">Profissão</span><span class="persona-data-value">${p.profissao}</span></div>
+      <div class="persona-data-item"><span class="persona-data-label">Renda mensal</span><span class="persona-data-value">${p.renda}</span></div>
+      <div class="persona-data-item"><span class="persona-data-label">Localização</span><span class="persona-data-value">${p.localizacao}</span></div>
+    `;
+    document.getElementById('pDores').innerHTML = p.dores.map(d => `<li>${d}</li>`).join('');
+    document.getElementById('pDesejos').innerHTML = p.desejos.map(d => `<li>${d}</li>`).join('');
+    document.getElementById('pObjecoes').innerHTML = p.objecoes.map(o => `<li>${o}</li>`).join('');
+    document.getElementById('pCanais').innerHTML = p.canais.map(c => `<li>${c}</li>`).join('');
+
+    window._currentPersona = p;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function copyPersona() {
+    const p = window._currentPersona;
+    if (!p) return;
+    const txt = `PERSONA — ${p.nome}\n${p.idade} anos · ${p.profissao} · ${p.localizacao}\n\n"${p.quote}"\n\nDORES:\n${p.dores.map(d => '• ' + d).join('\n')}\n\nDESEJOS:\n${p.desejos.map(d => '• ' + d).join('\n')}\n\nOBJEÇÕES:\n${p.objecoes.map(o => '• ' + o).join('\n')}\n\nCANAIS:\n${p.canais.map(c => '• ' + c).join('\n')}`;
+    navigator.clipboard.writeText(txt).then(() => alert('Persona copiada!'));
+  }
+
+  function resetWizard() {
+    if (!confirm('Tem certeza? Você vai perder os dados atuais.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    data = {}; currentStep = 0;
+    document.getElementById('resultScreen').classList.remove('active');
+    document.getElementById('wizardArea').innerHTML = '';
+    document.getElementById('introScreen').style.display = 'block';
+    document.getElementById('progressWrap').style.display = 'none';
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  if (!loadSaved()) { /* intro visible */ }
+</script>
+
+</body>
+</html>

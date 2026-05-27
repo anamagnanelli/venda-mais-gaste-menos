@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Diagnóstico — Onde você está com IA? · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+    :root {
+      --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A;
+      --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA;
+      --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+    /* ── HEADER ─────────────────────────────── */
+    .oa-header {
+      background: var(--dark); color: #fff;
+      padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .oa-header::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3);
+      color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px;
+      font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem;
+    }
+    .oa-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(34px, 5vw, 54px);
+      font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em;
+    }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+
+    /* ── PROGRESS ─────────────────────────────── */
+    .progress-wrap {
+      max-width: 720px; margin: 0 auto; padding: 2rem; position: sticky;
+      top: 73px; background: rgba(250,250,250,.92); backdrop-filter: blur(10px);
+      z-index: 50; border-bottom: 1px solid var(--border);
+    }
+    .progress-label {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: .65rem; font-size: .82rem; color: var(--muted); font-weight: 600;
+    }
+    .progress-label strong { color: var(--dark); }
+    .progress-bar {
+      width: 100%; height: 8px; background: var(--gray); border-radius: 999px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: linear-gradient(90deg, var(--gold), var(--em));
+      border-radius: 999px; transition: width .35s ease; width: 0%;
+    }
+
+    /* ── CONTAINER ────────────────────────────── */
+    .container { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    /* ── INTRO SCREEN ─────────────────────────── */
+    .intro-screen {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 3rem 2.5rem; text-align: center;
+    }
+    .intro-screen .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .intro-screen h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem; font-weight: 800; }
+    .intro-screen p { color: #374151; font-size: 1.02rem; margin-bottom: 1.5rem; line-height: 1.75; }
+    .intro-features {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+      margin: 2rem 0; padding: 1.75rem; background: var(--gray); border-radius: 16px;
+    }
+    .intro-feat { text-align: center; }
+    .intro-feat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+    .intro-feat-label { font-size: .78rem; color: var(--muted); margin-top: .25rem; font-weight: 500; }
+
+    /* ── QUESTION CARD ────────────────────────── */
+    .question-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2.5rem 2rem; transition: all .25s; display: none;
+    }
+    .question-card.active { display: block; animation: fadeIn .35s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .q-num {
+      display: inline-block; background: var(--gold); color: var(--dark);
+      padding: .35rem .85rem; border-radius: 999px;
+      font-family: 'Playfair Display', serif; font-weight: 800; font-size: .78rem;
+      letter-spacing: .05em; margin-bottom: 1rem;
+    }
+    .q-title { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; line-height: 1.3; margin-bottom: 2rem; color: var(--dark); }
+    .answers { display: flex; flex-direction: column; gap: .85rem; }
+    .answer-btn {
+      width: 100%; text-align: left; padding: 1.15rem 1.4rem;
+      background: #fff; border: 2px solid var(--border); border-radius: 14px;
+      font-family: 'Inter', sans-serif; font-size: .98rem; color: var(--dark); font-weight: 500;
+      cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 1rem;
+    }
+    .answer-btn:hover { border-color: var(--gold); background: rgba(212,168,83,.04); transform: translateY(-1px); }
+    .answer-btn.selected { border-color: var(--em); background: rgba(13,148,136,.06); }
+    .answer-btn.selected .a-marker { background: var(--em); color: #fff; border-color: var(--em); }
+    .a-marker {
+      width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-weight: 700;
+      font-size: .82rem; color: var(--muted); flex-shrink: 0; transition: all .2s;
+    }
+
+    /* ── NAV BUTTONS ──────────────────────────── */
+    .nav-buttons {
+      display: flex; justify-content: space-between; gap: 1rem;
+      margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .btn {
+      padding: .9rem 1.75rem; border-radius: 999px;
+      font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 700;
+      cursor: pointer; transition: all .2s; text-decoration: none;
+      display: inline-flex; align-items: center; gap: .4rem; border: none;
+    }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover:not(:disabled) { background: var(--gold-dk); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212,168,83,.3); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--gray); color: var(--dark); }
+    .btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+
+    /* ── RESULT SCREEN ────────────────────────── */
+    .result-screen { display: none; }
+    .result-screen.active { display: block; animation: fadeIn .5s ease; }
+    .result-hero {
+      background: var(--dark); color: #fff; border-radius: 24px;
+      padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden; margin-bottom: 1.5rem;
+    }
+    .result-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(212,168,83,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .result-hero-inner { position: relative; z-index: 1; }
+    .result-pill {
+      display: inline-block; background: rgba(212,168,83,.15); color: var(--gold);
+      border: 1px solid rgba(212,168,83,.35); padding: .4rem 1rem; border-radius: 999px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .result-score {
+      font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900;
+      line-height: 1; margin-bottom: .5rem;
+      background: linear-gradient(135deg, var(--gold), var(--em-lt));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .result-score-total { color: rgba(255,255,255,.45); font-size: 1rem; margin-bottom: 1.5rem; font-family: 'Playfair Display', serif; }
+    .result-level { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; font-style: italic; color: #fff; margin-bottom: 1rem; }
+    .result-desc { color: rgba(255,255,255,.7); font-size: 1.02rem; line-height: 1.7; max-width: 480px; margin: 0 auto; }
+
+    /* ── RECOMMENDATIONS ─────────────────────── */
+    .recommendations {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2.5rem 2rem; margin-bottom: 1.5rem;
+    }
+    .rec-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: var(--em); margin-bottom: .5rem; }
+    .recommendations h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; }
+    .rec-list { list-style: none; }
+    .rec-list li { padding: 1rem 0; border-bottom: 1px solid var(--border); display: flex; gap: 1rem; align-items: flex-start; }
+    .rec-list li:last-child { border-bottom: none; }
+    .rec-list li::before {
+      content: '→'; color: var(--gold); font-weight: 900; font-size: 1.2rem;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .rec-list strong { color: var(--dark); }
+    .rec-list p { font-size: .92rem; color: #374151; margin: .25rem 0 0; line-height: 1.6; }
+    .rec-list .rec-item { flex: 1; font-size: .98rem; color: #1f2937; }
+
+    /* ── COMPARISON (pre/post) ────────────────── */
+    .compare-card {
+      background: linear-gradient(135deg, rgba(212,168,83,.06), rgba(13,148,136,.04));
+      border: 1px solid rgba(212,168,83,.2);
+      border-radius: 18px; padding: 2rem; margin-bottom: 1.5rem; text-align: center;
+    }
+    .compare-card h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: .5rem; }
+    .compare-card p { color: var(--muted); font-size: .9rem; margin-bottom: 1.25rem; line-height: 1.6; }
+    .compare-card .btn { width: auto; }
+
+    /* ── ACTIONS ─────────────────────────────── */
+    .result-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; padding-top: 1rem; }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+    footer .logo { margin-bottom: .5rem; }
+
+    @media (max-width: 600px) {
+      .intro-features { grid-template-columns: 1fr; gap: .75rem; }
+      .question-card, .recommendations { padding: 1.75rem 1.5rem; }
+      .nav-buttons { flex-direction: column-reverse; }
+      .nav-buttons .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">🎯 OA 01 · Quiz Diagnóstico · Módulo 01</span>
+    <h1>Onde você está <span class="gold">com IA hoje?</span></h1>
+    <p>10 perguntas pra mapear seu nível atual com Inteligência Artificial nas vendas. Você refaz no fim do curso pra ver sua evolução.</p>
+  </div>
+</section>
+
+<!-- PROGRESS (escondida no intro/result) -->
+<div class="progress-wrap" id="progressWrap" style="display:none">
+  <div class="progress-label">
+    <span>Pergunta <strong id="qCurrent">1</strong> de <strong id="qTotal">10</strong></span>
+    <span><strong id="qPct">10</strong>% completo</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+  <!-- INTRO -->
+  <section class="intro-screen" id="introScreen">
+    <div class="icon">🎯</div>
+    <h2>Bora descobrir onde você está?</h2>
+    <p>
+      Este quiz mapeia seu nível atual em <strong>5 dimensões</strong>: conhecimento de IA, persona, conteúdo, prompts e métricas. No final você recebe um diagnóstico personalizado + recomendação do que estudar primeiro no curso.
+    </p>
+    <div class="intro-features">
+      <div class="intro-feat">
+        <span class="intro-feat-num">10</span>
+        <span class="intro-feat-label">perguntas</span>
+      </div>
+      <div class="intro-feat">
+        <span class="intro-feat-num">~3min</span>
+        <span class="intro-feat-label">de duração</span>
+      </div>
+      <div class="intro-feat">
+        <span class="intro-feat-num">100%</span>
+        <span class="intro-feat-label">salvo localmente</span>
+      </div>
+    </div>
+    <p style="font-size:.88rem;color:var(--muted)">⚠️ Sem cadastro · sem coleta de dados · suas respostas ficam só no seu navegador.</p>
+    <div class="nav-buttons" style="justify-content:center;border-top:none;padding-top:1rem">
+      <button class="btn btn-gold" onclick="startQuiz()">Começar diagnóstico →</button>
+    </div>
+  </section>
+
+  <!-- QUIZ AREA -->
+  <div id="quizArea"></div>
+
+  <!-- RESULT -->
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-hero-inner">
+        <span class="result-pill" id="resultPill">Diagnóstico concluído</span>
+        <div class="result-score" id="resultScore">0</div>
+        <div class="result-score-total">de 40 pontos</div>
+        <div class="result-level" id="resultLevel">—</div>
+        <p class="result-desc" id="resultDesc">—</p>
+      </div>
+    </div>
+    <div class="recommendations">
+      <div class="rec-label">Recomendações personalizadas</div>
+      <h3>Por onde começar no curso</h3>
+      <ul class="rec-list" id="recList"></ul>
+    </div>
+    <div class="compare-card" id="compareCard">
+      <h4>🔄 Refaça depois de terminar o curso</h4>
+      <p>Salve este resultado como seu "antes". Quando completar os 4 módulos, refaça este quiz e compare a evolução.</p>
+      <button class="btn btn-ghost" onclick="window.print()">📄 Imprimir/salvar como PDF</button>
+    </div>
+    <div class="result-actions">
+      <button class="btn btn-ghost" onclick="resetQuiz()">↻ Refazer quiz</button>
+      <a href="index.html#pricing" class="btn btn-gold">🚀 Começar o curso completo</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="logo" style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const QUESTIONS = [
+    {
+      title: "Qual seu nível atual de uso de IA no negócio?",
+      answers: [
+        { text: "Nunca usei IA pra nada profissional", value: 1 },
+        { text: "Usei algumas vezes, sem método", value: 2 },
+        { text: "Uso semanalmente em algumas tarefas", value: 3 },
+        { text: "Uso IA diariamente como ferramenta central", value: 4 }
+      ]
+    },
+    {
+      title: "Quantas horas por semana você gasta criando conteúdo manualmente?",
+      answers: [
+        { text: "Mais de 10h — sufoco total", value: 1 },
+        { text: "Entre 5h e 10h — pesado", value: 2 },
+        { text: "Entre 2h e 5h — controlável", value: 3 },
+        { text: "Menos de 2h — já otimizei", value: 4 }
+      ]
+    },
+    {
+      title: "Você tem persona do seu cliente ideal definida?",
+      answers: [
+        { text: "Não sei nem o que é persona", value: 1 },
+        { text: "Sei o que é mas nunca criei a minha", value: 2 },
+        { text: "Tenho uma persona genérica/intuitiva", value: 3 },
+        { text: "Tenho persona detalhada e atualizada", value: 4 }
+      ]
+    },
+    {
+      title: "Como você cria conteúdo pras redes sociais hoje?",
+      answers: [
+        { text: "Quase não posto nada", value: 1 },
+        { text: "Pago alguém / posto quando lembra", value: 2 },
+        { text: "Crio do zero quando inspira", value: 3 },
+        { text: "Tenho calendário editorial planejado", value: 4 }
+      ]
+    },
+    {
+      title: "Você usa engenharia de prompts (escreve prompts elaborados)?",
+      answers: [
+        { text: "Não sei o que é isso", value: 1 },
+        { text: "Já ouvi falar, mas não pratico", value: 2 },
+        { text: "Uso intuitivamente, sem método", value: 3 },
+        { text: "Domino — meus prompts geram resultados consistentes", value: 4 }
+      ]
+    },
+    {
+      title: "Quantas ferramentas de IA você usa regularmente?",
+      answers: [
+        { text: "Nenhuma", value: 1 },
+        { text: "Só o ChatGPT, esporadicamente", value: 2 },
+        { text: "2 a 3 ferramentas (ex: ChatGPT + Canva)", value: 3 },
+        { text: "Mais de 4 ferramentas integradas no fluxo", value: 4 }
+      ]
+    },
+    {
+      title: "Como você mede o ROI das suas ações de marketing?",
+      answers: [
+        { text: "Não meço nada — só intuição", value: 1 },
+        { text: "Olho engajamento (curtidas, comentários)", value: 2 },
+        { text: "Tenho métricas básicas (leads, CAC simples)", value: 3 },
+        { text: "Tenho dashboard com KPIs e tomo decisão por dados", value: 4 }
+      ]
+    },
+    {
+      title: "Você já tem algum tipo de automação no seu marketing/vendas?",
+      answers: [
+        { text: "Nada automatizado — faço tudo no braço", value: 1 },
+        { text: "Tenho mensagens automáticas simples (WhatsApp)", value: 2 },
+        { text: "Tenho email marketing automatizado básico", value: 3 },
+        { text: "Tenho pipelines completos (n8n, Zapier, etc.)", value: 4 }
+      ]
+    },
+    {
+      title: "Sua expectativa principal com este curso é:",
+      answers: [
+        { text: "Entender o que é IA antes de me dar mal", value: 1 },
+        { text: "Aprender ferramentas práticas pra usar amanhã", value: 2 },
+        { text: "Aumentar vendas usando IA como diferencial", value: 3 },
+        { text: "Automatizar processos e escalar sem contratar", value: 4 }
+      ]
+    },
+    {
+      title: "Quanto tempo você consegue dedicar ao curso por semana?",
+      answers: [
+        { text: "Menos de 1h — muito ocupada", value: 1 },
+        { text: "Entre 1h e 3h — quando dá", value: 2 },
+        { text: "Entre 3h e 5h — vou priorizar", value: 3 },
+        { text: "Mais de 5h — quero acelerar", value: 4 }
+      ]
+    }
+  ];
+
+  const STORAGE_KEY = 'vmgm-oa-quiz-diagnostico';
+  let answers = new Array(QUESTIONS.length).fill(null);
+  let currentQ = 0;
+
+  // ─── BOOT ─────────────────────────────────
+  function loadSaved() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        if (data.answers && data.answers.length === QUESTIONS.length) {
+          answers = data.answers;
+          if (data.completed) {
+            renderResult();
+            return true;
+          }
+        }
+      } catch(e) {}
+    }
+    return false;
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ answers, completed: answers.every(a => a !== null), savedAt: new Date().toISOString() }));
+  }
+
+  // ─── RENDER ───────────────────────────────
+  function startQuiz() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'block';
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = QUESTIONS[currentQ];
+    const area = document.getElementById('quizArea');
+    area.innerHTML = `
+      <section class="question-card active">
+        <span class="q-num">Pergunta ${currentQ + 1} de ${QUESTIONS.length}</span>
+        <h2 class="q-title">${q.title}</h2>
+        <div class="answers">
+          ${q.answers.map((a, i) => `
+            <button class="answer-btn ${answers[currentQ] === i ? 'selected' : ''}" onclick="selectAnswer(${i})">
+              <span class="a-marker">${String.fromCharCode(65 + i)}</span>
+              <span>${a.text}</span>
+            </button>
+          `).join('')}
+        </div>
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" ${currentQ === 0 ? 'disabled' : ''} onclick="prevQ()">← Anterior</button>
+          ${currentQ < QUESTIONS.length - 1
+            ? `<button class="btn btn-gold" id="nextBtn" ${answers[currentQ] === null ? 'disabled' : ''} onclick="nextQ()">Próxima →</button>`
+            : `<button class="btn btn-gold" id="nextBtn" ${answers[currentQ] === null ? 'disabled' : ''} onclick="finish()">Ver resultado →</button>`
+          }
+        </div>
+      </section>
+    `;
+    updateProgress();
+  }
+
+  function selectAnswer(i) {
+    answers[currentQ] = i;
+    save();
+    document.querySelectorAll('.answer-btn').forEach((b, idx) => {
+      b.classList.toggle('selected', idx === i);
+    });
+    const next = document.getElementById('nextBtn');
+    if (next) next.disabled = false;
+  }
+
+  function nextQ() {
+    if (currentQ < QUESTIONS.length - 1) {
+      currentQ++;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+  function prevQ() {
+    if (currentQ > 0) {
+      currentQ--;
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  function updateProgress() {
+    const pct = Math.round(((currentQ + 1) / QUESTIONS.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('qCurrent').textContent = currentQ + 1;
+    document.getElementById('qTotal').textContent = QUESTIONS.length;
+    document.getElementById('qPct').textContent = pct;
+  }
+
+  // ─── RESULT ───────────────────────────────
+  function finish() {
+    save();
+    renderResult();
+  }
+
+  function calcScore() {
+    return answers.reduce((sum, ans, idx) => sum + (ans !== null ? QUESTIONS[idx].answers[ans].value : 0), 0);
+  }
+
+  function getProfile(score) {
+    if (score <= 19) return {
+      level: "Iniciante",
+      pill: "🌱 Você está no começo",
+      desc: "Tudo bem — todo mundo começa aqui. A boa notícia é que você tem mais a ganhar do que quem já está avançado. O curso foi feito pra te tirar do zero ao operacional em 4 semanas.",
+      recs: [
+        { title: "Comece pelo Módulo 1 do zero", text: "Não pule nada. Os fundamentos vão acelerar tudo depois." },
+        { title: "Foque em UMA ferramenta primeiro", text: "ChatGPT antes de qualquer outra. Domine antes de adicionar mais." },
+        { title: "Faça o Gerador de Persona (OA 02) na primeira semana", text: "Sem persona, qualquer prompt vira tiro no escuro." },
+        { title: "Dedique 30min por dia", text: "Consistência vence intensidade. Melhor 30min/dia que 4h no domingo." }
+      ]
+    };
+    if (score <= 28) return {
+      level: "Em transição",
+      pill: "🚀 Você está no caminho",
+      desc: "Você já experimentou IA, mas falta método. O curso vai sistematizar o que você sabe e te dar os pilares que faltam pra IA virar resultado de verdade.",
+      recs: [
+        { title: "Pule a Aula 1 só se quiser uma revisão", text: "Mas não pule a Aula 2 — persona é onde a maioria trava." },
+        { title: "Foque no Módulo 4 (Engenharia de Prompts)", text: "É o módulo que vai dar mais ROI no seu caso." },
+        { title: "Use a Biblioteca de Prompts (OA 03) como diário", text: "Catalogue seus melhores prompts em vez de procurar toda vez." },
+        { title: "Implemente automação no Módulo 4", text: "Você já tem maturidade — o n8n + Groq vai ser game-changer." }
+      ]
+    };
+    if (score <= 35) return {
+      level: "Intermediário",
+      pill: "⚡ Você está afiada",
+      desc: "Você já usa IA com método. O curso vai te dar os 20% que faltam pra subir de patamar — automação, mensuração e engenharia de prompts avançada.",
+      recs: [
+        { title: "Vai direto pros Módulos 3 e 4", text: "Os Módulos 1 e 2 são revisão pra você." },
+        { title: "Mergulhe na Automação n8n + Groq", text: "É onde você tem o maior gap. Vai destravar escala." },
+        { title: "Use o Simulador de ROI (OA 08)", text: "Você já tem dados — calcule o impacto financeiro do que aplica." },
+        { title: "Considere o tier Empresarial", text: "Compartilhe o método com seu time pra multiplicar resultados." }
+      ]
+    };
+    return {
+      level: "Avançado",
+      pill: "🎯 Você está no topo",
+      desc: "Você já domina IA. O curso vai ser revisão estruturada + pontos específicos (especialmente automação e mensuração). Avalie se o curso é necessário pra você ou se faz mais sentido como referência da sua equipe.",
+      recs: [
+        { title: "Foque só nos OAs avançados", text: "Pule os vídeos básicos. Vá direto na Biblioteca de Prompts e no Plano de Marketing." },
+        { title: "Use como material da sua equipe", text: "O tier Empresarial pode multiplicar seu conhecimento." },
+        { title: "Compare com seus próprios métodos", text: "Provavelmente vai pegar 2-3 ideias novas — vale o investimento." },
+        { title: "Refaça este quiz no fim", text: "Mesmo experts ganham clareza com um diagnóstico estruturado." }
+      ]
+    };
+  }
+
+  function renderResult() {
+    const score = calcScore();
+    const profile = getProfile(score);
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('quizArea').innerHTML = '';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('resultScreen').classList.add('active');
+    document.getElementById('resultScore').textContent = score;
+    document.getElementById('resultLevel').textContent = profile.level;
+    document.getElementById('resultPill').textContent = profile.pill;
+    document.getElementById('resultDesc').textContent = profile.desc;
+    document.getElementById('recList').innerHTML = profile.recs.map(r => `
+      <li><div class="rec-item"><strong>${r.title}</strong><p>${r.text}</p></div></li>
+    `).join('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function resetQuiz() {
+    if (!confirm('Tem certeza? Você vai perder suas respostas atuais.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    answers = new Array(QUESTIONS.length).fill(null);
+    currentQ = 0;
+    document.getElementById('resultScreen').classList.remove('active');
+    document.getElementById('quizArea').innerHTML = '';
+    document.getElementById('introScreen').style.display = 'block';
+    document.getElementById('progressWrap').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Boot
+  if (!loadSaved()) {
+    // intro screen já visível por padrão
+  }
+</script>
+
+</body>
+</html>

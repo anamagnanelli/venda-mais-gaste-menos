@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recursos do curso — 8 Objetos de Aprendizagem · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1180px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3); color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 580px; margin: 0 auto; line-height: 1.65; }
+
+    /* INFO BAR */
+    .info-bar { max-width: 1180px; margin: -2.5rem auto 0; padding: 0 2rem; position: relative; z-index: 10; }
+    .info-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 2rem; box-shadow: 0 20px 60px rgba(0,0,0,.08); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; justify-content: space-between; }
+    .info-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+    .info-stat { text-align: left; }
+    .info-stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+    .info-stat-label { font-size: .75rem; color: var(--muted); margin-top: .15rem; font-weight: 600; letter-spacing: .03em; }
+
+    /* FILTERS */
+    .filter-pills { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .filter-pill { padding: .55rem 1rem; background: var(--gray); border: 1.5px solid transparent; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .82rem; font-weight: 600; color: var(--muted); cursor: pointer; transition: all .2s; }
+    .filter-pill:hover { background: rgba(212,168,83,.1); color: var(--gold-dk); }
+    .filter-pill.active { background: var(--dark); color: var(--gold); border-color: var(--gold); }
+
+    .container { max-width: 1180px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .stats-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: .88rem; color: var(--muted); }
+    .stats-bar strong { color: var(--dark); font-weight: 700; }
+
+    /* GRID */
+    .oas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.5rem; }
+
+    /* OA CARD */
+    .oa-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      overflow: hidden; transition: all .25s; display: flex; flex-direction: column;
+      text-decoration: none; color: inherit;
+    }
+    .oa-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.1); border-color: var(--gold); }
+    .oa-card-top {
+      background: var(--dark); padding: 1.85rem 1.85rem 1.6rem;
+      position: relative; overflow: hidden; min-height: 130px;
+    }
+    .oa-card-top::after {
+      content: attr(data-n); position: absolute; right: 1.5rem; bottom: -.4rem;
+      font-family: 'Playfair Display', serif; font-size: 6rem; font-weight: 900;
+      color: rgba(255,255,255,.05); line-height: 1; pointer-events: none;
+    }
+    .oa-icon-wrap { display: flex; align-items: center; gap: .85rem; position: relative; z-index: 1; }
+    .oa-icon { font-size: 2.2rem; line-height: 1; }
+    .oa-tag { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); }
+    .oa-mod { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: .15rem; }
+    .oa-card-body { padding: 1.5rem 1.85rem; flex: 1; display: flex; flex-direction: column; }
+    .oa-card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: .65rem; line-height: 1.3; }
+    .oa-card-body p { font-size: .9rem; color: var(--muted); line-height: 1.6; flex: 1; margin-bottom: 1.25rem; }
+    .oa-features { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .oa-feat { font-size: .7rem; color: var(--em); background: rgba(13,148,136,.08); padding: .25rem .65rem; border-radius: 999px; font-weight: 600; }
+    .oa-card-foot { padding: 1.1rem 1.85rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--gray); }
+    .oa-time { font-size: .8rem; color: var(--muted); font-weight: 500; display: flex; align-items: center; gap: .3rem; }
+    .oa-btn { background: var(--dark); color: var(--gold); padding: .5rem 1.2rem; border-radius: 999px; font-size: .8rem; font-weight: 700; text-decoration: none; transition: all .2s; }
+    .oa-card:hover .oa-btn { background: var(--gold); color: var(--dark); }
+
+    /* JOURNEY */
+    .journey {
+      background: linear-gradient(135deg, rgba(212,168,83,.06), rgba(13,148,136,.04));
+      border: 1px solid rgba(212,168,83,.2); border-radius: 22px;
+      padding: 2.5rem; margin-bottom: 3rem;
+    }
+    .journey-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: var(--em); margin-bottom: .5rem; }
+    .journey h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 800; margin-bottom: 1.25rem; }
+    .journey-steps { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .journey-step {
+      flex: 1; min-width: 180px; background: #fff; padding: 1.1rem 1.25rem;
+      border-radius: 12px; border: 1px solid var(--border); position: relative;
+    }
+    .journey-step-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .journey-step-name { font-size: .82rem; font-weight: 700; color: var(--dark); margin: .35rem 0; }
+    .journey-step-desc { font-size: .76rem; color: var(--muted); line-height: 1.5; }
+
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+
+    @media (max-width: 800px) {
+      .info-card { gap: 1rem; flex-direction: column; align-items: stretch; }
+      .info-stats { justify-content: space-between; }
+      .filter-pills { justify-content: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .info-bar { padding: 0 1.25rem; }
+      .info-card { padding: 1.25rem; }
+      .info-stats { gap: 1.25rem; }
+      .container { padding: 2rem 1.25rem 4rem; }
+      .oas-grid { grid-template-columns: 1fr; }
+      .journey { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">📚 Recursos do curso · 8 OAs interativos</span>
+    <h1>8 recursos pra você <span class="gold">aplicar IA hoje.</span></h1>
+    <p>Quizzes, geradores, calculadoras e ferramentas que transformam teoria em prática. Tudo gratuito, funciona offline, 100% no seu navegador.</p>
+  </div>
+</section>
+
+<div class="info-bar">
+  <div class="info-card">
+    <div class="info-stats">
+      <div class="info-stat"><span class="info-stat-num">8</span><span class="info-stat-label">Objetos de Aprendizagem</span></div>
+      <div class="info-stat"><span class="info-stat-num">100%</span><span class="info-stat-label">Gratuito · offline</span></div>
+      <div class="info-stat"><span class="info-stat-num">0</span><span class="info-stat-label">Cadastros · sem login</span></div>
+    </div>
+    <div class="filter-pills" id="filterPills"></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- JORNADA SUGERIDA -->
+  <div class="journey">
+    <div class="journey-label">Sugestão de uso</div>
+    <h2>Jornada recomendada — do diagnóstico ao certificado</h2>
+    <div class="journey-steps">
+      <div class="journey-step"><div class="journey-step-num">01</div><div class="journey-step-name">Diagnóstico</div><div class="journey-step-desc">Comece pelo Quiz pra saber seu nível atual</div></div>
+      <div class="journey-step"><div class="journey-step-num">02</div><div class="journey-step-name">Persona</div><div class="journey-step-desc">Gere a persona do seu cliente ideal</div></div>
+      <div class="journey-step"><div class="journey-step-num">03</div><div class="journey-step-name">Campanha</div><div class="journey-step-desc">Use a persona pra montar campanha de 7 dias</div></div>
+      <div class="journey-step"><div class="journey-step-num">04</div><div class="journey-step-name">Aplicar</div><div class="journey-step-desc">Biblioteca de prompts + checklist guiam execução</div></div>
+      <div class="journey-step"><div class="journey-step-num">05</div><div class="journey-step-name">Mensurar</div><div class="journey-step-desc">Simulador de ROI valida resultados</div></div>
+      <div class="journey-step"><div class="journey-step-num">06</div><div class="journey-step-name">Certificar</div><div class="journey-step-desc">Gera certificado Saint Paul em PDF</div></div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div>Mostrando <strong id="visibleCount">8</strong> de <strong>8</strong> recursos</div>
+    <div>📚 Atualizado em maio/2026</div>
+  </div>
+  <div class="oas-grid" id="oasGrid"></div>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const FILTERS = [
+    { key: 'all', label: 'Todos' },
+    { key: 'm01', label: 'Módulo 1' },
+    { key: 'm02', label: 'Módulo 2' },
+    { key: 'm03', label: 'Módulo 3' },
+    { key: 'm04', label: 'Módulo 4' },
+    { key: 'transversal', label: 'Transversais' }
+  ];
+
+  const OAS = [
+    {
+      n: '01', file: 'oa-01-quiz-diagnostico.html', icon: '🎯',
+      tag: 'Quiz Diagnóstico', module: 'm01', moduleLabel: 'Módulo 01',
+      title: 'Onde você está com IA hoje?',
+      desc: '10 perguntas pra mapear seu nível atual com IA em 5 dimensões. Resultado personalizado + recomendações específicas.',
+      features: ['10 perguntas', '~3min', 'Pre/post curso'], time: '~3 min'
+    },
+    {
+      n: '02', file: 'oa-02-persona.html', icon: '👤',
+      tag: 'Gerador de Persona', module: 'm02', moduleLabel: 'Módulo 02',
+      title: 'Crie a persona do seu cliente ideal',
+      desc: 'Wizard de 7 etapas que combina seus dados com modelos testados pra gerar persona completa com nome, dores, desejos e canais.',
+      features: ['Template fixo', 'Offline', '~4min'], time: '~4 min'
+    },
+    {
+      n: '03', file: 'oa-03-campanha.html', icon: '📢',
+      tag: 'Planejador de Campanha', module: 'm03', moduleLabel: 'Módulo 03',
+      title: 'Monte sua mini-campanha de 7 dias',
+      desc: 'Brief estratégico + calendário com posts por dia + métricas-chave. Use a persona do OA 02 como público.',
+      features: ['Brief 1 página', 'Calendário 7 dias', '~5min'], time: '~5 min'
+    },
+    {
+      n: '04', file: 'oa-04-biblioteca-prompts.html', icon: '📚',
+      tag: 'Biblioteca de Prompts', module: 'm04', moduleLabel: 'Módulo 04',
+      title: '24 prompts prontos categorizados',
+      desc: 'Busca, filtros e copy 1-click. Prompts pra Persona, Pesquisa, Copy, Conteúdo, Planejamento e Análise.',
+      features: ['24 prompts', '6 categorias', 'Copy direto'], time: 'Sob demanda'
+    },
+    {
+      n: '05', file: 'oa-05-glossario.html', icon: '📖',
+      tag: 'Glossário de IA', module: 'transversal', moduleLabel: 'Transversal',
+      title: '32 termos do mundo da IA explicados',
+      desc: 'Dicionário com busca, navegação alfabética e exemplos práticos. Sem jargão técnico — escrito pra empreendedoras.',
+      features: ['32 termos', 'Busca + filtros', 'Sem jargão'], time: 'Consulta'
+    },
+    {
+      n: '06', file: 'oa-06-checklist.html', icon: '✅',
+      tag: 'Checklist de Implementação', module: 'transversal', moduleLabel: 'Pós-curso',
+      title: 'Do curso à prática em 32 tarefas',
+      desc: '4 fases: preparação · durante o curso · 30 dias após · 60-90 dias. Marca progresso, salva localmente, mostra %.',
+      features: ['32 tarefas', '4 fases', 'Persistente'], time: '90 dias'
+    },
+    {
+      n: '07', file: 'oa-07-roi.html', icon: '💰',
+      tag: 'Simulador de ROI', module: 'transversal', moduleLabel: 'Validação',
+      title: 'Quanto a IA vai te economizar?',
+      desc: 'Calculadora com 5 sliders. Mostra economia de tempo, redução de custos, receita extra e payback do curso em dias.',
+      features: ['5 sliders', 'ROI 12 meses', 'Payback'], time: '~2 min'
+    },
+    {
+      n: '08', file: 'oa-08-certificado.html', icon: '🏆',
+      tag: 'Certificado de Conclusão', module: 'transversal', moduleLabel: 'Final',
+      title: 'Gere seu certificado Saint Paul',
+      desc: 'Preencha nome + data e gere certificado profissional em PDF. Imprimível em A4 paisagem com ID único de verificação.',
+      features: ['ID único', 'A4 paisagem', 'PDF print'], time: '~1 min'
+    }
+  ];
+
+  let activeFilter = 'all';
+
+  function renderFilters() {
+    document.getElementById('filterPills').innerHTML = FILTERS.map(f => `
+      <button class="filter-pill ${f.key === activeFilter ? 'active' : ''}" onclick="setFilter('${f.key}')">${f.label}</button>
+    `).join('');
+  }
+
+  function renderGrid() {
+    const filtered = activeFilter === 'all' ? OAS : OAS.filter(o => o.module === activeFilter);
+    document.getElementById('visibleCount').textContent = filtered.length;
+    document.getElementById('oasGrid').innerHTML = filtered.map(o => `
+      <a href="${o.file}" class="oa-card">
+        <div class="oa-card-top" data-n="${o.n}">
+          <div class="oa-icon-wrap">
+            <span class="oa-icon">${o.icon}</span>
+            <div>
+              <div class="oa-tag">OA ${o.n} · ${o.tag}</div>
+              <div class="oa-mod">${o.moduleLabel}</div>
+            </div>
+          </div>
+        </div>
+        <div class="oa-card-body">
+          <h3>${o.title}</h3>
+          <p>${o.desc}</p>
+          <div class="oa-features">${o.features.map(f => `<span class="oa-feat">${f}</span>`).join('')}</div>
+        </div>
+        <div class="oa-card-foot">
+          <span class="oa-time">⏱ ${o.time}</span>
+          <span class="oa-btn">Abrir →</span>
+        </div>
+      </a>
+    `).join('');
+  }
+
+  function setFilter(key) {
+    activeFilter = key;
+    renderFilters();
+    renderGrid();
+  }
+
+  renderFilters();
+  renderGrid();
+</script>
+
+</body>
+</html>

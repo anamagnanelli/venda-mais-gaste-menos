@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aula 02 — Persona e Alinhamento Estratégico · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.65; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1180px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; text-decoration: none; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .82rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta { background: var(--gold); color: var(--dark); padding: .5rem 1.2rem; border-radius: 999px; font-size: .82rem; font-weight: 700; }
+    .nav-cta:hover { background: var(--gold-dk); color: var(--dark); }
+    .course-progress { background: var(--dark); padding: 0; position: sticky; top: 73px; z-index: 50; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .course-progress-inner { max-width: 1180px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 1rem; height: 50px; }
+    .course-progress-label { font-size: .78rem; color: rgba(255,255,255,.55); font-weight: 600; white-space: nowrap; }
+    .course-progress-label strong { color: var(--gold); }
+    .course-progress-bar { flex: 1; height: 6px; background: rgba(255,255,255,.08); border-radius: 999px; overflow: hidden; }
+    .course-progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 999px; transition: width .4s ease; }
+    .course-progress-pct { font-family: 'Playfair Display', serif; color: var(--gold); font-weight: 700; font-size: 1rem; }
+    .aula-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3.5rem; position: relative; overflow: hidden; }
+    .aula-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .aula-header::after { content: ''; position: absolute; top: -200px; right: -100px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(13,148,136,.12) 0%, transparent 65%); pointer-events: none; }
+    .aula-header-inner { max-width: 1180px; margin: 0 auto; position: relative; z-index: 1; }
+    .aula-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(212,168,83,.12); border: 1px solid rgba(212,168,83,.3); color: var(--gold); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .aula-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(38px, 5.5vw, 62px); font-weight: 900; line-height: 1.05; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+    .aula-header h1 .gold { color: var(--gold); font-style: italic; }
+    .aula-header p { color: rgba(255,255,255,.65); font-size: 1.08rem; max-width: 680px; line-height: 1.7; }
+    .aula-meta { display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1.75rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.08); }
+    .aula-meta-item { display: flex; align-items: center; gap: .5rem; font-size: .88rem; color: rgba(255,255,255,.7); }
+    .aula-meta-item strong { color: #fff; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 3rem 2rem 4rem; }
+    .layout { display: grid; grid-template-columns: 1fr 280px; gap: 2.5rem; align-items: start; }
+    .lesson { background: #fff; border: 1px solid var(--border); border-radius: 22px; overflow: hidden; margin-bottom: 1.5rem; scroll-margin-top: 130px; }
+    .lesson-head { padding: 1.5rem 1.85rem 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .lesson-num { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; background: linear-gradient(135deg, var(--gold), var(--em-lt)); font-family: 'Playfair Display', serif; font-weight: 900; color: var(--dark); }
+    .lesson-tag { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--em); margin-bottom: .35rem; }
+    .lesson-head h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 800; line-height: 1.25; }
+    .lesson-head-left { display: flex; gap: 1.25rem; align-items: flex-start; flex: 1; }
+    .lesson-check { width: 32px; height: 32px; border: 2px solid var(--border); border-radius: 50%; cursor: pointer; transition: all .2s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 5px; }
+    .lesson-check svg { width: 16px; height: 16px; opacity: 0; transition: opacity .2s; }
+    .lesson.done .lesson-check { background: var(--em); border-color: var(--em); }
+    .lesson.done .lesson-check svg { opacity: 1; }
+    .video-placeholder { margin: 1.5rem 1.85rem 0; border-radius: 14px; overflow: hidden; background: var(--dark); aspect-ratio: 16/9; position: relative; cursor: pointer; transition: all .2s; }
+    .video-placeholder:hover { transform: scale(1.005); }
+    .video-placeholder::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 40px 40px; }
+    .video-placeholder::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(212,168,83,.08) 50%, transparent 100%); }
+    .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; border-radius: 50%; background: var(--gold); color: var(--dark); border: none; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; transition: all .25s; box-shadow: 0 20px 50px rgba(212,168,83,.45); }
+    .video-placeholder:hover .play-btn { transform: translate(-50%, -50%) scale(1.08); }
+    .video-label { position: absolute; bottom: 1rem; left: 1.25rem; background: rgba(0,0,0,.7); color: rgba(255,255,255,.85); padding: .4rem .9rem; border-radius: 999px; font-size: .75rem; font-weight: 600; backdrop-filter: blur(8px); z-index: 2; }
+    .video-duration { position: absolute; bottom: 1rem; right: 1.25rem; background: rgba(0,0,0,.7); color: var(--gold); padding: .4rem .9rem; border-radius: 999px; font-size: .75rem; font-weight: 700; backdrop-filter: blur(8px); z-index: 2; }
+    .lesson-content { padding: 2rem 1.85rem; }
+    .lesson-content h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin: 1.75rem 0 .75rem; color: var(--dark); }
+    .lesson-content h3:first-child { margin-top: 0; }
+    .lesson-content p { font-size: .98rem; color: #374151; margin-bottom: 1rem; line-height: 1.75; }
+    .lesson-content strong { color: var(--dark); }
+    .lesson-content ul { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .lesson-content ul li { font-size: .95rem; color: #374151; line-height: 1.7; margin-bottom: .5rem; }
+    .lesson-content ul li::marker { color: var(--gold); }
+    .key-points { background: rgba(13,148,136,.05); border-left: 3px solid var(--em); padding: 1.25rem 1.5rem; border-radius: 0 12px 12px 0; margin: 1.5rem 0; }
+    .key-points h4 { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--em); margin-bottom: .65rem; }
+    .key-points ul { list-style: none; padding: 0; margin: 0; }
+    .key-points li { padding: .35rem 0; display: flex; gap: .65rem; align-items: flex-start; font-size: .92rem; color: #1f2937; margin: 0; line-height: 1.55; }
+    .key-points li::before { content: '✓'; color: var(--em); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .activity-box { background: linear-gradient(135deg, var(--dark), #1a1a1a); color: #fff; border-radius: 22px; padding: 2.5rem 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; border: 1px solid rgba(212,168,83,.2); }
+    .activity-box::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
+    .activity-inner { position: relative; z-index: 1; }
+    .activity-pill { display: inline-block; background: rgba(212,168,83,.15); color: var(--gold); border: 1px solid rgba(212,168,83,.3); padding: .35rem .85rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .activity-box h2 { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 900; color: #fff; margin-bottom: .75rem; line-height: 1.2; }
+    .activity-box h2 .gold { color: var(--gold); font-style: italic; }
+    .activity-box p { color: rgba(255,255,255,.7); margin-bottom: 1.5rem; line-height: 1.7; }
+    .activity-cta { display: inline-flex; align-items: center; gap: .5rem; background: var(--gold); color: var(--dark); padding: .9rem 1.85rem; border-radius: 999px; font-weight: 700; text-decoration: none; transition: all .25s; }
+    .activity-cta:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 12px 30px rgba(212,168,83,.3); }
+    .activity-meta { display: flex; gap: 2rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.1); flex-wrap: wrap; font-size: .82rem; color: rgba(255,255,255,.55); }
+    .aula-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .aula-nav-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; text-decoration: none; color: inherit; transition: all .25s; display: block; }
+    .aula-nav-card:hover { border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+    .aula-nav-card.disabled { opacity: .4; pointer-events: none; }
+    .aula-nav-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: .5rem; }
+    .aula-nav-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+    .aula-nav-card.next { text-align: right; }
+    .sidebar { position: sticky; top: 140px; }
+    .sidebar-card { background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem; margin-bottom: 1rem; }
+    .sidebar-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--em); margin-bottom: .75rem; }
+    .sidebar-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+    .toc-list { list-style: none; padding: 0; }
+    .toc-list li { padding: .65rem 0; border-bottom: 1px solid var(--gray); }
+    .toc-list li:last-child { border-bottom: none; }
+    .toc-list a { display: flex; align-items: flex-start; gap: .75rem; text-decoration: none; color: var(--dark); font-size: .88rem; line-height: 1.5; transition: color .2s; }
+    .toc-list a:hover { color: var(--em); }
+    .toc-list .toc-num { font-family: 'Playfair Display', serif; font-weight: 800; color: var(--gold); font-size: .9rem; flex-shrink: 0; min-width: 28px; }
+    .module-list { list-style: none; padding: 0; }
+    .module-list li { display: flex; align-items: center; gap: .65rem; padding: .55rem 0; font-size: .85rem; color: var(--muted); }
+    .module-list li.current { color: var(--dark); font-weight: 700; }
+    .module-list li.current::before { content: '▸'; color: var(--gold); font-weight: 900; }
+    .module-list li:not(.current)::before { content: '·'; opacity: .3; }
+    .module-list a { color: inherit; text-decoration: none; }
+    .module-list a:hover { color: var(--em); }
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2.5rem 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+    footer .logo-f { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    footer .logo-f span { color: var(--gold); }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-links { display: none; } }
+    @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">✦ Venda Mais. <span>Gaste Menos.</span></a>
+    <div class="nav-links">
+      <a href="index.html#modulos">Módulos</a>
+      <a href="recursos.html">Recursos</a>
+      <a href="index.html" class="nav-cta">Voltar ao curso</a>
+    </div>
+  </div>
+</nav>
+
+<div class="course-progress">
+  <div class="course-progress-inner">
+    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">2</span> de 4</strong></span>
+    <div class="course-progress-bar"><div class="course-progress-fill" id="courseProgress" style="width:0%"></div></div>
+    <span class="course-progress-pct"><span id="coursePct">0</span>%</span>
+  </div>
+</div>
+
+<section class="aula-header">
+  <div class="aula-header-inner">
+    <span class="aula-pill">📘 Módulo 02 · 3 vídeos · ~37min + atividade</span>
+    <h1>Persona e <span class="gold">alinhamento estratégico.</span></h1>
+    <p>A base de TUDO no marketing é saber pra quem você fala. Aqui você cria sua persona com ChatGPT, mapeia dores reais e alinha persona com sua estratégia de negócio. É o módulo onde a maioria trava — não pule.</p>
+    <div class="aula-meta">
+      <div class="aula-meta-item">📹 <strong>3 vídeos</strong> · ~37min</div>
+      <div class="aula-meta-item">🎯 <strong>1 atividade prática</strong></div>
+      <div class="aula-meta-item">⏱ <strong>~1h45 total</strong> com aplicação</div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <div class="layout">
+    <main>
+
+      <!-- VÍDEO 2.1 -->
+      <article class="lesson" id="v2-1">
+        <div class="lesson-head">
+          <div class="lesson-head-left">
+            <div class="lesson-num">2.1</div>
+            <div>
+              <div class="lesson-tag">Vídeo 2.1 · Aula 02</div>
+              <h2>O que é persona e como criar com ChatGPT</h2>
+            </div>
+          </div>
+          <div class="lesson-check" onclick="toggleLesson('v2-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
+          <span class="video-label">📹 Vídeo 2.1</span><button class="play-btn">▶</button><span class="video-duration">15:00</span>
+        </div>
+        <div class="lesson-content">
+          <h3>Persona ≠ público-alvo (a confusão que custa caro)</h3>
+          <p>
+            <strong>Público-alvo</strong> é o agregado: "mulheres 25-40, classe B, que moram em capital". Não diz nada sobre a pessoa real. <strong>Persona</strong> é UMA pessoa específica: nome, idade, profissão, dores, desejos, frase típica. Você escreve PRA ela. Você anuncia PRA ela. Você cria produto PRA ela.
+          </p>
+          <p>
+            Negócio com persona detalhada cria copy mais conversor, anúncio mais segmentado e produto mais aderente. Negócio com "público-alvo" cria post genérico que ninguém salva.
+          </p>
+
+          <h3>Os 7 elementos de uma persona que funciona</h3>
+          <ul>
+            <li><strong>Nome + idade</strong> (algo realista, brasileiro)</li>
+            <li><strong>Profissão e renda</strong> (define o tipo de oferta que faz sentido)</li>
+            <li><strong>3 dores principais</strong> (o que tira o sono dela)</li>
+            <li><strong>3 desejos profundos</strong> (o que ela REALMENTE quer)</li>
+            <li><strong>3 objeções</strong> (o que pode impedir a compra)</li>
+            <li><strong>Canais</strong> onde ela passa o tempo</li>
+            <li><strong>1 frase representativa</strong> que ela diria sobre o problema</li>
+          </ul>
+
+          <h3>O prompt da persona (cole e use)</h3>
+          <p style="background:var(--gray);padding:1.25rem;border-radius:10px;font-size:.9rem;font-family:monospace;line-height:1.6;color:#1f2937">
+            "Você é especialista em marketing pra pequenos negócios brasileiros. Crie persona detalhada do meu negócio com: nome + idade, profissão + renda, 3 dores, 3 desejos, 3 objeções, canais, 1 frase típica. CONTEXTO: vendo [X] para [Y intuição inicial] a R$ [Z]. Use linguagem específica."
+          </p>
+
+          <div class="key-points">
+            <h4>📌 Princípio</h4>
+            <ul>
+              <li>Tenha <strong>UMA persona principal</strong>. Múltiplas personas = nenhuma persona.</li>
+              <li>Refaça a cada <strong>3 meses</strong> — seu cliente muda, sua persona também.</li>
+              <li>Use a persona pra "responder" perguntas: "Por que você não comprou ainda?" gera objeções reais.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- VÍDEO 2.2 -->
+      <article class="lesson" id="v2-2">
+        <div class="lesson-head">
+          <div class="lesson-head-left">
+            <div class="lesson-num">2.2</div>
+            <div>
+              <div class="lesson-tag">Vídeo 2.2 · Aula 02</div>
+              <h2>Mapa de dores e desejos do cliente</h2>
+            </div>
+          </div>
+          <div class="lesson-check" onclick="toggleLesson('v2-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
+          <span class="video-label">📹 Vídeo 2.2</span><button class="play-btn">▶</button><span class="video-duration">12:00</span>
+        </div>
+        <div class="lesson-content">
+          <h3>Por que dor vende mais que solução</h3>
+          <p>
+            As pessoas não compram produtos. Compram <strong>alívio de dor</strong> ou <strong>realização de desejo</strong>. Anúncio que mostra solução sem mostrar a dor primeiro é anúncio ignorado. Você precisa <em>nomear</em> a dor da persona antes de oferecer o remédio.
+          </p>
+
+          <h3>O mapa em 3 níveis de profundidade</h3>
+          <ul>
+            <li><strong>Dores diárias (irritantes mas toleráveis)</strong> — não motivam compra grande, mas validam que você entende</li>
+            <li><strong>Dores semanais (causam estresse)</strong> — começam a motivar busca por solução</li>
+            <li><strong>Dores estruturais (mudam a vida)</strong> — motivam decisão de compra alta</li>
+          </ul>
+          <p>
+            Pra cada dor, mapeie: <strong>gatilho</strong> que ativa, <strong>consequência</strong> se não resolver, <strong>frase</strong> que a persona usaria pra descrever. Use as frases como headlines — elas usam o vocabulário REAL da pessoa.
+          </p>
+
+          <h3>Desejos profundos: o lado positivo da equação</h3>
+          <p>
+            Dor é o "fugir de". Desejo é o "ir em direção a". Marketing bom toca os dois. Mapeie 3 desejos profundos: <strong>o que ela quer SER</strong>, <strong>o que ela quer TER</strong>, <strong>o que ela quer SENTIR</strong>. Não fique no superficial ("vender mais"). Vá fundo ("se sentir competente como empreendedora").
+          </p>
+
+          <div class="key-points">
+            <h4>📌 Aplicação prática</h4>
+            <ul>
+              <li>Headlines = frases REAIS da persona (não suas) — copia direto do mapa de dores</li>
+              <li>Posts de valor = mostram dor + agitam consequência</li>
+              <li>Posts de venda = revelam solução + mostram desejo realizado</li>
+              <li>Quando bater dúvida sobre o que postar, volte ao mapa.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- VÍDEO 2.3 -->
+      <article class="lesson" id="v2-3">
+        <div class="lesson-head">
+          <div class="lesson-head-left">
+            <div class="lesson-num">2.3</div>
+            <div>
+              <div class="lesson-tag">Vídeo 2.3 · Aula 02</div>
+              <h2>Alinhamento persona × marketing × estratégia</h2>
+            </div>
+          </div>
+          <div class="lesson-check" onclick="toggleLesson('v2-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
+          <span class="video-label">📹 Vídeo 2.3</span><button class="play-btn">▶</button><span class="video-duration">10:00</span>
+        </div>
+        <div class="lesson-content">
+          <h3>O erro mais caro: persona desconectada do produto</h3>
+          <p>
+            Empreendedora cria persona linda. Cria produto separado. Cria marketing separado. <strong>Cada coisa de um lado.</strong> Resultado: posts não convertem, anúncios não funcionam, vendas não fecham — porque persona, marketing e estratégia não conversam.
+          </p>
+
+          <h3>O teste de alinhamento em 3 perguntas</h3>
+          <p>Pra cada decisão de produto/marketing/estratégia, responda:</p>
+          <ul>
+            <li><strong>Faz sentido pra MINHA persona?</strong> (não pra "todo mundo")</li>
+            <li><strong>Resolve UMA das dores mapeadas?</strong> (especificamente — qual delas?)</li>
+            <li><strong>Atinge UM dos desejos profundos?</strong> (qual?)</li>
+          </ul>
+          <p>
+            Se as 3 respostas forem "sim", siga. Se alguma for "não", repense. Esse teste sozinho economiza 80% do tempo desperdiçado em coisa que não converte.
+          </p>
+
+          <h3>Como persona muda canais e tom de voz</h3>
+          <p>
+            Persona Maria (32, moda online) → Instagram + Reels + linguagem coloquial-direta. Persona Carlos (45, loja física) → WhatsApp + Facebook + linguagem mais formal e didática. Persona Ana (28, freelance) → LinkedIn + email + tom mais técnico-prático. <strong>Mesmo método. Canais diferentes. Tons diferentes.</strong>
+          </p>
+
+          <div class="key-points">
+            <h4>📌 Princípio do alinhamento</h4>
+            <ul>
+              <li>Persona é a <strong>bússola</strong>. Toda decisão de marketing passa por ela.</li>
+              <li>Canais NÃO são "Instagram + Facebook + TikTok + tudo". Canais são onde SUA persona está.</li>
+              <li>Tom de voz vem da persona — não da "moda do mercado".</li>
+              <li>Produto que não resolve dor da persona é produto que ninguém compra (por mais legal que pareça).</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <section class="activity-box">
+        <div class="activity-inner">
+          <span class="activity-pill">🎯 Atividade prática · Módulo 02</span>
+          <h2>Gere a <span class="gold">persona do seu negócio.</span></h2>
+          <p>Use o Gerador de Persona pra criar SUA persona detalhada em 7 etapas. O resultado é seu mapa estratégico — vai ser usado em todos os próximos módulos.</p>
+          <a href="oa-02-persona.html" class="activity-cta">👤 Abrir Gerador de Persona →</a>
+          <div class="activity-meta">
+            <span>✓ 7 etapas guiadas</span>
+            <span>✓ Persona completa pronta</span>
+            <span>✓ ~4 minutos</span>
+          </div>
+        </div>
+      </section>
+
+      <nav class="aula-nav">
+        <a href="aula-01.html" class="aula-nav-card">
+          <div class="aula-nav-label">← Aula anterior</div>
+          <div class="aula-nav-title">01. Introdução à IA</div>
+        </a>
+        <a href="aula-03.html" class="aula-nav-card next">
+          <div class="aula-nav-label">Próxima aula →</div>
+          <div class="aula-nav-title">03. Campanhas e Conteúdos</div>
+        </a>
+      </nav>
+
+    </main>
+
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-label">Nesta aula</div>
+        <h3>📋 Conteúdo</h3>
+        <ul class="toc-list">
+          <li><a href="#v2-1"><span class="toc-num">2.1</span><span>O que é persona + ChatGPT</span></a></li>
+          <li><a href="#v2-2"><span class="toc-num">2.2</span><span>Mapa de dores e desejos</span></a></li>
+          <li><a href="#v2-3"><span class="toc-num">2.3</span><span>Alinhamento persona × estratégia</span></a></li>
+        </ul>
+      </div>
+      <div class="sidebar-card">
+        <div class="sidebar-label">Navegação</div>
+        <h3>🗺️ Curso completo</h3>
+        <ul class="module-list">
+          <li><a href="aula-01.html">01. Introdução à IA</a></li>
+          <li class="current"><strong>02. Persona e Estratégia</strong></li>
+          <li><a href="aula-03.html">03. Campanhas e Conteúdos</a></li>
+          <li><a href="aula-04.html">04. Engenharia de Prompts</a></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<footer>
+  <div class="logo-f">✦ Venda Mais. <span>Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const MODULE_NUM = 2;
+  const STORAGE_KEY = 'vmgm-aula-progress';
+  const LESSONS_THIS_AULA = ['v2-1', 'v2-2', 'v2-3'];
+  const TOTAL_LESSONS_COURSE = 12;
+
+  function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; } }
+  function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
+  function toggleLesson(id) {
+    const progress = loadProgress();
+    progress[id] = !progress[id];
+    saveProgress(progress);
+    document.getElementById(id).classList.toggle('done', progress[id]);
+    updateProgress();
+  }
+  function updateProgress() {
+    const progress = loadProgress();
+    const done = Object.values(progress).filter(Boolean).length;
+    const pct = Math.round((done / TOTAL_LESSONS_COURSE) * 100);
+    document.getElementById('courseProgress').style.width = pct + '%';
+    document.getElementById('coursePct').textContent = pct;
+    document.getElementById('modNum').textContent = MODULE_NUM;
+  }
+  function applyProgress() {
+    const progress = loadProgress();
+    LESSONS_THIS_AULA.forEach(id => { if (progress[id]) document.getElementById(id).classList.add('done'); });
+    updateProgress();
+  }
+  applyProgress();
+</script>
+
+</body>
+</html>

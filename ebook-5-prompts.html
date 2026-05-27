@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 Prompts pra Vender Mais Hoje — Ebook Grátis · Venda Mais. Gaste Menos.</title>
+  <meta name="description" content="Ebook gratuito do curso 'Venda Mais. Gaste Menos.' — 5 prompts prontos pra você começar a usar IA nas vendas hoje mesmo. Projeto Extensionista Saint Paul.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+
+    :root {
+      --dark:    #0D0D0D;
+      --gold:    #D4A853;
+      --gold-dk: #B8922A;
+      --em:      #0D9488;
+      --em-lt:   #0FB8A9;
+      --white:   #FAFAFA;
+      --gray:    #F5F4F0;
+      --border:  #E5E7EB;
+      --muted:   #6B7280;
+    }
+
+    /* ── PROGRESS BAR ───────────────────────────── */
+    .progress {
+      position: fixed; top: 0; left: 0; height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--em));
+      z-index: 100; transition: width .2s ease;
+    }
+
+    /* ── NAV TOP ─────────────────────────────────── */
+    .top-nav {
+      position: sticky; top: 0; background: rgba(13,13,13,.92);
+      backdrop-filter: blur(10px); z-index: 50;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .top-nav-inner {
+      max-width: 920px; margin: 0 auto; padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1rem; font-weight: 700; }
+    .nav-logo span { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold); color: var(--dark); padding: .5rem 1.2rem;
+      border-radius: 999px; font-size: .82rem; font-weight: 700;
+      text-decoration: none; transition: all .2s;
+    }
+    .nav-cta:hover { background: var(--gold-dk); transform: translateY(-1px); }
+
+    /* ── CAPA ────────────────────────────────────── */
+    .cover {
+      background: var(--dark); color: #fff;
+      padding: 6rem 2rem 5rem; position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .cover::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(212,168,83,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,83,.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .cover::after {
+      content: ''; position: absolute; top: -250px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(212,168,83,.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .cover-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .cover-pill {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.35);
+      color: var(--em-lt); padding: .45rem 1.1rem; border-radius: 999px;
+      font-size: .8rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 2rem;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 900; line-height: 1; letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .cover h1 .gold { color: var(--gold); display: block; font-style: italic; }
+    .cover-sub {
+      font-size: 1.2rem; color: rgba(255,255,255,.65);
+      max-width: 600px; margin: 0 auto 3rem; line-height: 1.65;
+    }
+    .cover-meta {
+      display: inline-flex; align-items: center; gap: 1.5rem; padding-top: 2.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+    }
+    .cover-meta-item { text-align: left; }
+    .cover-meta-label { display: block; font-size: .68rem; color: rgba(255,255,255,.4); letter-spacing: .12em; text-transform: uppercase; margin-bottom: .25rem; font-weight: 600; }
+    .cover-meta-value { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #fff; font-weight: 700; }
+
+    /* ── CONTAINER ───────────────────────────────── */
+    .container { max-width: 760px; margin: 0 auto; padding: 5rem 2rem; }
+
+    /* ── SUMÁRIO ─────────────────────────────────── */
+    .toc {
+      background: #fff; border: 1px solid var(--border); border-radius: 22px;
+      padding: 2.5rem; margin-top: 3rem;
+    }
+    .toc-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: var(--em); margin-bottom: .5rem; }
+    .toc h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .toc ol { list-style: none; counter-reset: toc; }
+    .toc li {
+      counter-increment: toc; padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1.25rem;
+    }
+    .toc li:last-child { border-bottom: none; }
+    .toc li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900;
+      color: var(--gold); flex-shrink: 0; min-width: 50px;
+    }
+    .toc a { color: var(--dark); text-decoration: none; font-size: 1.02rem; font-weight: 600; flex: 1; transition: color .2s; }
+    .toc a:hover { color: var(--em); }
+    .toc-tag { font-size: .75rem; color: var(--muted); font-weight: 500; }
+
+    /* ── INTRO ───────────────────────────────────── */
+    .intro h2 {
+      font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 800;
+      line-height: 1.2; margin-bottom: 1.5rem;
+    }
+    .intro p { font-size: 1.08rem; color: #374151; margin-bottom: 1.25rem; line-height: 1.75; }
+    .intro strong { color: var(--dark); }
+
+    /* ── PROMPT SECTION ──────────────────────────── */
+    .prompt-section {
+      padding: 5rem 0; border-top: 1px solid var(--border);
+    }
+    .prompt-num {
+      display: inline-block; font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 900; line-height: 1;
+      background: linear-gradient(135deg, var(--gold), var(--em));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .prompt-tag {
+      display: inline-block; background: rgba(212,168,83,.12);
+      color: var(--gold-dk); border: 1px solid rgba(212,168,83,.3);
+      padding: .35rem 1rem; border-radius: 999px;
+      font-size: .73rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .prompt-section h2 {
+      font-family: 'Playfair Display', serif; font-size: 2.2rem;
+      font-weight: 800; line-height: 1.15; margin-bottom: 1rem;
+    }
+    .prompt-section .lead {
+      font-size: 1.1rem; color: var(--muted); margin-bottom: 2rem;
+    }
+
+    .when-to-use {
+      background: rgba(13,148,136,.06); border-left: 3px solid var(--em);
+      padding: 1.25rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: 2rem;
+    }
+    .when-to-use h4 {
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--em); margin-bottom: .5rem;
+    }
+    .when-to-use p { font-size: .98rem; color: #1f2937; margin: 0; }
+
+    /* ── BLOCO DE PROMPT (estilo terminal) ──────── */
+    .prompt-box {
+      background: var(--dark); border-radius: 16px;
+      margin: 1.5rem 0 2rem; overflow: hidden; position: relative;
+    }
+    .prompt-head {
+      background: #1f1f1f; padding: .85rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .prompt-head-left { display: flex; align-items: center; gap: .5rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #eab308; }
+    .dot-g { background: #22c55e; }
+    .prompt-tool {
+      font-family: 'JetBrains Mono', monospace; font-size: .78rem;
+      color: rgba(255,255,255,.55); margin-left: .75rem;
+    }
+    .copy-btn {
+      background: rgba(212,168,83,.15); color: var(--gold);
+      border: 1px solid rgba(212,168,83,.3);
+      padding: .35rem .85rem; border-radius: 8px;
+      font-size: .75rem; font-weight: 600; cursor: pointer;
+      transition: all .2s; font-family: 'Inter', sans-serif;
+    }
+    .copy-btn:hover { background: rgba(212,168,83,.25); }
+    .copy-btn.copied { background: var(--em); color: #fff; border-color: var(--em); }
+    .prompt-body {
+      padding: 1.75rem 1.5rem; color: #e5e7eb;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .92rem; line-height: 1.75;
+      white-space: pre-wrap; word-wrap: break-word;
+    }
+    .prompt-body .var { color: var(--gold); font-weight: 600; }
+    .prompt-body .key { color: var(--em-lt); }
+
+    /* ── EXEMPLO DE SAÍDA ────────────────────────── */
+    .example {
+      background: var(--gray); border-radius: 14px;
+      padding: 1.5rem 1.75rem; margin-bottom: 2rem;
+    }
+    .example-label {
+      font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--muted); margin-bottom: .75rem;
+    }
+    .example p { font-size: .95rem; color: #374151; margin-bottom: .65rem; line-height: 1.7; }
+    .example p:last-child { margin-bottom: 0; }
+    .example strong { color: var(--dark); }
+
+    /* ── DICA / VARIAÇÃO ─────────────────────────── */
+    .tip {
+      background: linear-gradient(135deg, rgba(212,168,83,.08), rgba(13,148,136,.06));
+      border: 1px solid rgba(212,168,83,.2);
+      border-radius: 14px; padding: 1.5rem 1.75rem;
+    }
+    .tip-label {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .75rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--gold-dk); margin-bottom: .75rem;
+    }
+    .tip h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: .5rem; }
+    .tip p { font-size: .92rem; color: #374151; margin: 0 0 .75rem; line-height: 1.65; }
+    .tip ul { padding-left: 1.5rem; }
+    .tip li { font-size: .92rem; color: #374151; line-height: 1.7; margin-bottom: .4rem; }
+    .tip strong { color: var(--dark); }
+
+    /* ── CTA FINAL ───────────────────────────────── */
+    .cta-final {
+      background: var(--dark); color: #fff;
+      padding: 5rem 2rem; position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .cta-final::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(212,168,83,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,168,83,.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .cta-final-inner { max-width: 700px; margin: 0 auto; position: relative; z-index: 1; }
+    .cta-final h2 {
+      font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .cta-final h2 .gold { color: var(--gold); font-style: italic; }
+    .cta-final p { font-size: 1.1rem; color: rgba(255,255,255,.65); margin-bottom: 2.5rem; line-height: 1.65; }
+    .cta-final .btn-gold {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--gold); color: var(--dark);
+      padding: 1.1rem 2.5rem; border-radius: 999px;
+      font-size: 1.05rem; font-weight: 700; text-decoration: none;
+      transition: all .25s;
+    }
+    .cta-final .btn-gold:hover { background: var(--gold-dk); transform: translateY(-2px); box-shadow: 0 16px 40px rgba(212,168,83,.4); }
+    .cta-includes { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 2rem; font-size: .85rem; color: rgba(255,255,255,.6); }
+    .cta-includes span { display: inline-flex; align-items: center; gap: .35rem; }
+
+    /* ── ABOUT ───────────────────────────────────── */
+    .about {
+      background: var(--gray); padding: 4rem 2rem;
+    }
+    .about-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .about-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: var(--em); margin-bottom: .5rem; }
+    .about h3 { font-family: 'Playfair Display', serif; font-size: 1.7rem; margin-bottom: 1rem; font-weight: 700; }
+    .about p { color: #374151; font-size: .98rem; margin-bottom: 1.5rem; line-height: 1.75; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .team-mini { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+    .team-mini-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+      padding: .75rem 1.25rem; font-size: .85rem; color: var(--dark); font-weight: 600;
+    }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    .ebook-footer {
+      background: var(--dark); color: rgba(255,255,255,.55);
+      padding: 2.5rem 2rem; text-align: center; font-size: .82rem;
+    }
+    .ebook-footer .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+    .ebook-footer .logo span { color: var(--gold); }
+    .ebook-footer p { margin-bottom: .5rem; }
+
+    /* ── RESPONSIVO ──────────────────────────────── */
+    @media (max-width: 700px) {
+      .container { padding: 3rem 1.25rem; }
+      .cover { padding: 4rem 1.5rem 3rem; }
+      .toc { padding: 1.75rem; }
+      .prompt-num { font-size: 3.5rem; }
+      .prompt-section h2 { font-size: 1.7rem; }
+      .prompt-body { font-size: .82rem; padding: 1.25rem; }
+      .cover-meta { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress" id="progress" style="width:0%"></div>
+
+<!-- Top nav -->
+<nav class="top-nav">
+  <div class="top-nav-inner">
+    <div class="nav-logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">Voltar ao curso</a>
+  </div>
+</nav>
+
+<!-- CAPA -->
+<section class="cover">
+  <div class="cover-inner">
+    <span class="cover-pill">📖 Ebook gratuito · Projeto Extensionista Saint Paul</span>
+    <h1>
+      5 Prompts
+      <span class="gold">pra vender mais hoje.</span>
+    </h1>
+    <p class="cover-sub">
+      Os prompts prontos que os alunos do nosso curso usam pra criar campanhas, personas e conteúdos com IA em minutos — não em semanas.
+    </p>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Páginas</span>
+        <span class="cover-meta-value">7</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Tempo de leitura</span>
+        <span class="cover-meta-value">12min</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Ferramentas</span>
+        <span class="cover-meta-value">ChatGPT · Perplexity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUMÁRIO + INTRO -->
+<div class="container">
+  <section class="intro">
+    <h2>Antes de começar.</h2>
+    <p>
+      Você está aqui porque desconfia que <strong>existe um jeito mais rápido</strong> de criar marketing pro seu negócio. Está certa.
+    </p>
+    <p>
+      O problema é que <strong>90% das pessoas usam IA do jeito errado</strong>: jogam um "crie um post sobre vendas" no ChatGPT e ficam frustradas com o resultado genérico. A IA não é mágica — ela é uma <em>conversa</em>, e quem domina a conversa (chamamos isso de <strong>engenharia de prompts</strong>) consegue resultados profissionais em minutos.
+    </p>
+    <p>
+      Neste ebook você vai aprender <strong>5 prompts prontos</strong> que os alunos do nosso curso usam diariamente. Cada um vem com: <em>quando usar</em>, o <em>prompt completo</em> pra copiar, um <em>exemplo de saída</em> e uma <em>dica de como melhorar</em> ainda mais.
+    </p>
+    <p>
+      Bora?
+    </p>
+  </section>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-label">Sumário</div>
+    <h2>Os 5 prompts</h2>
+    <ol>
+      <li><a href="#prompt-1">Criar uma persona detalhada do seu cliente ideal</a><span class="toc-tag">2 min</span></li>
+      <li><a href="#prompt-2">Pesquisar concorrentes e encontrar oportunidades</a><span class="toc-tag">3 min</span></li>
+      <li><a href="#prompt-3">Escrever copy de anúncio que converte</a><span class="toc-tag">2 min</span></li>
+      <li><a href="#prompt-4">Gerar 10 posts pras redes sociais</a><span class="toc-tag">3 min</span></li>
+      <li><a href="#prompt-5">Montar seu plano de marketing de 1 semana</a><span class="toc-tag">2 min</span></li>
+    </ol>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- PROMPT 1 — PERSONA -->
+<!-- ════════════════════════════════════════════ -->
+<div class="container">
+  <section class="prompt-section" id="prompt-1" style="border-top:none;padding-top:2rem">
+    <span class="prompt-num">01</span>
+    <div><span class="prompt-tag">Persona · Estratégia</span></div>
+    <h2>Crie uma persona detalhada do seu cliente ideal</h2>
+    <p class="lead">A base de TUDO no marketing é saber pra quem você fala. Esse prompt gera uma persona pronta com idade, dores, desejos, objeções e canais.</p>
+
+    <div class="when-to-use">
+      <h4>📍 Quando usar</h4>
+      <p>No início de qualquer estratégia — antes de criar campanha, post, anúncio ou produto. Refaça a cada 3 meses pra refinar.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <div class="prompt-head-left">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="prompt-tool">chatgpt · prompt-01-persona</span>
+        </div>
+        <button class="copy-btn" data-target="p1">Copiar</button>
+      </div>
+      <div class="prompt-body" id="p1">Você é especialista em marketing digital pra pequenos negócios brasileiros.
+
+Crie uma <span class="key">persona detalhada</span> pro meu negócio com:
+
+1. <span class="key">Nome fictício + idade</span> (algo realista, brasileiro)
+2. <span class="key">Profissão e renda mensal aproximada</span>
+3. <span class="key">3 dores principais</span> que essa pessoa enfrenta antes de comprar
+4. <span class="key">3 desejos profundos</span> (o que ela REALMENTE quer alcançar)
+5. <span class="key">3 objeções</span> que ela pode ter ao considerar meu produto
+6. <span class="key">Canais</span> onde ela passa o tempo (redes, apps, fóruns)
+7. <span class="key">1 frase</span> que essa persona diria sobre o problema dela
+
+CONTEXTO DO MEU NEGÓCIO:
+- O que eu vendo: <span class="var">[descreva em 1 frase]</span>
+- Para quem (intuição inicial): <span class="var">[ex: mulheres 25-40 que querem produtividade]</span>
+- Preço médio: <span class="var">[ex: R$ 197]</span>
+- Diferencial: <span class="var">[o que te torna único]</span>
+
+Use linguagem específica e EVITE generalidades como "quer crescer" ou "tem dor". Seja concreta como se fosse uma pessoa real que você conhece.</div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">📝 Exemplo do que esperar</div>
+      <p><strong>Persona: Juliana, 34 anos</strong></p>
+      <p><strong>Profissão:</strong> Pedagoga · escola particular · renda ~R$ 4.500/mês</p>
+      <p><strong>Dores:</strong> (1) "Não consigo ler nem 1 livro por mês com a rotina de aulas." (2) "Toda vez que tento estudar à noite, já chego exausta." (3) "Quero crescer profissionalmente mas não sei nem por onde começar."</p>
+      <p><strong>Frase que ela diria:</strong> "Eu queria muito ter tempo pra estudar de novo, mas a vida não para."</p>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">💡 Dica avançada</div>
+      <h4>Faça a persona "responder" perguntas</h4>
+      <p>Depois que a persona estiver criada, continue a conversa com: <em>"Agora responda como Juliana: por que você não comprou meu curso ainda?"</em></p>
+      <p>O ChatGPT vai gerar objeções que VOCÊ não tinha pensado — e essas objeções viram títulos de posts, anúncios e FAQs.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- PROMPT 2 — PESQUISA DE MERCADO -->
+<!-- ════════════════════════════════════════════ -->
+<div class="container">
+  <section class="prompt-section" id="prompt-2">
+    <span class="prompt-num">02</span>
+    <div><span class="prompt-tag">Pesquisa · Concorrência</span></div>
+    <h2>Pesquise concorrentes e encontre oportunidades</h2>
+    <p class="lead">O Perplexity tem busca real na internet com fontes citadas. Esse prompt extrai concorrentes, preços, posicionamento e gaps em uma resposta só.</p>
+
+    <div class="when-to-use">
+      <h4>📍 Quando usar</h4>
+      <p>Antes de lançar um produto novo, definir preço, ou criar uma campanha. Refaça a cada 6 meses pra mapear novos players.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <div class="prompt-head-left">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="prompt-tool">perplexity · prompt-02-mercado</span>
+        </div>
+        <button class="copy-btn" data-target="p2">Copiar</button>
+      </div>
+      <div class="prompt-body" id="p2">Faça uma <span class="key">pesquisa de mercado</span> sobre o nicho de <span class="var">[seu nicho — ex: lojas de roupa fitness online no Brasil]</span>.
+
+Me entregue:
+
+1. <span class="key">5 maiores concorrentes</span> diretos (com link e Instagram de cada)
+2. <span class="key">Faixa de preço média</span> praticada pelo mercado
+3. <span class="key">Posicionamento dominante</span> (o que TODO mundo está dizendo?)
+4. <span class="key">3 gaps de mercado</span> (o que NINGUÉM está fazendo bem ainda?)
+5. <span class="key">3 tendências</span> emergentes nos últimos 12 meses
+6. <span class="key">Palavras-chave principais</span> que o público usa no Google
+7. <span class="key">1 oportunidade</span> clara de diferenciação que você recomenda pra um novo entrante
+
+Cite TODAS as fontes (links reais) ao final de cada item. Se não tiver dado confiável, diga "não encontrei informação verificável" — NÃO invente números.</div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">📝 Exemplo do que esperar</div>
+      <p><strong>Gap 1:</strong> Nenhum concorrente no Brasil oferece consultoria personalizada de "look fitness por tipo de corpo" — todos vendem peças genéricas. (Fonte: análise dos 5 sites listados acima)</p>
+      <p><strong>Tendência:</strong> Aumento de 47% em buscas por "roupa fitness plus size" nos últimos 12 meses no Google Trends.</p>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">💡 Dica avançada</div>
+      <h4>Combine com ChatGPT pra extrair ação</h4>
+      <p>Depois de receber a pesquisa do Perplexity, cole o resultado no ChatGPT e pergunte:</p>
+      <p><em>"Com base nessa pesquisa, qual seria minha estratégia de posicionamento em 3 frases? E quais 5 títulos de post eu deveria publicar essa semana?"</em></p>
+      <p>Você sai com pesquisa + posicionamento + calendário editorial em 5 minutos.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- PROMPT 3 — COPY ANÚNCIO -->
+<!-- ════════════════════════════════════════════ -->
+<div class="container">
+  <section class="prompt-section" id="prompt-3">
+    <span class="prompt-num">03</span>
+    <div><span class="prompt-tag">Copy · Anúncio</span></div>
+    <h2>Escreva copy de anúncio que converte de verdade</h2>
+    <p class="lead">Copy genérico não vende. Esse prompt usa a estrutura <strong>P-A-S</strong> (Problema → Agitação → Solução) testada em milhões de anúncios.</p>
+
+    <div class="when-to-use">
+      <h4>📍 Quando usar</h4>
+      <p>Sempre que precisar criar anúncio pago (Meta Ads, Google Ads) ou copy de email/landing page. Gere 5-10 variações por vez pra testar.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <div class="prompt-head-left">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="prompt-tool">chatgpt · prompt-03-copy</span>
+        </div>
+        <button class="copy-btn" data-target="p3">Copiar</button>
+      </div>
+      <div class="prompt-body" id="p3">Você é copywriter direto, sem jargão, focado em conversão.
+
+Escreva <span class="key">5 variações de copy de anúncio</span> usando a estrutura <span class="key">P-A-S</span> (Problema-Agitação-Solução):
+
+- <span class="key">Headline</span> (até 8 palavras, gancho forte)
+- <span class="key">Corpo</span> (3 parágrafos curtos: problema → consequência → solução)
+- <span class="key">CTA</span> (verbo de ação + benefício imediato)
+
+CONTEXTO:
+- Produto: <span class="var">[descreva em 1 frase]</span>
+- Persona: <span class="var">[cole a persona do Prompt 1]</span>
+- Preço: <span class="var">[valor]</span>
+- Diferencial: <span class="var">[o que te diferencia]</span>
+- Plataforma: <span class="var">[Instagram, Facebook, Google, Email]</span>
+
+REGRAS:
+- Linguagem brasileira coloquial (não traduzida)
+- ZERO clichês ("transforme sua vida", "descubra o segredo", "última chance")
+- Cada variação com um ângulo DIFERENTE (medo, ganância, prova social, escassez, autoridade)
+- Sem emojis em excesso (máximo 1 por copy)
+- Termine cada copy com pergunta ou afirmação que cause pausa
+
+Marque cada variação como [V1], [V2], etc.</div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">📝 Exemplo do que esperar</div>
+      <p><strong>[V1] Headline:</strong> "Você não tem tempo. Ou não tem método?"</p>
+      <p><strong>Corpo:</strong> A maioria das pedagogas que conheço diz que "não tem tempo pra estudar". Mas a verdade é mais incômoda: nunca aprenderam um método que cabe na rotina de uma escola. Resultado? 3 anos no mesmo cargo, mesma renda, mesma frustração.</p>
+      <p><strong>CTA:</strong> Veja o método de 25min/dia (sem precisar acordar 5h)</p>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">💡 Dica avançada</div>
+      <h4>Teste A/B em 24h, não em 1 mês</h4>
+      <p>Não gaste R$500 só pra descobrir qual variação funciona. Faça assim:</p>
+      <ul>
+        <li><strong>Stories no Instagram:</strong> 5 enquetes "Qual headline te faria parar de rolar?"</li>
+        <li><strong>Grupo de WhatsApp:</strong> Envie pras 10 pessoas mais parecidas com a persona</li>
+        <li><strong>Email pra base:</strong> Mande as 2 melhores como subject pra metade da lista cada</li>
+      </ul>
+      <p>Em 24h você descobre qual ângulo bate mais — aí coloca verba só nessa.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- PROMPT 4 — POSTS DE REDE -->
+<!-- ════════════════════════════════════════════ -->
+<div class="container">
+  <section class="prompt-section" id="prompt-4">
+    <span class="prompt-num">04</span>
+    <div><span class="prompt-tag">Redes sociais · Conteúdo</span></div>
+    <h2>Gere 10 posts pras redes sociais em 1 prompt</h2>
+    <p class="lead">A regra de ouro: <strong>80% conteúdo de valor, 20% de venda</strong>. Esse prompt monta as duas categorias com a proporção certa.</p>
+
+    <div class="when-to-use">
+      <h4>📍 Quando usar</h4>
+      <p>Toda semana ou quinzena, pra encher o calendário editorial. Roda esse prompt na segunda e você tem conteúdo pra 10 dias.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <div class="prompt-head-left">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="prompt-tool">chatgpt · prompt-04-posts</span>
+        </div>
+        <button class="copy-btn" data-target="p4">Copiar</button>
+      </div>
+      <div class="prompt-body" id="p4">Crie <span class="key">10 ideias de posts</span> pro Instagram do meu negócio, seguindo a regra <span class="key">80/20</span>:
+
+- <span class="key">8 posts de VALOR</span> (educar, inspirar, contar história, dar dica)
+- <span class="key">2 posts de VENDA</span> (apresentar produto, depoimento, oferta)
+
+CONTEXTO:
+- Negócio: <span class="var">[descreva]</span>
+- Persona: <span class="var">[cole a persona do Prompt 1]</span>
+- Tom de voz: <span class="var">[ex: amiga próxima / autoridade técnica / divertida]</span>
+
+Pra cada post entregue:
+
+1. <span class="key">Formato</span> (Carrossel / Reels / Foto única / Story)
+2. <span class="key">Gancho</span> (primeira frase que faz parar de rolar)
+3. <span class="key">Estrutura</span> (3 a 5 bullets do conteúdo)
+4. <span class="key">CTA</span> (ação que o seguidor deve tomar)
+5. <span class="key">Hashtags</span> (5 hashtags específicas do nicho — sem #empreendedorismo genérico)
+
+Alterne entre os 8 posts de valor TEMAS DIFERENTES (não 8 posts sobre o mesmo tópico). Os 2 posts de venda devem ser DIFERENTES entre si (ex: 1 depoimento + 1 oferta).</div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">📝 Exemplo do que esperar</div>
+      <p><strong>Post 3 (Valor) — Formato:</strong> Carrossel de 7 slides</p>
+      <p><strong>Gancho:</strong> "7 sinais de que você está estudando errado (e nem percebeu)"</p>
+      <p><strong>CTA:</strong> "Salva pra revisar na próxima vez que abrir o caderno 📚"</p>
+      <p><strong>Hashtags:</strong> #pedagogiabasil #professoraconcurseira #estudarcomfoco #carreiradocente #planodecarreira</p>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">💡 Dica avançada</div>
+      <h4>Reaproveite cada post em 4 formatos</h4>
+      <p>Um post bom no Instagram pode virar:</p>
+      <ul>
+        <li><strong>Reels</strong> de 30s (cobre o gancho + 1 ponto)</li>
+        <li><strong>Carrossel</strong> de 7 slides (versão completa)</li>
+        <li><strong>Stories</strong> de 5 telas (versão interativa com enquetes)</li>
+        <li><strong>Email</strong> pra base (texto expandido com link pro produto)</li>
+      </ul>
+      <p>1 prompt → 10 ideias → 40 conteúdos. <strong>Isso é IA bem usada.</strong></p>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- PROMPT 5 — PLANO DE MARKETING -->
+<!-- ════════════════════════════════════════════ -->
+<div class="container">
+  <section class="prompt-section" id="prompt-5">
+    <span class="prompt-num">05</span>
+    <div><span class="prompt-tag">Planejamento · Execução</span></div>
+    <h2>Monte seu plano de marketing de 1 semana</h2>
+    <p class="lead">Sem plano, IA vira distração. Esse prompt te entrega cronograma de 7 dias com ações específicas, ferramenta de cada uma e métrica pra acompanhar.</p>
+
+    <div class="when-to-use">
+      <h4>📍 Quando usar</h4>
+      <p>Toda segunda-feira de manhã. Em 10 minutos você tem clareza total da semana — sem decidir cada coisa na hora.</p>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <div class="prompt-head-left">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="prompt-tool">chatgpt · prompt-05-plano</span>
+        </div>
+        <button class="copy-btn" data-target="p5">Copiar</button>
+      </div>
+      <div class="prompt-body" id="p5">Você é diretora de marketing focada em execução, não teoria.
+
+Monte um <span class="key">plano de marketing de 7 dias</span> pro meu negócio. Pra CADA dia da semana entregue:
+
+- <span class="key">Foco principal</span> (1 frase)
+- <span class="key">Ações concretas</span> (3 a 5 itens, com tempo estimado em minutos)
+- <span class="key">Ferramenta IA</span> a usar em cada ação
+- <span class="key">Entregável do dia</span> (o que tem que estar pronto até o fim do dia)
+- <span class="key">Métrica</span> pra acompanhar essa ação
+
+CONTEXTO:
+- Negócio: <span class="var">[descreva]</span>
+- Objetivo da semana: <span class="var">[ex: lançar produto / aquecer audiência / converter leads]</span>
+- Tempo disponível por dia: <span class="var">[ex: 1h30 entre 7h e 8h30]</span>
+- Status atual: <span class="var">[ex: 800 seguidores, 0 vendas no mês passado]</span>
+
+REGRAS:
+- TOTAL de tempo gasto na semana: máximo 10h (assuma rotina ocupada)
+- Equilibrar: 40% conteúdo · 30% relacionamento · 20% conversão · 10% análise
+- Cada dia tem que ter NO MÁXIMO 1 entregável grande (não sobrecarregar)
+- Sexta-feira é dia de revisão + planejar próxima semana
+- Sábado e Domingo são opcionais (1 dia de descanso obrigatório)
+
+Formato: tabela por dia.</div>
+    </div>
+
+    <div class="example">
+      <div class="example-label">📝 Exemplo do que esperar</div>
+      <p><strong>SEGUNDA — Foco:</strong> Aquecer audiência depois do fim de semana</p>
+      <p><strong>Ação 1 (20min):</strong> Postar enquete no Stories sobre principal dor da persona. <em>Ferramenta:</em> nenhuma · feito direto no app</p>
+      <p><strong>Ação 2 (40min):</strong> Criar carrossel "5 erros que pedagoga comete ao estudar à noite". <em>Ferramenta:</em> ChatGPT (texto) + Canva (design)</p>
+      <p><strong>Entregável:</strong> 1 carrossel publicado às 19h · <strong>Métrica:</strong> Salvamentos > 30</p>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">💡 Dica avançada</div>
+      <h4>Plano de domingo vs plano de quinta</h4>
+      <p>Roda esse prompt 2 vezes: no domingo (planejamento ideal) e na quinta-feira da semana anterior (planejamento realista, sabendo o que já saiu da grade).</p>
+      <p>A diferença entre os dois é onde você precisa <strong>ajustar a vida</strong> (não a IA).</p>
+    </div>
+  </section>
+</div>
+
+<!-- ════════════════════════════════════════════ -->
+<!-- CTA FINAL -->
+<!-- ════════════════════════════════════════════ -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <h2>
+      Esses são <span class="gold">5 dos 30+ prompts</span><br>
+      que ensinamos no curso completo.
+    </h2>
+    <p>
+      O curso "Venda Mais. Gaste Menos." vai muito além de prompts soltos — você sai com um <strong>sistema completo</strong> de IA pro seu negócio: 4 módulos, 12 vídeos curtos, 8 objetos de aprendizagem interativos e o Assistente IA personalizado.
+    </p>
+    <a href="index.html#pricing" class="btn-gold">🚀 Ver o curso completo</a>
+    <div class="cta-includes">
+      <span>✓ R$ 197 pagamento único</span>
+      <span>✓ Acesso por 12 meses</span>
+      <span>✓ Garantia de 7 dias</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="about-inner">
+    <div class="about-label">Quem fez este ebook</div>
+    <h3>Projeto Extensionista · Saint Paul</h3>
+    <p>
+      Este ebook é parte do projeto extensionista do curso de Administração da Saint Paul Escola de Negócios. Foi produzido por uma equipe de estudantes pesquisando como pequenos negócios brasileiros podem usar IA pra vender mais sem gastar mais.
+    </p>
+    <div class="team-mini">
+      <div class="team-mini-card">Ana Beatriz Magnanelli</div>
+      <div class="team-mini-card">Anna Beatriz Amorim</div>
+      <div class="team-mini-card">Martha Nobel</div>
+      <div class="team-mini-card">Ana Luisa Fragali</div>
+      <div class="team-mini-card">Lucas Lico</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ebook-footer">
+  <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios · Turma 02</p>
+  <p style="font-size:.72rem;margin-top:.75rem;color:rgba(255,255,255,.3)">⚠️ As ferramentas de IA mencionadas podem gerar conteúdo impreciso. Sempre revise antes de publicar.</p>
+</footer>
+
+<script>
+  // Progress bar
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, (window.scrollY / h) * 100);
+    progress.style.width = pct + '%';
+  });
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.target;
+      const text = document.getElementById(id).innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        const original = btn.textContent;
+        btn.textContent = '✓ Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 2000);
+      } catch(e) {
+        btn.textContent = 'Erro';
+      }
+    });
+  });
+
+  // Smooth scroll for TOC
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

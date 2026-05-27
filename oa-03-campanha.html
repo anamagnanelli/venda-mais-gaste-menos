@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Planejador de Campanha — Mini-campanha em 5min · Venda Mais. Gaste Menos.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3); color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(34px, 5vw, 54px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.015em; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1.02rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+    .progress-wrap { max-width: 720px; margin: 0 auto; padding: 2rem; position: sticky; top: 73px; background: rgba(250,250,250,.92); backdrop-filter: blur(10px); z-index: 50; border-bottom: 1px solid var(--border); display: none; }
+    .progress-label { display: flex; justify-content: space-between; margin-bottom: .65rem; font-size: .82rem; color: var(--muted); font-weight: 600; }
+    .progress-label strong { color: var(--dark); }
+    .progress-bar { width: 100%; height: 8px; background: var(--gray); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 999px; transition: width .35s ease; width: 0%; }
+    .container { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .intro-screen { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 3rem 2.5rem; text-align: center; }
+    .intro-screen .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .intro-screen h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 1rem; font-weight: 800; }
+    .intro-screen p { color: #374151; font-size: 1.02rem; margin-bottom: 1.5rem; line-height: 1.75; }
+    .intro-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; padding: 1.75rem; background: var(--gray); border-radius: 16px; }
+    .intro-feat { text-align: center; }
+    .intro-feat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+    .intro-feat-label { font-size: .78rem; color: var(--muted); margin-top: .25rem; font-weight: 500; }
+    .form-card { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 2.5rem 2rem; display: none; }
+    .form-card.active { display: block; animation: fadeIn .35s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .q-num { display: inline-block; background: var(--gold); color: var(--dark); padding: .35rem .85rem; border-radius: 999px; font-family: 'Playfair Display', serif; font-weight: 800; font-size: .78rem; letter-spacing: .05em; margin-bottom: 1rem; }
+    .q-title { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; line-height: 1.3; margin-bottom: .5rem; }
+    .q-help { color: var(--muted); font-size: .92rem; margin-bottom: 1.75rem; line-height: 1.55; }
+    .field { margin-bottom: 1.25rem; }
+    .field label { display: block; font-size: .85rem; font-weight: 600; color: var(--dark); margin-bottom: .5rem; }
+    .field input, .field textarea, .field select { width: 100%; padding: .85rem 1rem; border: 1.5px solid var(--border); border-radius: 12px; font-size: .96rem; font-family: 'Inter', sans-serif; color: var(--dark); background: #fff; transition: all .2s; }
+    .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--em); box-shadow: 0 0 0 3px rgba(13,148,136,.1); }
+    .field textarea { resize: vertical; min-height: 90px; }
+    .options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .opt-btn { padding: 1rem 1.15rem; background: #fff; border: 2px solid var(--border); border-radius: 12px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 500; color: var(--dark); cursor: pointer; transition: all .2s; text-align: left; }
+    .opt-btn:hover { border-color: var(--gold); background: rgba(212,168,83,.04); }
+    .opt-btn.selected { border-color: var(--em); background: rgba(13,148,136,.06); color: var(--em); font-weight: 700; }
+    .nav-buttons { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .btn { padding: .9rem 1.75rem; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 700; cursor: pointer; transition: all .2s; text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; border: none; }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover:not(:disabled) { background: var(--gold-dk); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212,168,83,.3); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--gray); color: var(--dark); }
+    .btn:disabled { opacity: .35; cursor: not-allowed; transform: none; }
+
+    /* RESULT */
+    .result-screen { display: none; }
+    .result-screen.active { display: block; animation: fadeIn .5s ease; }
+    .brief-card { background: #fff; border: 1px solid var(--border); border-radius: 24px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: 0 20px 60px rgba(0,0,0,.08); }
+    .brief-head { background: var(--dark); color: #fff; padding: 2.5rem 2rem; text-align: center; position: relative; overflow: hidden; }
+    .brief-head::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 50px 50px; }
+    .brief-head-inner { position: relative; z-index: 1; }
+    .brief-tag { display: inline-block; background: rgba(212,168,83,.15); color: var(--gold); border: 1px solid rgba(212,168,83,.3); padding: .35rem .85rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .brief-title { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; font-style: italic; color: #fff; margin-bottom: .5rem; }
+    .brief-sub { color: rgba(255,255,255,.65); font-size: .95rem; }
+    .brief-body { padding: 2rem; }
+    .brief-section { margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .brief-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .brief-section-label { display: inline-block; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--em); margin-bottom: .75rem; padding: .25rem .65rem; background: rgba(13,148,136,.08); border-radius: 6px; }
+    .brief-section h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 700; }
+    .brief-section p { color: #374151; line-height: 1.7; font-size: .98rem; }
+    .brief-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+    .brief-grid-item { padding: 1rem 1.25rem; background: var(--gray); border-radius: 12px; }
+    .brief-grid-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); display: block; margin-bottom: .35rem; }
+    .brief-grid-value { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--dark); font-size: 1rem; }
+
+    /* CALENDAR */
+    .day-card {
+      background: var(--gray); border-left: 3px solid var(--gold);
+      padding: 1.25rem 1.5rem; border-radius: 0 12px 12px 0; margin-bottom: .85rem;
+    }
+    .day-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .65rem; }
+    .day-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05rem; color: var(--dark); }
+    .day-format { font-size: .75rem; color: var(--em); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; background: rgba(13,148,136,.1); padding: .2rem .6rem; border-radius: 999px; }
+    .day-content { color: #374151; font-size: .92rem; line-height: 1.6; }
+    .day-cta { font-size: .82rem; color: var(--muted); margin-top: .5rem; font-style: italic; }
+
+    /* METRICS */
+    .metrics-list { list-style: none; }
+    .metrics-list li { padding: .75rem 0; border-bottom: 1px solid var(--gray); display: flex; gap: .85rem; align-items: flex-start; font-size: .95rem; color: #374151; line-height: 1.6; }
+    .metrics-list li:last-child { border-bottom: none; }
+    .metrics-list li::before { content: '📊'; flex-shrink: 0; }
+
+    .result-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; padding-top: 1rem; }
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+    @media (max-width: 600px) {
+      .intro-features, .brief-grid { grid-template-columns: 1fr; gap: .75rem; }
+      .form-card, .brief-body { padding: 1.75rem 1.5rem; }
+      .options-grid { grid-template-columns: 1fr; }
+      .nav-buttons { flex-direction: column-reverse; }
+      .nav-buttons .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="index.html" class="nav-cta">← Voltar ao curso</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">📢 OA 03 · Planejador de Campanha · Módulo 03</span>
+    <h1>Sua mini-campanha <span class="gold">em 5 minutos.</span></h1>
+    <p>Defina objetivo, persona e mensagem. Você sai com um brief completo + calendário de 7 dias + métricas pra acompanhar.</p>
+  </div>
+</section>
+
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-label">
+    <span>Etapa <strong id="qCurrent">1</strong> de <strong id="qTotal">6</strong></span>
+    <span><strong id="qPct">17</strong>% completo</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="container">
+
+  <section class="intro-screen" id="introScreen">
+    <div class="icon">📢</div>
+    <h2>Bora montar sua campanha?</h2>
+    <p>6 perguntas estratégicas pra estruturar uma mini-campanha de 7 dias. Você sai daqui com: <strong>brief de uma página</strong>, <strong>calendário com posts diários</strong> e <strong>métricas-chave</strong> pra acompanhar.</p>
+    <div class="intro-features">
+      <div class="intro-feat"><span class="intro-feat-num">6</span><span class="intro-feat-label">perguntas</span></div>
+      <div class="intro-feat"><span class="intro-feat-num">~5min</span><span class="intro-feat-label">de duração</span></div>
+      <div class="intro-feat"><span class="intro-feat-num">7 dias</span><span class="intro-feat-label">de campanha</span></div>
+    </div>
+    <div class="nav-buttons" style="justify-content:center;border-top:none;padding-top:1rem">
+      <button class="btn btn-gold" onclick="startWizard()">Começar planejamento →</button>
+    </div>
+  </section>
+
+  <div id="wizardArea"></div>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="brief-card">
+      <div class="brief-head">
+        <div class="brief-head-inner">
+          <span class="brief-tag">📋 Brief da campanha</span>
+          <div class="brief-title" id="bTitle">—</div>
+          <div class="brief-sub" id="bSub">—</div>
+        </div>
+      </div>
+      <div class="brief-body">
+        <div class="brief-section">
+          <span class="brief-section-label">🎯 Estratégia</span>
+          <div class="brief-grid" id="bData"></div>
+        </div>
+        <div class="brief-section">
+          <span class="brief-section-label">💬 Mensagem central</span>
+          <h3 id="bMessage">—</h3>
+          <p id="bMessageDesc">—</p>
+        </div>
+        <div class="brief-section">
+          <span class="brief-section-label">📅 Calendário 7 dias</span>
+          <h3>Plano de publicação</h3>
+          <div id="bCalendar"></div>
+        </div>
+        <div class="brief-section">
+          <span class="brief-section-label">📊 Métricas a acompanhar</span>
+          <h3>O que medir nesta campanha</h3>
+          <ul class="metrics-list" id="bMetrics"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="result-actions">
+      <button class="btn btn-ghost" onclick="resetWizard()">↻ Refazer</button>
+      <button class="btn btn-ghost" onclick="copyBrief()">📋 Copiar brief</button>
+      <button class="btn btn-gold" onclick="window.print()">📄 Salvar como PDF</button>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.5rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+  const STEPS = [
+    { key: 'nome', title: 'Como vamos chamar essa campanha?', help: 'Um nome curto pra identificar. Pode ser o produto, a data ou o tema.', type: 'text', placeholder: 'Ex: Lançamento Coleção Inverno' },
+    { key: 'objetivo', title: 'Qual o objetivo principal?', help: 'Toda campanha precisa de UM objetivo claro — escolha o mais importante.', type: 'options', options: [
+      '🛒 Vender um produto/serviço', '📧 Gerar leads (capturar emails)', '👀 Aumentar reconhecimento (awareness)', '💬 Ativar base de clientes existente'
+    ]},
+    { key: 'produto', title: 'O que exatamente está sendo promovido?', help: 'Descreva em 1 frase. Quanto mais específico, melhor o brief.', type: 'text', placeholder: 'Ex: Curso de marketing digital de R$197' },
+    { key: 'persona', title: 'Quem é o público dessa campanha?', help: 'Cole sua persona resumida (use o OA 02 se ainda não criou).', type: 'text', placeholder: 'Ex: Empreendedoras 28-40, faturamento mensal R$5-20k' },
+    { key: 'canais', title: 'Quais canais você vai usar?', help: 'Comece com 1-2 onde sua persona realmente está. Mais canais ≠ melhor resultado.', type: 'options', options: [
+      'Instagram (orgânico + Stories)', 'WhatsApp (lista + grupos)', 'Email marketing', 'Anúncios pagos (Meta Ads)',
+      'TikTok / Reels', 'LinkedIn', 'Site / Blog (SEO)', 'Combinar 2+ canais'
+    ]},
+    { key: 'orcamento', title: 'Qual seu orçamento pra esta campanha?', help: 'Inclui anúncios, ferramentas e qualquer custo extra. Não inclui seu tempo.', type: 'options', options: [
+      'R$ 0 (só orgânico)', 'Até R$ 300', 'R$ 300 a R$ 1.000', 'R$ 1.000 a R$ 3.000', 'Acima de R$ 3.000'
+    ]}
+  ];
+
+  const STORAGE_KEY = 'vmgm-oa-campanha';
+  let data = {}, currentStep = 0;
+
+  // ─── TEMPLATES ─────────────────────────────
+  const MESSAGES = {
+    '🛒 Vender um produto/serviço': {
+      title: 'Quem não compra agora, paga o dobro depois.',
+      desc: 'Mensagem de urgência baseada em valor — quem age agora ganha. Funciona pra fechamento de venda direta.'
+    },
+    '📧 Gerar leads (capturar emails)': {
+      title: 'O que ninguém te conta sobre [seu tema].',
+      desc: 'Mensagem de curiosidade + valor — promete revelar algo único em troca do contato. Funciona pra captação de leads frios.'
+    },
+    '👀 Aumentar reconhecimento (awareness)': {
+      title: 'Por que ninguém está falando sobre isso?',
+      desc: 'Mensagem de polêmica + autoridade — provoca debate e gera compartilhamento. Funciona pra ampliar alcance orgânico.'
+    },
+    '💬 Ativar base de clientes existente': {
+      title: 'A próxima fase do que você já comprou.',
+      desc: 'Mensagem de continuidade — fala diretamente com quem já confia em você. Funciona pra upsell/cross-sell.'
+    }
+  };
+
+  const CALENDARS = {
+    '🛒 Vender um produto/serviço': [
+      { dia: 'Seg', formato: 'Carrossel', conteudo: 'Apresente o problema que seu produto resolve (sem citar o produto ainda)', cta: 'Salvar pra revisar depois' },
+      { dia: 'Ter', formato: 'Reels', conteudo: 'Vídeo curto mostrando o "antes vs depois" — visual + emocional', cta: 'Marcar amiga que precisa ver isso' },
+      { dia: 'Qua', formato: 'Stories sequência', conteudo: '5-7 stories com depoimentos reais ou cases (autoridade social)', cta: 'Responder enquete: "você passa por isso?"' },
+      { dia: 'Qui', formato: 'Post + Stories', conteudo: 'Apresente o produto/serviço com benefícios claros (não features)', cta: 'Comentar interesse no post' },
+      { dia: 'Sex', formato: 'Carrossel', conteudo: 'Quebre as 5 maiores objeções de compra ("não tenho tempo, não vale o preço...")', cta: 'DM pra tirar dúvidas' },
+      { dia: 'Sáb', formato: 'Stories', conteudo: 'Bastidores + countdown pra oferta (cria expectativa)', cta: 'Ativar lembrete do post de amanhã' },
+      { dia: 'Dom', formato: 'Post + Stories', conteudo: 'OFERTA: link de compra + bônus por tempo limitado (urgência real)', cta: 'CLIQUE AQUI PRA COMPRAR' }
+    ],
+    '📧 Gerar leads (capturar emails)': [
+      { dia: 'Seg', formato: 'Reels', conteudo: 'Vídeo curto provocativo: "O que ninguém te conta sobre [tema]"', cta: 'Comenta "EU QUERO" pra receber o link' },
+      { dia: 'Ter', formato: 'Carrossel', conteudo: '7 mitos sobre [seu tema] — quebrando crenças do público', cta: 'Salvar pra ler depois' },
+      { dia: 'Qua', formato: 'Stories', conteudo: 'Bastidores criando o material gratuito (gera expectativa)', cta: 'Marca enquete: "quer receber?"' },
+      { dia: 'Qui', formato: 'Post + Stories', conteudo: 'Anúncio do MATERIAL GRATUITO (ebook/checklist/template)', cta: 'Link no perfil pra baixar grátis' },
+      { dia: 'Sex', formato: 'Reels', conteudo: 'Mostra prévia do conteúdo do material (3 dicas pequenas)', cta: 'Quer o material completo? Link na bio' },
+      { dia: 'Sáb', formato: 'Stories', conteudo: 'Pessoas baixando + depoimentos de quem já recebeu', cta: 'DM "quero o link" se ainda não baixou' },
+      { dia: 'Dom', formato: 'Post', conteudo: 'Última chamada — destaque da semana com prova social', cta: 'Garante o seu agora (link na bio)' }
+    ],
+    '👀 Aumentar reconhecimento (awareness)': [
+      { dia: 'Seg', formato: 'Reels', conteudo: 'Hot take: opinião forte sobre algo do seu nicho', cta: 'Concorda? Comenta!' },
+      { dia: 'Ter', formato: 'Carrossel', conteudo: '10 dados surpreendentes sobre seu mercado', cta: 'Compartilhar com alguém que precisa ver' },
+      { dia: 'Qua', formato: 'Post', conteudo: 'História pessoal/profissional que ensina algo', cta: 'Qual foi a sua experiência?' },
+      { dia: 'Qui', formato: 'Reels', conteudo: 'Resposta polêmica a um vídeo viral do nicho', cta: 'Discorda? Quero ler nos comentários' },
+      { dia: 'Sex', formato: 'Carrossel', conteudo: 'Tutorial visual: como fazer X em 5 passos', cta: 'Salva pra usar amanhã' },
+      { dia: 'Sáb', formato: 'Stories', conteudo: 'Q&A respondendo dúvidas reais do público', cta: 'Mais dúvidas? Manda DM' },
+      { dia: 'Dom', formato: 'Post', conteudo: 'Resumo da semana + convite pra conhecer mais', cta: 'Segue pra mais conteúdo assim' }
+    ],
+    '💬 Ativar base de clientes existente': [
+      { dia: 'Seg', formato: 'Email + Stories', conteudo: '"Como você está aplicando o que aprendeu?" (engajamento)', cta: 'Responder com 1 conquista' },
+      { dia: 'Ter', formato: 'Stories', conteudo: 'Compartilha case de cliente real (depoimento)', cta: 'Sua história também merece destaque' },
+      { dia: 'Qua', formato: 'Email', conteudo: '5 dicas avançadas que só clientes recebem', cta: 'Apliquei → me conta o resultado' },
+      { dia: 'Qui', formato: 'Stories + DM', conteudo: 'Convite pessoal pra próximo produto/upgrade', cta: 'Quer saber? Responde aqui' },
+      { dia: 'Sex', formato: 'Email', conteudo: 'Oferta exclusiva: novo produto com desconto pra clientes atuais', cta: 'Clique pra aproveitar' },
+      { dia: 'Sáb', formato: 'Stories', conteudo: 'Mostra quem já garantiu (prova social interna)', cta: 'Faltam X vagas' },
+      { dia: 'Dom', formato: 'Email + DM', conteudo: 'Último dia da oferta + bônus extra pra quem fecha hoje', cta: 'Garanta agora' }
+    ]
+  };
+
+  const METRICS = {
+    '🛒 Vender um produto/serviço': [
+      'Cliques no link de compra (CTR)',
+      'Conversões / vendas concluídas',
+      'CAC (Custo de Aquisição de Cliente)',
+      'Ticket médio da campanha',
+      'ROAS (Retorno sobre Investimento em Ads)'
+    ],
+    '📧 Gerar leads (capturar emails)': [
+      'Número de novos leads capturados',
+      'Custo por lead (CPL)',
+      'Taxa de conversão da landing page',
+      'Engajamento dos posts (curtidas, comentários, salvamentos)',
+      'Open rate dos primeiros emails enviados'
+    ],
+    '👀 Aumentar reconhecimento (awareness)': [
+      'Alcance total dos posts',
+      'Impressões e visualizações de Reels',
+      'Crescimento de seguidores na semana',
+      'Compartilhamentos e salvamentos',
+      'Tempo médio de visualização dos vídeos'
+    ],
+    '💬 Ativar base de clientes existente': [
+      'Taxa de abertura dos emails',
+      'Taxa de resposta aos Stories/DMs',
+      'Vendas de upsell/cross-sell',
+      'Engajamento dos clientes ativos vs inativos',
+      'NPS / satisfação da base'
+    ]
+  };
+
+  // ─── PERSISTENCE ──────────────────────────
+  function loadSaved() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try { const obj = JSON.parse(saved); if (obj.data) { data = obj.data; if (obj.completed) { renderResult(); return true; } } } catch(e) {}
+    }
+    return false;
+  }
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, completed: STEPS.every(s => data[s.key]), savedAt: new Date().toISOString() }));
+  }
+
+  function startWizard() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('progressWrap').style.display = 'block';
+    renderStep();
+  }
+
+  function renderStep() {
+    const step = STEPS[currentStep];
+    const area = document.getElementById('wizardArea');
+    let inputHtml = '';
+    if (step.type === 'text') {
+      inputHtml = `<div class="field"><input type="text" id="inp" placeholder="${step.placeholder || ''}" value="${data[step.key] || ''}" oninput="onTextInput()"></div>`;
+    } else if (step.type === 'options') {
+      inputHtml = `<div class="options-grid">${step.options.map(o => `<button class="opt-btn ${data[step.key] === o ? 'selected' : ''}" onclick="selectOpt('${o.replace(/'/g, "\\'")}')">${o}</button>`).join('')}</div>`;
+    }
+    area.innerHTML = `
+      <section class="form-card active">
+        <span class="q-num">Etapa ${currentStep + 1} de ${STEPS.length}</span>
+        <h2 class="q-title">${step.title}</h2>
+        ${step.help ? `<p class="q-help">${step.help}</p>` : ''}
+        ${inputHtml}
+        <div class="nav-buttons">
+          <button class="btn btn-ghost" ${currentStep === 0 ? 'disabled' : ''} onclick="prevStep()">← Anterior</button>
+          ${currentStep < STEPS.length - 1
+            ? `<button class="btn btn-gold" id="nextBtn" ${!data[step.key] ? 'disabled' : ''} onclick="nextStep()">Próxima →</button>`
+            : `<button class="btn btn-gold" id="nextBtn" ${!data[step.key] ? 'disabled' : ''} onclick="finish()">📋 Gerar brief</button>`
+          }
+        </div>
+      </section>
+    `;
+    updateProgress();
+  }
+
+  function onTextInput() { const v = document.getElementById('inp').value.trim(); data[STEPS[currentStep].key] = v; save(); document.getElementById('nextBtn').disabled = !v; }
+  function selectOpt(opt) { data[STEPS[currentStep].key] = opt; save(); document.querySelectorAll('.opt-btn').forEach(b => b.classList.toggle('selected', b.textContent === opt)); document.getElementById('nextBtn').disabled = false; }
+  function nextStep() { if (currentStep < STEPS.length - 1) { currentStep++; renderStep(); window.scrollTo({top:0,behavior:'smooth'}); } }
+  function prevStep() { if (currentStep > 0) { currentStep--; renderStep(); window.scrollTo({top:0,behavior:'smooth'}); } }
+  function updateProgress() {
+    const pct = Math.round(((currentStep + 1) / STEPS.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('qCurrent').textContent = currentStep + 1;
+    document.getElementById('qTotal').textContent = STEPS.length;
+    document.getElementById('qPct').textContent = pct;
+  }
+
+  function finish() { save(); renderResult(); }
+
+  function renderResult() {
+    document.getElementById('introScreen').style.display = 'none';
+    document.getElementById('wizardArea').innerHTML = '';
+    document.getElementById('progressWrap').style.display = 'none';
+    document.getElementById('resultScreen').classList.add('active');
+
+    document.getElementById('bTitle').textContent = data.nome;
+    document.getElementById('bSub').textContent = `Campanha de 7 dias · ${data.objetivo}`;
+
+    document.getElementById('bData').innerHTML = `
+      <div class="brief-grid-item"><span class="brief-grid-label">Objetivo</span><span class="brief-grid-value">${data.objetivo}</span></div>
+      <div class="brief-grid-item"><span class="brief-grid-label">Canal principal</span><span class="brief-grid-value">${data.canais}</span></div>
+      <div class="brief-grid-item"><span class="brief-grid-label">Orçamento</span><span class="brief-grid-value">${data.orcamento}</span></div>
+      <div class="brief-grid-item"><span class="brief-grid-label">Duração</span><span class="brief-grid-value">7 dias</span></div>
+      <div class="brief-grid-item" style="grid-column:1/-1"><span class="brief-grid-label">Produto</span><span class="brief-grid-value">${data.produto}</span></div>
+      <div class="brief-grid-item" style="grid-column:1/-1"><span class="brief-grid-label">Público-alvo</span><span class="brief-grid-value">${data.persona}</span></div>
+    `;
+
+    const msg = MESSAGES[data.objetivo];
+    document.getElementById('bMessage').textContent = msg.title;
+    document.getElementById('bMessageDesc').textContent = msg.desc;
+
+    const cal = CALENDARS[data.objetivo];
+    document.getElementById('bCalendar').innerHTML = cal.map(d => `
+      <div class="day-card">
+        <div class="day-head">
+          <span class="day-name">${d.dia}-feira</span>
+          <span class="day-format">${d.formato}</span>
+        </div>
+        <div class="day-content">${d.conteudo}</div>
+        <div class="day-cta">→ CTA: ${d.cta}</div>
+      </div>
+    `).join('');
+
+    document.getElementById('bMetrics').innerHTML = METRICS[data.objetivo].map(m => `<li>${m}</li>`).join('');
+
+    window._currentBrief = { data, msg, cal, metrics: METRICS[data.objetivo] };
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function copyBrief() {
+    const b = window._currentBrief;
+    if (!b) return;
+    const txt = `BRIEF DA CAMPANHA — ${b.data.nome}\n\nObjetivo: ${b.data.objetivo}\nProduto: ${b.data.produto}\nPúblico: ${b.data.persona}\nCanal: ${b.data.canais}\nOrçamento: ${b.data.orcamento}\nDuração: 7 dias\n\n— MENSAGEM CENTRAL —\n${b.msg.title}\n(${b.msg.desc})\n\n— CALENDÁRIO 7 DIAS —\n${b.cal.map(d => `${d.dia}: [${d.formato}] ${d.conteudo}\n   CTA: ${d.cta}`).join('\n\n')}\n\n— MÉTRICAS —\n${b.metrics.map(m => '• ' + m).join('\n')}`;
+    navigator.clipboard.writeText(txt).then(() => alert('Brief copiado!'));
+  }
+
+  function resetWizard() {
+    if (!confirm('Tem certeza? Você vai perder os dados atuais.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    data = {}; currentStep = 0;
+    document.getElementById('resultScreen').classList.remove('active');
+    document.getElementById('wizardArea').innerHTML = '';
+    document.getElementById('introScreen').style.display = 'block';
+    document.getElementById('progressWrap').style.display = 'none';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  if (!loadSaved()) {}
+</script>
+
+</body>
+</html>
