@@ -133,7 +133,7 @@
 
 <div class="course-progress">
   <div class="course-progress-inner">
-    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">4</span> de 4</strong></span>
+    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">4</span> de 5</strong></span>
     <div class="course-progress-bar"><div class="course-progress-fill" id="courseProgress" style="width:0%"></div></div>
     <span class="course-progress-pct"><span id="coursePct">0</span>%</span>
   </div>
@@ -364,9 +364,9 @@
           <div class="aula-nav-label">← Aula anterior</div>
           <div class="aula-nav-title">03. Campanhas e Conteúdos</div>
         </a>
-        <a href="recursos.html" class="aula-nav-card next">
-          <div class="aula-nav-label">Próximo →</div>
-          <div class="aula-nav-title">Recursos do curso</div>
+        <a href="aula-05.html" class="aula-nav-card next">
+          <div class="aula-nav-label">Próxima aula →</div>
+          <div class="aula-nav-title">05. Cases + Próximos passos</div>
         </a>
       </nav>
 
@@ -386,10 +386,12 @@
         <div class="sidebar-label">Navegação</div>
         <h3>🗺️ Curso completo</h3>
         <ul class="module-list">
+          <li><a href="aula-00.html">00. Boas-vindas</a></li>
           <li><a href="aula-01.html">01. Introdução à IA</a></li>
           <li><a href="aula-02.html">02. Persona e Estratégia</a></li>
           <li><a href="aula-03.html">03. Campanhas e Conteúdos</a></li>
           <li class="current"><strong>04. Engenharia de Prompts</strong></li>
+          <li><a href="aula-05.html">05. Cases + Próximos passos</a></li>
         </ul>
       </div>
     </aside>
@@ -406,7 +408,7 @@
   const MODULE_NUM = 4;
   const STORAGE_KEY = 'vmgm-aula-progress';
   const LESSONS_THIS_AULA = ['v4-1', 'v4-2', 'v4-3'];
-  const TOTAL_LESSONS_COURSE = 12;
+  const TOTAL_LESSONS_COURSE = 18;
   function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; } }
   function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
   function toggleLesson(id) { const progress = loadProgress(); progress[id] = !progress[id]; saveProgress(progress); document.getElementById(id).classList.toggle('done', progress[id]); updateProgress(); }

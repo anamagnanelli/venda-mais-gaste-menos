@@ -293,9 +293,14 @@
 
 <script>
   const STORAGE_KEY = 'vmgm-aula-progress';
-  const TOTAL_LESSONS = 12;
+  const TOTAL_LESSONS = 18;
 
   const MODULES = [
+    { n: '00', title: 'Boas-vindas: Por que IA agora?', file: 'aula-00.html', dur: '50min + setup', videos: [
+      { id: 'v0-1', title: 'Por que IA agora? Contexto 2026', dur: '20min' },
+      { id: 'v0-2', title: 'O que o curso é (e NÃO é)', dur: '15min' },
+      { id: 'v0-3', title: 'Setup técnico em 10 minutos', dur: '15min' }
+    ]},
     { n: '01', title: 'Introdução à IA no Empreendedorismo', file: 'aula-01.html', dur: '37min + atividade', videos: [
       { id: 'v1-1', title: 'O que é IA e como impulsiona vendas', dur: '15min' },
       { id: 'v1-2', title: 'Tour pelas 8 ferramentas curadas', dur: '12min' },
@@ -315,6 +320,11 @@
       { id: 'v4-1', title: 'Fundamentos e anatomia de prompts', dur: '17min' },
       { id: 'v4-2', title: 'Iteração e otimização', dur: '12min' },
       { id: 'v4-3', title: 'Plano de marketing de 1 semana', dur: '13min' }
+    ]},
+    { n: '05', title: 'Cases Reais e Próximos Passos', file: 'aula-05.html', dur: '70min + plano 90d', videos: [
+      { id: 'v5-1', title: 'Case Maria — Loja de moda online (+180%)', dur: '25min' },
+      { id: 'v5-2', title: 'Case Carlos — Loja física + e-commerce', dur: '25min' },
+      { id: 'v5-3', title: 'Case Letícia — Designer freelance', dur: '20min' }
     ]}
   ];
 

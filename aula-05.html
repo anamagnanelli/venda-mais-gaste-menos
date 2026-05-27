@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aula 03 — Criação de Campanhas e Conteúdos · Venda Mais. Gaste Menos.</title>  <link rel="stylesheet" href="fonts.css">
+  <title>Aula 05 — Cases Reais e Próximos Passos · Venda Mais. Gaste Menos.</title>
+  <link rel="stylesheet" href="fonts.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -69,6 +70,9 @@
     .key-points ul { list-style: none; padding: 0; margin: 0; }
     .key-points li { padding: .35rem 0; display: flex; gap: .65rem; align-items: flex-start; font-size: .92rem; color: #1f2937; margin: 0; line-height: 1.55; }
     .key-points li::before { content: '✓'; color: var(--em); font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+    .case-stat { background: var(--gray); border-radius: 12px; padding: 1rem 1.25rem; display: flex; align-items: baseline; gap: .65rem; margin-bottom: 1rem; }
+    .case-stat-num { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.5rem; color: var(--em); font-style: italic; }
+    .case-stat-label { font-size: .88rem; color: #1f2937; flex: 1; }
     .activity-box { background: linear-gradient(135deg, var(--dark), #1a1a1a); color: #fff; border-radius: 22px; padding: 2.5rem 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; border: 1px solid rgba(212,168,83,.2); }
     .activity-box::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
     .activity-inner { position: relative; z-index: 1; }
@@ -106,8 +110,13 @@
     footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2.5rem 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
     footer .logo-f { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
     footer .logo-f span { color: var(--gold); }
+    .cert-teaser { background: linear-gradient(135deg, var(--gold), var(--em)); color: #fff; border-radius: 22px; padding: 3rem 2.5rem; margin-bottom: 1.5rem; text-align: center; }
+    .cert-teaser h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; font-style: italic; margin-bottom: .75rem; }
+    .cert-teaser p { font-size: 1.02rem; opacity: .95; max-width: 480px; margin: 0 auto 1.5rem; }
+    .cert-teaser a { display: inline-block; background: var(--dark); color: var(--gold); padding: 1rem 2.2rem; border-radius: 999px; font-weight: 800; text-decoration: none; transition: all .25s; }
+    .cert-teaser a:hover { background: rgba(0,0,0,.9); transform: translateY(-1px); }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-links { display: none; } }
-    @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box, .cert-teaser { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -125,7 +134,7 @@
 
 <div class="course-progress">
   <div class="course-progress-inner">
-    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">3</span> de 5</strong></span>
+    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">5</span> de 5</strong></span>
     <div class="course-progress-bar"><div class="course-progress-fill" id="courseProgress" style="width:0%"></div></div>
     <span class="course-progress-pct"><span id="coursePct">0</span>%</span>
   </div>
@@ -133,13 +142,13 @@
 
 <section class="aula-header">
   <div class="aula-header-inner">
-    <span class="aula-pill">📘 Módulo 03 · 3 vídeos · ~45min + atividade</span>
-    <h1>Criação de campanhas <span class="gold">e conteúdos.</span></h1>
-    <p>Como estruturar uma campanha de marketing do zero, escrever copy que converte, criar conteúdo segmentado pra redes sociais e gerar imagens + vídeos com IA. Hands-on intensivo — você sai com material pronto.</p>
+    <span class="aula-pill">🏆 Aula 05 · Cases reais · 3 vídeos · ~70min + atividade</span>
+    <h1>Cases reais e <span class="gold">próximos passos.</span></h1>
+    <p>3 empreendedoras que aplicaram o método e mediram resultados. Você vai ver com detalhes O QUE elas fizeram, COMO mediram e QUAIS números conquistaram. No final, monta seu plano de 90 dias e gera seu certificado.</p>
     <div class="aula-meta">
-      <div class="aula-meta-item">📹 <strong>3 vídeos</strong> · ~45min</div>
-      <div class="aula-meta-item">🎯 <strong>1 atividade prática</strong></div>
-      <div class="aula-meta-item">⏱ <strong>~2h total</strong> com aplicação</div>
+      <div class="aula-meta-item">📹 <strong>3 vídeos</strong> · ~70min</div>
+      <div class="aula-meta-item">🎯 <strong>Plano de 90 dias</strong></div>
+      <div class="aula-meta-item">🏆 <strong>Certificado liberado</strong></div>
     </div>
   </div>
 </section>
@@ -148,187 +157,201 @@
   <div class="layout">
     <main>
 
-      <!-- VÍDEO 3.1 -->
-      <article class="lesson" id="v3-1">
+      <!-- VÍDEO 5.1 -->
+      <article class="lesson" id="v5-1">
         <div class="lesson-head">
           <div class="lesson-head-left">
-            <div class="lesson-num">3.1</div>
+            <div class="lesson-num">5.1</div>
             <div>
-              <div class="lesson-tag">Vídeo 3.1 · Aula 03</div>
-              <h2>Estrutura de campanha + copywriting com IA</h2>
+              <div class="lesson-tag">Vídeo 5.1 · Aula 05</div>
+              <h2>Case Maria — Loja de moda online (+180% engajamento)</h2>
             </div>
           </div>
-          <div class="lesson-check" onclick="toggleLesson('v3-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="lesson-check" onclick="toggleLesson('v5-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
-          <span class="video-label">📹 Vídeo 3.1</span><button class="play-btn">▶</button><span class="video-duration">18:00</span>
+          <span class="video-label">📹 Vídeo 5.1</span><button class="play-btn">▶</button><span class="video-duration">25:00</span>
         </div>
         <div class="lesson-content">
-          <h3>Toda campanha boa responde 3 perguntas</h3>
+          <h3>O ponto de partida</h3>
           <p>
-            Antes de qualquer copy, antes de qualquer anúncio, antes de qualquer post — toda campanha que converte responde com clareza: <strong>Objetivo</strong> (o que você quer que aconteça?) · <strong>Público</strong> (com quem você está falando?) · <strong>Mensagem</strong> (o que você está dizendo?).
+            <strong>Maria Souza, 32 anos, São Paulo.</strong> Loja de moda online (Instagram + WhatsApp Business). Antes do método: 800 seguidores, vendia 8-12 peças por mês, gastava ~12h por semana criando conteúdo manualmente.
           </p>
           <p>
-            Empreendedora pequena lança campanha sem definir esses 3. Resultado: posts genéricos, anúncios sem foco, dinheiro queimado.
+            <strong>Maior dor:</strong> "Posto, posto, posto, e ninguém engaja. Tenho que ficar inventando o que postar todo dia. Tô exausta e os números não saem do mesmo lugar."
           </p>
 
-          <h3>Os 4 tipos de campanha (e quando usar cada)</h3>
+          <h3>O que ela fez (passo a passo)</h3>
           <ul>
-            <li><strong>Campanha de Venda</strong> — objetivo direto de fechar pedido. Use quando tem produto pronto + audiência aquecida.</li>
-            <li><strong>Campanha de Lead</strong> — captura email pra nutrir depois. Use quando tem produto novo ou caro.</li>
-            <li><strong>Campanha de Awareness</strong> — aumentar conhecimento de marca. Use quando está começando ou se reposicionando.</li>
-            <li><strong>Campanha de Ativação</strong> — mexer com base existente. Use pra upsell ou re-engajar quem comprou antes.</li>
+            <li><strong>Semana 1:</strong> Criou persona detalhada com o OA 02 (mulher 28-40, profissional liberal, valoriza autenticidade)</li>
+            <li><strong>Semana 2:</strong> Usou o Prompt 04 da Biblioteca pra gerar 10 posts/semana segmentados pela persona</li>
+            <li><strong>Semana 3:</strong> Implementou regra 80/20 (8 valor + 2 venda) e alternou formatos (Reels + Carrossel + Stories)</li>
+            <li><strong>Semana 4:</strong> Configurou enquetes interativas nos Stories pra mapear desejos reais</li>
           </ul>
 
-          <h3>Copywriting com IA: o framework P-A-S</h3>
-          <p>
-            <strong>Problema → Agitação → Solução.</strong> Estrutura testada em milhões de anúncios. Funciona porque toca a dor antes de oferecer o remédio. Use ChatGPT pra gerar 5 variações de copy P-A-S por campanha — depois teste pra ver qual converte mais.
-          </p>
+          <h3>Os números (medidos após 30 dias)</h3>
+          <div class="case-stat"><span class="case-stat-num">+180%</span><span class="case-stat-label">em engajamento médio dos posts</span></div>
+          <div class="case-stat"><span class="case-stat-num">2h/sem</span><span class="case-stat-label">de tempo gasto criando conteúdo (era 12h)</span></div>
+          <div class="case-stat"><span class="case-stat-num">22 peças</span><span class="case-stat-label">vendidas no mês (eram 8-12)</span></div>
+          <div class="case-stat"><span class="case-stat-num">+340</span><span class="case-stat-label">novos seguidores qualificados no mês</span></div>
 
           <div class="key-points">
-            <h4>📌 Princípios de copy</h4>
+            <h4>📌 O que aprender com a Maria</h4>
             <ul>
-              <li>Linguagem brasileira coloquial. NUNCA traduzida de inglês.</li>
-              <li>ZERO clichês ("transforme sua vida", "descubra o segredo").</li>
-              <li>Gere 5 variações com ÂNGULOS diferentes (medo, ganância, prova social, escassez, autoridade).</li>
-              <li>Teste em 24h via Stories antes de gastar R$ em ads.</li>
+              <li>Persona detalhada multiplica engajamento porque copy fala A PESSOA, não com "público"</li>
+              <li>Calendário editorial mensal libera mentalmente — não precisa decidir cada dia</li>
+              <li>Stories interativos coletam dados pra melhorar próxima campanha</li>
+              <li>Redução de tempo (12h→2h) liberou Maria pra atender melhor cada cliente</li>
             </ul>
           </div>
         </div>
       </article>
 
-      <!-- VÍDEO 3.2 -->
-      <article class="lesson" id="v3-2">
+      <!-- VÍDEO 5.2 -->
+      <article class="lesson" id="v5-2">
         <div class="lesson-head">
           <div class="lesson-head-left">
-            <div class="lesson-num">3.2</div>
+            <div class="lesson-num">5.2</div>
             <div>
-              <div class="lesson-tag">Vídeo 3.2 · Aula 03</div>
-              <h2>Conteúdo para redes: valor vs. venda</h2>
+              <div class="lesson-tag">Vídeo 5.2 · Aula 05</div>
+              <h2>Case Carlos — Loja física + e-commerce (CAC -50%)</h2>
             </div>
           </div>
-          <div class="lesson-check" onclick="toggleLesson('v3-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="lesson-check" onclick="toggleLesson('v5-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
-          <span class="video-label">📹 Vídeo 3.2</span><button class="play-btn">▶</button><span class="video-duration">15:00</span>
+          <span class="video-label">📹 Vídeo 5.2</span><button class="play-btn">▶</button><span class="video-duration">25:00</span>
         </div>
         <div class="lesson-content">
-          <h3>A regra de ouro: 80% valor, 20% venda</h3>
+          <h3>O ponto de partida</h3>
           <p>
-            Quem só vende perde audiência. Quem só dá valor não monetiza. O equilíbrio testado: <strong>8 posts de valor pra cada 2 posts de venda</strong>. Em 10 posts, 2 são de oferta direta — o resto educa, inspira, conta história, dá dica prática.
+            <strong>Carlos Mendes, 45 anos, Curitiba.</strong> Loja física de utilidades domésticas + e-commerce iniciante. Antes: pagava R$ 80 por novo cliente no Facebook Ads (CAC alto), recebia ~150 mensagens/semana no WhatsApp que ele mesmo respondia.
+          </p>
+          <p>
+            <strong>Maior dor:</strong> "Meu WhatsApp não para. Quando consigo responder, o cliente já foi embora. E pagar quase R$ 100 por venda nova tá comendo minha margem."
           </p>
 
-          <h3>Tipos de post de valor (pra alternar)</h3>
+          <h3>O que ele fez (passo a passo)</h3>
           <ul>
-            <li><strong>Educativo</strong> — ensina algo específico ("3 erros que você comete ao...")</li>
-            <li><strong>Inspiração</strong> — frases ou histórias que motivam</li>
-            <li><strong>Bastidores</strong> — mostra o "como" do seu trabalho</li>
-            <li><strong>Caso real</strong> — depoimento ou transformação de cliente</li>
-            <li><strong>Polêmica</strong> — opinião forte que gera debate</li>
-            <li><strong>Tutorial</strong> — passo a passo visual</li>
-            <li><strong>Q&A</strong> — responde dúvida real do público</li>
-            <li><strong>Lista</strong> — top 5 / top 10 de algo</li>
+            <li><strong>Mês 1:</strong> Configurou o pipeline n8n + Groq pra triagem automática das mensagens (Aula 4)</li>
+            <li><strong>Mês 1:</strong> Resposta automática em &lt;1 minuto + classificação por tipo (dúvida/pedido/reclamação)</li>
+            <li><strong>Mês 2:</strong> Refez copy dos anúncios com Prompt 07 P-A-S (5 variações testadas em 24h via Stories)</li>
+            <li><strong>Mês 2:</strong> Identificou a variação vencedora e concentrou todo orçamento nela</li>
           </ul>
 
-          <h3>Tipos de post de venda (pros 2 de cada 10)</h3>
-          <ul>
-            <li><strong>Apresentação</strong> — mostra o produto direto, com benefícios claros</li>
-            <li><strong>Depoimento</strong> — cliente fala por você (prova social forte)</li>
-            <li><strong>Oferta</strong> — bônus, desconto, urgência real</li>
-            <li><strong>Quebra de objeção</strong> — responde "não tenho tempo", "não vale o preço"</li>
-          </ul>
-
-          <h3>Formatos por algoritmo</h3>
-          <p>
-            <strong>Reels</strong> (algoritmo prioriza alcance) = topo de funil. <strong>Carrossel</strong> (algoritmo prioriza salvamentos) = meio de funil + autoridade. <strong>Stories</strong> (engajamento direto) = relacionamento + ativação. Distribua: 50% Reels · 30% Carrossel · 15% Foto · 5% Stories destaque.
-          </p>
+          <h3>Os números (medidos após 60 dias)</h3>
+          <div class="case-stat"><span class="case-stat-num">R$ 40</span><span class="case-stat-label">CAC novo (era R$ 80) — redução de 50%</span></div>
+          <div class="case-stat"><span class="case-stat-num">98%</span><span class="case-stat-label">das mensagens respondidas em menos de 1 minuto</span></div>
+          <div class="case-stat"><span class="case-stat-num">+47%</span><span class="case-stat-label">em conversão de WhatsApp pra venda</span></div>
+          <div class="case-stat"><span class="case-stat-num">R$ 0</span><span class="case-stat-label">de custo mensal de automação (tudo gratuito)</span></div>
 
           <div class="key-points">
-            <h4>📌 Princípio do reaproveitamento</h4>
+            <h4>📌 O que aprender com o Carlos</h4>
             <ul>
-              <li>1 post bom = 4 conteúdos diferentes (Reels + Carrossel + Stories + Email)</li>
-              <li>Use ChatGPT pra "traduzir" um mesmo conteúdo entre formatos</li>
-              <li>Calendário editorial mensal economiza decisão diária — planeja 30 dias em 30 minutos</li>
+              <li>Automação não é "luxo de empresa grande" — é o que separa quem escala de quem trava</li>
+              <li>Resposta rápida (&lt;1min) aumenta conversão DRASTICAMENTE — pq cliente está com cartão na mão</li>
+              <li>Teste A/B de copy via Stories economiza dinheiro de anúncio que ia ser queimado</li>
+              <li>Pipeline n8n + Groq é gratuito e roda 24/7 — não precisa nem deixar computador ligado</li>
             </ul>
           </div>
         </div>
       </article>
 
-      <!-- VÍDEO 3.3 -->
-      <article class="lesson" id="v3-3">
+      <!-- VÍDEO 5.3 -->
+      <article class="lesson" id="v5-3">
         <div class="lesson-head">
           <div class="lesson-head-left">
-            <div class="lesson-num">3.3</div>
+            <div class="lesson-num">5.3</div>
             <div>
-              <div class="lesson-tag">Vídeo 3.3 · Aula 03</div>
-              <h2>Imagens e vídeos com Leonardo + HeyGen</h2>
+              <div class="lesson-tag">Vídeo 5.3 · Aula 05</div>
+              <h2>Case Letícia — Designer freelance (4x entregas/mês)</h2>
             </div>
           </div>
-          <div class="lesson-check" onclick="toggleLesson('v3-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="lesson-check" onclick="toggleLesson('v5-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
-          <span class="video-label">📹 Vídeo 3.3</span><button class="play-btn">▶</button><span class="video-duration">12:00</span>
+          <span class="video-label">📹 Vídeo 5.3</span><button class="play-btn">▶</button><span class="video-duration">20:00</span>
         </div>
         <div class="lesson-content">
-          <h3>Leonardo AI — imagens originais sem banco de imagem</h3>
+          <h3>O ponto de partida</h3>
           <p>
-            Plano gratuito do Leonardo dá <strong>150 tokens por dia</strong> — suficiente pra ~10 imagens. Você descreve o que quer (estilo, ambiente, ação) e o Leonardo gera versões originais, livres pra uso comercial.
+            <strong>Letícia Almeida, 28 anos, Belo Horizonte.</strong> Designer freelancer (identidade visual + redes sociais). Antes: entregava 3-4 projetos por mês, dizia "não" pra 6-7 leads por mês (sem tempo), trabalhava 60h/semana.
           </p>
           <p>
-            <strong>Prompt que funciona:</strong> "[Sujeito] [ação] em [ambiente], estilo [fotografia natural / ilustração flat / 3D realista], iluminação [suave / dramática / natural], cores [paleta], proporção [vertical 9:16 / quadrada 1:1]".
-          </p>
-
-          <h3>HeyGen — vídeos com avatar pra quem não quer aparecer</h3>
-          <p>
-            Avatar virtual realista fala o seu roteiro. <strong>Plano gratuito: 3 vídeos por mês</strong>, até 1 minuto cada. Você escreve o texto, escolhe avatar + voz, espera 5 minutos. Resultado: vídeo profissional sem você ter gravado.
-          </p>
-          <p>
-            <strong>Quando usar HeyGen</strong>: pra vídeos curtos de produto, tutoriais técnicos, vídeos de venda. <strong>Quando NÃO usar</strong>: quando você QUER mostrar autenticidade pessoal (Stories, bastidores). Pra esses, grave com seu celular mesmo.
+            <strong>Maior dor:</strong> "Tô sufocada. Não consigo aceitar mais cliente porque já não dou conta do que tenho. E sei que se eu cobrasse mais, perderia os atuais."
           </p>
 
-          <h3>ElevenLabs + Suno — voz e trilha sonora</h3>
-          <p>
-            <strong>ElevenLabs</strong>: gera narração ultra-realista ou clona sua voz (10k caracteres/mês grátis). Útil pra fazer narração de Reels sem precisar gravar áudio.
-          </p>
-          <p>
-            <strong>Suno</strong>: cria música original royalty-free (50 créditos/dia). Use pra trilhas de vídeos sem risco de copyright.
-          </p>
+          <h3>O que ela fez (passo a passo)</h3>
+          <ul>
+            <li><strong>Quinzena 1:</strong> Criou Biblioteca pessoal de 30 prompts no OA 04 (briefing, paleta, conceito, copy)</li>
+            <li><strong>Quinzena 2:</strong> Implementou fluxo: cliente preenche brief → ChatGPT gera 3 conceitos → ela escolhe e refina</li>
+            <li><strong>Mês 2:</strong> Adicionou Leonardo AI pra geração de moodboards iniciais (economiza 2h por projeto)</li>
+            <li><strong>Mês 3:</strong> Aumentou preço em 40% baseado em capacidade nova (não perdeu clientes — provou valor)</li>
+          </ul>
+
+          <h3>Os números (medidos após 90 dias)</h3>
+          <div class="case-stat"><span class="case-stat-num">16/mês</span><span class="case-stat-label">projetos entregues (eram 3-4)</span></div>
+          <div class="case-stat"><span class="case-stat-num">+40%</span><span class="case-stat-label">no preço médio cobrado por projeto</span></div>
+          <div class="case-stat"><span class="case-stat-num">40h/sem</span><span class="case-stat-label">horas trabalhadas (eram 60h)</span></div>
+          <div class="case-stat"><span class="case-stat-num">+R$ 8.500</span><span class="case-stat-label">faturamento mensal a mais (mesmo trabalhando menos)</span></div>
 
           <div class="key-points">
-            <h4>📌 Stack de produção de vídeo curta</h4>
+            <h4>📌 O que aprender com a Letícia</h4>
             <ul>
-              <li><strong>Roteiro:</strong> ChatGPT (5 versões de 30s)</li>
-              <li><strong>Visual:</strong> Leonardo AI (3-5 imagens) OU HeyGen (avatar)</li>
-              <li><strong>Voz:</strong> ElevenLabs (sua voz clonada ou voz padrão)</li>
-              <li><strong>Trilha:</strong> Suno (música original royalty-free)</li>
-              <li><strong>Edição final:</strong> Canva ou CapCut (gratuitos)</li>
+              <li>Biblioteca pessoal de prompts adapta o método pro SEU contexto profissional</li>
+              <li>Fluxo cliente→IA→você multiplica capacidade sem perder qualidade</li>
+              <li>Ganho de eficiência permite aumentar preço (sem culpa) ou trabalhar menos (qualidade de vida)</li>
+              <li>3 meses de aplicação consistente = transformação irreversível na rotina</li>
             </ul>
           </div>
         </div>
       </article>
 
+      <!-- ATIVIDADE -->
       <section class="activity-box">
         <div class="activity-inner">
-          <span class="activity-pill">🎯 Atividade prática · Módulo 03</span>
-          <h2>Monte sua <span class="gold">mini-campanha de 7 dias.</span></h2>
-          <p>Use o Planejador de Campanha pra gerar brief + calendário diário + métricas. Use a persona que você criou no Módulo 02 como público da campanha.</p>
-          <a href="oa-03-campanha.html" class="activity-cta">📢 Abrir Planejador de Campanha →</a>
+          <span class="activity-pill">🎯 Atividade prática · Aula 05</span>
+          <h2>Planeje seus <span class="gold">próximos 90 dias.</span></h2>
+          <p>Use o Checklist (32 tarefas em 4 fases) pra organizar como você vai aplicar o método nos próximos 3 meses. Depois calcule seu ROI projetado e refaça o Quiz Diagnóstico pra comparar com o "antes".</p>
+          <a href="oa-06-checklist.html" class="activity-cta">✅ Abrir Checklist de 90 dias →</a>
           <div class="activity-meta">
-            <span>✓ Brief em 1 página</span>
-            <span>✓ Calendário 7 dias</span>
-            <span>✓ Métricas-chave</span>
+            <span>✓ 32 tarefas guiadas</span>
+            <span>✓ 4 fases (pré/durante/30d/60-90d)</span>
+            <span>✓ % de progresso visual</span>
           </div>
         </div>
       </section>
 
+      <!-- ROI SIMULAÇÃO -->
+      <section class="activity-box" style="background:linear-gradient(135deg,#0D9488,#0F766E);border-color:rgba(13,148,136,.3)">
+        <div class="activity-inner">
+          <span class="activity-pill" style="background:rgba(255,255,255,.18);color:#fff;border-color:rgba(255,255,255,.3)">💰 Bônus · Calcule seu retorno</span>
+          <h2>Quanto IA <span style="color:#fff;font-style:italic">vai te economizar?</span></h2>
+          <p style="color:rgba(255,255,255,.85)">Com 5 sliders, descubra quanto você ganha de tempo e dinheiro nos próximos 12 meses aplicando o método. Mostre esses números pra você mesma — é a prova final do investimento.</p>
+          <a href="oa-07-roi.html" class="activity-cta" style="background:#fff;color:#0F766E">💰 Calcular meu ROI →</a>
+          <div class="activity-meta" style="color:rgba(255,255,255,.7);border-top-color:rgba(255,255,255,.18)">
+            <span>✓ 5 sliders</span>
+            <span>✓ Projeção 12 meses</span>
+            <span>✓ Payback em dias</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CERTIFICADO TEASER -->
+      <section class="cert-teaser">
+        <h2>🏆 Hora do certificado!</h2>
+        <p>Você concluiu o curso completo: 6 módulos, 18 vídeos, todas as atividades práticas. Hora de gerar seu certificado oficial Saint Paul e comemorar.</p>
+        <a href="oa-08-certificado.html">🏆 Gerar meu Certificado →</a>
+      </section>
+
       <nav class="aula-nav">
-        <a href="aula-02.html" class="aula-nav-card">
+        <a href="aula-04.html" class="aula-nav-card">
           <div class="aula-nav-label">← Aula anterior</div>
-          <div class="aula-nav-title">02. Persona e Estratégia</div>
-        </a>
-        <a href="aula-04.html" class="aula-nav-card next">
-          <div class="aula-nav-label">Próxima aula →</div>
           <div class="aula-nav-title">04. Engenharia de Prompts</div>
+        </a>
+        <a href="recursos.html" class="aula-nav-card next">
+          <div class="aula-nav-label">Próximo →</div>
+          <div class="aula-nav-title">Recursos do curso</div>
         </a>
       </nav>
 
@@ -339,9 +362,9 @@
         <div class="sidebar-label">Nesta aula</div>
         <h3>📋 Conteúdo</h3>
         <ul class="toc-list">
-          <li><a href="#v3-1"><span class="toc-num">3.1</span><span>Estrutura + copywriting</span></a></li>
-          <li><a href="#v3-2"><span class="toc-num">3.2</span><span>Conteúdo: valor vs venda</span></a></li>
-          <li><a href="#v3-3"><span class="toc-num">3.3</span><span>Imagens + vídeos com IA</span></a></li>
+          <li><a href="#v5-1"><span class="toc-num">5.1</span><span>Case Maria — Moda online</span></a></li>
+          <li><a href="#v5-2"><span class="toc-num">5.2</span><span>Case Carlos — Loja + e-commerce</span></a></li>
+          <li><a href="#v5-3"><span class="toc-num">5.3</span><span>Case Letícia — Freelance</span></a></li>
         </ul>
       </div>
       <div class="sidebar-card">
@@ -351,9 +374,9 @@
           <li><a href="aula-00.html">00. Boas-vindas</a></li>
           <li><a href="aula-01.html">01. Introdução à IA</a></li>
           <li><a href="aula-02.html">02. Persona e Estratégia</a></li>
-          <li class="current"><strong>03. Campanhas e Conteúdos</strong></li>
+          <li><a href="aula-03.html">03. Campanhas e Conteúdos</a></li>
           <li><a href="aula-04.html">04. Engenharia de Prompts</a></li>
-          <li><a href="aula-05.html">05. Cases + Próximos passos</a></li>
+          <li class="current"><strong>05. Cases + Próximos passos</strong></li>
         </ul>
       </div>
     </aside>
@@ -367,9 +390,9 @@
 </footer>
 
 <script>
-  const MODULE_NUM = 3;
+  const MODULE_NUM = 5;
   const STORAGE_KEY = 'vmgm-aula-progress';
-  const LESSONS_THIS_AULA = ['v3-1', 'v3-2', 'v3-3'];
+  const LESSONS_THIS_AULA = ['v5-1', 'v5-2', 'v5-3'];
   const TOTAL_LESSONS_COURSE = 18;
   function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; } }
   function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }

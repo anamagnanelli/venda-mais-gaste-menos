@@ -219,7 +219,7 @@
 <!-- COURSE PROGRESS -->
 <div class="course-progress">
   <div class="course-progress-inner">
-    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">1</span> de 4</strong></span>
+    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">1</span> de 5</strong></span>
     <div class="course-progress-bar"><div class="course-progress-fill" id="courseProgress" style="width:0%"></div></div>
     <span class="course-progress-pct"><span id="coursePct">0</span>%</span>
   </div>
@@ -418,10 +418,10 @@
 
       <!-- AULA NAV -->
       <nav class="aula-nav">
-        <div class="aula-nav-card disabled">
+        <a href="aula-00.html" class="aula-nav-card">
           <div class="aula-nav-label">← Aula anterior</div>
-          <div class="aula-nav-title">Primeira aula</div>
-        </div>
+          <div class="aula-nav-title">00. Boas-vindas</div>
+        </a>
         <a href="aula-02.html" class="aula-nav-card next">
           <div class="aula-nav-label">Próxima aula →</div>
           <div class="aula-nav-title">02. Persona e Alinhamento</div>
@@ -445,10 +445,12 @@
         <div class="sidebar-label">Navegação</div>
         <h3>🗺️ Curso completo</h3>
         <ul class="module-list">
+          <li><a href="aula-00.html">00. Boas-vindas</a></li>
           <li class="current"><strong>01. Introdução à IA</strong></li>
           <li><a href="aula-02.html">02. Persona e Estratégia</a></li>
           <li><a href="aula-03.html">03. Campanhas e Conteúdos</a></li>
           <li><a href="aula-04.html">04. Engenharia de Prompts</a></li>
+          <li><a href="aula-05.html">05. Cases + Próximos passos</a></li>
         </ul>
       </div>
     </aside>
@@ -465,7 +467,7 @@
   const MODULE_NUM = 1;
   const STORAGE_KEY = 'vmgm-aula-progress';
   const LESSONS_THIS_AULA = ['v1-1', 'v1-2', 'v1-3'];
-  const TOTAL_LESSONS_COURSE = 12;
+  const TOTAL_LESSONS_COURSE = 18;
 
   function loadProgress() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; }

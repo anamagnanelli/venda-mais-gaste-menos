@@ -125,7 +125,7 @@
 
 <div class="course-progress">
   <div class="course-progress-inner">
-    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">2</span> de 4</strong></span>
+    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">2</span> de 5</strong></span>
     <div class="course-progress-bar"><div class="course-progress-fill" id="courseProgress" style="width:0%"></div></div>
     <span class="course-progress-pct"><span id="coursePct">0</span>%</span>
   </div>
@@ -337,10 +337,12 @@
         <div class="sidebar-label">Navegação</div>
         <h3>🗺️ Curso completo</h3>
         <ul class="module-list">
+          <li><a href="aula-00.html">00. Boas-vindas</a></li>
           <li><a href="aula-01.html">01. Introdução à IA</a></li>
           <li class="current"><strong>02. Persona e Estratégia</strong></li>
           <li><a href="aula-03.html">03. Campanhas e Conteúdos</a></li>
           <li><a href="aula-04.html">04. Engenharia de Prompts</a></li>
+          <li><a href="aula-05.html">05. Cases + Próximos passos</a></li>
         </ul>
       </div>
     </aside>
@@ -357,7 +359,7 @@
   const MODULE_NUM = 2;
   const STORAGE_KEY = 'vmgm-aula-progress';
   const LESSONS_THIS_AULA = ['v2-1', 'v2-2', 'v2-3'];
-  const TOTAL_LESSONS_COURSE = 12;
+  const TOTAL_LESSONS_COURSE = 18;
 
   function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch(e) { return {}; } }
   function saveProgress(p) { localStorage.setItem(STORAGE_KEY, JSON.stringify(p)); }
