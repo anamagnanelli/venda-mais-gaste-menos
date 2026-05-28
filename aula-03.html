@@ -106,7 +106,11 @@
     footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2.5rem 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
     footer .logo-f { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
     footer .logo-f span { color: var(--gold); }
-    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-links { display: none; } }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; }
+    .nav-hamburger:hover { color: #fff; }
+    .video-placeholder.show-notice::before { content: none; }
+    .video-placeholder.show-notice::after { content: '🎬 Vídeo em breve — leia o conteúdo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+    @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-hamburger { display: block; } nav { position: relative; } .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 200; background: var(--dark); flex-direction: column; padding: 1.25rem 2rem 1.75rem; gap: 1.25rem; border-bottom: 2px solid rgba(212,168,83,.25); } .nav-links.open { display: flex; } }
     @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -115,17 +119,18 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">✦ Venda Mais. <span>Gaste Menos.</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="index.html#modulos">Módulos</a>
       <a href="recursos.html">Recursos</a>
       <a href="index.html" class="nav-cta">Voltar ao curso</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
   </div>
 </nav>
 
 <div class="course-progress">
   <div class="course-progress-inner">
-    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">3</span> de 5</strong></span>
+    <span class="course-progress-label">Progresso do curso · <strong>Módulo <span id="modNum">3</span> de 6</strong></span>
     <div class="course-progress-bar"><div class="course-progress-fill" id="courseProgress" style="width:0%"></div></div>
     <span class="course-progress-pct"><span id="coursePct">0</span>%</span>
   </div>
@@ -160,7 +165,7 @@
           </div>
           <div class="lesson-check" onclick="toggleLesson('v3-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
-        <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
+        <div class="video-placeholder" onclick="this.classList.add('show-notice')">
           <span class="video-label">📹 Vídeo 3.1</span><button class="play-btn">▶</button><span class="video-duration">18:00</span>
         </div>
         <div class="lesson-content">
@@ -209,7 +214,7 @@
           </div>
           <div class="lesson-check" onclick="toggleLesson('v3-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
-        <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
+        <div class="video-placeholder" onclick="this.classList.add('show-notice')">
           <span class="video-label">📹 Vídeo 3.2</span><button class="play-btn">▶</button><span class="video-duration">15:00</span>
         </div>
         <div class="lesson-content">
@@ -266,7 +271,7 @@
           </div>
           <div class="lesson-check" onclick="toggleLesson('v3-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
-        <div class="video-placeholder" onclick="alert('🎬 Vídeo será adicionado em breve. Por enquanto, leia o conteúdo abaixo.')">
+        <div class="video-placeholder" onclick="this.classList.add('show-notice')">
           <span class="video-label">📹 Vídeo 3.3</span><button class="play-btn">▶</button><span class="video-duration">12:00</span>
         </div>
         <div class="lesson-content">
@@ -377,6 +382,22 @@
   function updateProgress() { const progress = loadProgress(); const done = Object.values(progress).filter(Boolean).length; const pct = Math.round((done / TOTAL_LESSONS_COURSE) * 100); document.getElementById('courseProgress').style.width = pct + '%'; document.getElementById('coursePct').textContent = pct; document.getElementById('modNum').textContent = MODULE_NUM; }
   function applyProgress() { const progress = loadProgress(); LESSONS_THIS_AULA.forEach(id => { if (progress[id]) document.getElementById(id).classList.add('done'); }); updateProgress(); }
   applyProgress();
+
+  // Hamburger menu
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.textContent = isOpen ? '✕' : '☰';
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.textContent = '☰';
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 
 </body>

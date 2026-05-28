@@ -134,10 +134,16 @@
     footer .logo-f { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
     footer .logo-f span { color: var(--gold); }
 
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; transition: color .2s; }
+    .nav-hamburger:hover { color: #fff; }
+
     @media (max-width: 900px) {
       .pipeline-grid { grid-template-columns: 1fr; gap: 1rem; }
       .arrow { transform: rotate(90deg); }
-      .nav-links { display: none; }
+      nav { position: relative; }
+      .nav-hamburger { display: block; }
+      .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 200; background: var(--dark); flex-direction: column; padding: 1.25rem 2rem 1.75rem; gap: 1.25rem; border-bottom: 2px solid rgba(212,168,83,.25); }
+      .nav-links.open { display: flex; }
     }
     @media (max-width: 600px) {
       .container { padding: 3rem 1.25rem 4rem; }
@@ -153,12 +159,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">✦ Venda Mais. <span>Gaste Menos.</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="index.html#modulos">Módulos</a>
       <a href="recursos.html">Recursos</a>
       <a href="dashboard.html">Meu painel</a>
       <a href="index.html" class="nav-cta">Voltar ao curso</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
   </div>
 </nav>
 
@@ -461,5 +468,21 @@ Retorne <span class="key">JSON</span> com <span class="str">{tipo, resumo}</span
   <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios · Pipeline desenvolvido por Lucas Lico + equipe</p>
 </footer>
 
+<script>
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.textContent = isOpen ? '✕' : '☰';
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.textContent = '☰';
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>

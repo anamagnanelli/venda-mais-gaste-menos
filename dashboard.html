@@ -144,13 +144,35 @@
     footer .logo-f { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
     footer .logo-f span { color: var(--gold); }
 
+    /* Hamburger */
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; transition: color .2s; }
+    .nav-hamburger:hover { color: #fff; }
+
+    /* localStorage banner */
+    .ls-banner {
+      background: rgba(212,168,83,.1); border: 1px solid rgba(212,168,83,.3);
+      border-radius: 12px; padding: .85rem 1.25rem;
+      display: flex; align-items: flex-start; gap: .75rem;
+      font-size: .85rem; color: #6B7280; margin-bottom: 1.5rem;
+    }
+    .ls-banner strong { color: #374151; }
+    .ls-banner-close { background: none; border: none; cursor: pointer; color: #9CA3AF; font-size: 1.1rem; margin-left: auto; padding: 0 .25rem; line-height: 1; flex-shrink: 0; }
+
     @media (max-width: 900px) {
       .progress-hero { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem; }
       .progress-circle-wrap { justify-content: flex-start; }
       .modules-grid { grid-template-columns: 1fr; }
       .resources-grid { grid-template-columns: repeat(2, 1fr); }
       .cert-promo { grid-template-columns: 1fr; padding: 2rem; }
-      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      nav { position: relative; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 200;
+        background: var(--dark); flex-direction: column;
+        padding: 1.25rem 2rem 1.75rem; gap: 1.25rem;
+        border-bottom: 2px solid rgba(212,168,83,.25);
+      }
+      .nav-links.open { display: flex; }
     }
     @media (max-width: 600px) {
       .dash-hero { padding: 3rem 1.5rem 4.5rem; }
@@ -164,12 +186,13 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="logo">✦ Venda Mais. <span>Gaste Menos.</span></a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="dashboard.html" style="color:var(--gold);font-weight:700">Dashboard</a>
       <a href="recursos.html">Recursos</a>
       <a href="index.html#modulos">Módulos</a>
       <a href="index.html" class="nav-cta">Página inicial</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
   </div>
 </nav>
 
@@ -178,11 +201,18 @@
   <div class="dash-hero-inner">
     <span class="greeting-pill">👋 <span id="greetingTime">Olá</span>, bem-vinda de volta!</span>
     <h1>Sua <span class="gold">jornada de aprendizado.</span></h1>
-    <p>Acompanhe seu progresso nos 4 módulos, retome de onde parou e acesse os 8 objetos de aprendizagem em um só lugar.</p>
+    <p>Acompanhe seu progresso nos 6 módulos, retome de onde parou e acesse as 8 atividades práticas em um só lugar.</p>
   </div>
 </section>
 
 <div class="container">
+
+  <!-- LOCAL STORAGE NOTICE -->
+  <div class="ls-banner" id="lsBanner">
+    <span>💾</span>
+    <span><strong>Seu progresso fica salvo neste navegador.</strong> Se trocar de dispositivo ou limpar o cache, ele não aparece. Anote seus módulos concluídos caso precise acessar de outro aparelho.</span>
+    <button class="ls-banner-close" onclick="this.parentElement.style.display='none'" aria-label="Fechar aviso">✕</button>
+  </div>
 
   <!-- PROGRESS HERO -->
   <div class="progress-hero">
@@ -205,7 +235,7 @@
         </svg>
         <div class="progress-circle-text">
           <div class="progress-pct"><span id="pctNum">0</span>%</div>
-          <div class="progress-label"><span id="doneNum">0</span>/12 vídeos</div>
+          <div class="progress-label"><span id="doneNum">0</span>/18 vídeos</div>
         </div>
       </div>
     </div>
@@ -217,7 +247,7 @@
       <div class="section-label">Seus módulos</div>
       <h2>Continue de onde parou</h2>
     </div>
-    <div class="section-head-right">📚 4 módulos · 12 vídeos · 8h total</div>
+    <div class="section-head-right">📚 6 módulos · 18 vídeos · ~4h20 total</div>
   </div>
 
   <div class="modules-grid" id="modulesGrid"></div>
@@ -278,8 +308,8 @@
   <div class="cert-promo" id="certPromo">
     <div class="cert-promo-content">
       <span class="cert-promo-pill">🏆 Seu certificado Saint Paul</span>
-      <h2 id="certTitle">Conclua os 4 módulos pra liberar</h2>
-      <p id="certDesc">Quando você marcar todos os 12 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.</p>
+      <h2 id="certTitle">Conclua os 6 módulos pra liberar</h2>
+      <p id="certDesc">Quando você marcar todos os 18 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.</p>
     </div>
     <a href="oa-08-certificado.html" class="cert-promo-btn" id="certBtn">🔒 Bloqueado</a>
   </div>
@@ -439,19 +469,35 @@
     if (doneCount === TOTAL_LESSONS) {
       certPromo.classList.remove('locked');
       document.getElementById('certTitle').textContent = '🎉 Você está pronta!';
-      document.getElementById('certDesc').textContent = 'Você concluiu os 4 módulos e os 12 vídeos. Clique pra gerar seu certificado oficial Saint Paul em PDF.';
+      document.getElementById('certDesc').textContent = 'Você concluiu os 6 módulos e os 18 vídeos. Clique pra gerar seu certificado oficial Saint Paul em PDF.';
       certBtn.textContent = '🏆 Gerar agora';
       certBtn.href = 'oa-08-certificado.html';
     } else {
       certPromo.classList.add('locked');
       const missing = TOTAL_LESSONS - doneCount;
       document.getElementById('certTitle').textContent = `Falta ${missing} vídeo${missing > 1 ? 's' : ''} pra liberar`;
-      document.getElementById('certDesc').textContent = 'Quando você marcar todos os 12 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.';
+      document.getElementById('certDesc').textContent = 'Quando você marcar todos os 18 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.';
       certBtn.textContent = `🔒 ${missing} restante${missing > 1 ? 's' : ''}`;
     }
   }
 
   render();
+
+  // Hamburger menu
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.textContent = isOpen ? '✕' : '☰';
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.textContent = '☰';
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
 </script>
 
 </body>

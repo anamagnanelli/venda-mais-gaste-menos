@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Venda Mais. Gaste Menos. — Simulação de Design</title>  <link rel="stylesheet" href="fonts.css">
+  <title>Venda Mais. Gaste Menos. | Curso de IA para Empreendedoras</title>  <link rel="stylesheet" href="fonts.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -396,6 +396,15 @@
     .faq-item[open] .faq-q::after { transform: rotate(45deg); }
     .faq-a { padding: 0 1.6rem 1.4rem; color: var(--muted); line-height: 1.7; font-size: .95rem; }
 
+    /* ── HAMBURGER ───────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem;
+      line-height: 1; transition: color .2s;
+    }
+    .nav-hamburger:hover { color: #fff; }
+
     /* ── RESPONSIVO ──────────────────────────────── */
     @media (max-width: 900px) {
       .pain-grid, .tools-grid, .compare-grid, .testimonials-grid, .personas-grid, .pricing-3tiers { grid-template-columns: repeat(2, 1fr); }
@@ -405,7 +414,16 @@
     @media (max-width: 600px) {
       .pain-grid, .tools-grid, .team-grid, .testimonials-grid, .personas-grid { grid-template-columns: repeat(2, 1fr); }
       .compare-grid, .pricing-3tiers { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
+      .nav-hamburger { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute; top: 100%; left: 0; right: 0; z-index: 200;
+        background: var(--dark); flex-direction: column;
+        padding: 1.25rem 2rem 1.75rem; gap: 1.25rem;
+        border-bottom: 2px solid rgba(212,168,83,.25);
+      }
+      .nav-links.open { display: flex; }
+      nav { position: relative; }
       .hero-stats { gap: 2rem; }
       .f-links { gap: 1rem; flex-direction: column; }
     }
@@ -417,13 +435,14 @@
 <nav>
   <div class="nav-inner">
     <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#modulos">Módulos</a>
       <a href="recursos.html">Recursos</a>
       <a href="ebook-5-prompts.html">Ebook grátis</a>
       <a href="dashboard.html">Meu painel</a>
       <a href="#pricing" class="nav-cta">Começar agora</a>
     </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">☰</button>
   </div>
 </nav>
 
@@ -574,7 +593,7 @@
           <li>2h por semana — IA gera 80% do conteúdo</li>
           <li>R$0 em agência — você é a estratégia</li>
           <li>Posts segmentados por persona com prompts prontos</li>
-          <li>Atendimento automatizado via n8n + Groq</li>
+          <li>Atendimento automático no WhatsApp (responde sozinho)</li>
           <li>Pipeline previsível: do lead à venda</li>
         </ul>
         <div class="compare-foot">
@@ -679,7 +698,7 @@
 <!-- TESTIMONIALS -->
 <section class="section" style="background:#fff">
   <div class="section-inner">
-    <span class="section-label">Quem já aplicou (perfil Maria · Carlos · Ana)</span>
+    <span class="section-label">Quem já está aplicando</span>
     <h2 class="section-h2">Está vendendo mais.</h2>
     <p class="section-sub">Resultados reais de empreendedores que aplicaram o método logo na primeira semana. Cada depoimento representa uma das 3 personas do curso.</p>
     <div class="testimonials-grid">
@@ -751,8 +770,8 @@
         <div class="tier-price"><sup>R$</sup>197</div>
         <div class="tier-price-sub">pagamento único · acesso por 12 meses</div>
         <ul class="tier-features">
-          <li>4 módulos + 12 vídeos curtos (~2h40)</li>
-          <li>8 Objetos de Aprendizagem interativos</li>
+          <li>6 módulos + 18 vídeos curtos (~4h20)</li>
+          <li>8 atividades práticas interativas (quiz, simulador e mais)</li>
           <li>Atividades práticas por módulo</li>
           <li>🤖 <strong>Assistente IA personalizado do curso</strong></li>
           <li>Pipeline de automação <a href="automacao-n8n.html" style="color:var(--em);text-decoration:underline">n8n + Groq</a></li>
@@ -760,7 +779,7 @@
           <li><strong>Certificado de conclusão Saint Paul</strong></li>
           <li>Suporte WhatsApp por 12 meses</li>
         </ul>
-        <a href="#" class="tier-btn tier-btn-gold">🚀 Quero começar agora</a>
+        <a href="mailto:contato@vendamaisgastemenos.com?subject=Quero%20comprar%20o%20curso%20Individual" class="tier-btn tier-btn-gold">💬 Falar pra comprar</a>
       </div>
       <!-- TIER 3 — EMPRESARIAL -->
       <div class="tier-card">
@@ -795,7 +814,7 @@
     <div class="faq-wrap">
       <details class="faq-item">
         <summary class="faq-q">Preciso entender de tecnologia para fazer o curso?</summary>
-        <p class="faq-a">Não. O curso parte do zero — se você sabe abrir o navegador e usar o WhatsApp, consegue aplicar tudo. Os 4 módulos são pensados para empreendedores sem background técnico.</p>
+        <p class="faq-a">Não. O curso parte do zero — se você sabe abrir o navegador e usar o WhatsApp, consegue aplicar tudo. Os 6 módulos são pensados para empreendedores sem background técnico.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Por quanto tempo tenho acesso ao conteúdo?</summary>
@@ -807,7 +826,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-q">Como funciona o certificado?</summary>
-        <p class="faq-a">Ao concluir os 4 módulos e os quizzes, você gera um certificado personalizado em PDF direto no site. Ele tem o nome do curso, da Saint Paul Escola de Negócios e a sua identificação.</p>
+        <p class="faq-a">Ao concluir os 6 módulos e as atividades, você gera um certificado personalizado em PDF direto no site. Ele tem o nome do curso, da Saint Paul Escola de Negócios e a sua identificação.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Como recebo suporte se travar em algum exercício?</summary>
@@ -887,6 +906,22 @@
     c.style.transform = 'translateY(22px)';
     c.style.transition = 'opacity .55s ease, transform .55s ease';
     io.observe(c);
+  });
+
+  // Hamburger menu
+  const hamburger = document.getElementById('navHamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    hamburger.textContent = isOpen ? '✕' : '☰';
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      hamburger.textContent = '☰';
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
   });
 </script>
 
