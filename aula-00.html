@@ -399,6 +399,17 @@
   function applyProgress() { const progress = loadProgress(); LESSONS_THIS_AULA.forEach(id => { if (progress[id]) document.getElementById(id).classList.add('done'); }); updateProgress(); }
   applyProgress();
 
+  // Autoplay via ?play=1 (chegando do hero CTA da landing)
+  if (new URLSearchParams(location.search).get('play') === '1') {
+    const firstVideo = document.querySelector('.video-placeholder');
+    if (firstVideo) {
+      setTimeout(() => {
+        firstVideo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => firstVideo.classList.add('show-notice'), 700);
+      }, 400);
+    }
+  }
+
   // Hamburger menu
   const hamburger = document.getElementById('navHamburger');
   const navLinks = document.getElementById('navLinks');

@@ -144,6 +144,16 @@
     footer .logo-f { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
     footer .logo-f span { color: var(--gold); }
 
+    /* RETOMAR CARD */
+    .retomar-card { background: linear-gradient(135deg, var(--dark), #1a1a1a); border: 1px solid rgba(212,168,83,.3); border-radius: 18px; padding: 1.5rem 2rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; position: relative; overflow: hidden; }
+    .retomar-card::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; }
+    .retomar-card-left { position: relative; z-index: 1; }
+    .retomar-card-eyebrow { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--em-lt); margin-bottom: .35rem; }
+    .retomar-card-title { display: block; font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 800; color: #fff; margin-bottom: .25rem; }
+    .retomar-card-desc { display: block; font-size: .85rem; color: rgba(255,255,255,.55); }
+    .retomar-card-btn { position: relative; z-index: 1; background: var(--gold); color: var(--dark); padding: .85rem 1.75rem; border-radius: 999px; font-weight: 700; text-decoration: none; transition: all .25s; white-space: nowrap; flex-shrink: 0; }
+    .retomar-card-btn:hover { background: var(--gold-dk); transform: translateY(-1px); box-shadow: 0 12px 30px rgba(212,168,83,.3); }
+
     /* Hamburger */
     .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; transition: color .2s; }
     .nav-hamburger:hover { color: #fff; }
@@ -175,6 +185,7 @@
       .nav-links.open { display: flex; }
     }
     @media (max-width: 600px) {
+      .retomar-card { flex-direction: column; align-items: flex-start; }
       .dash-hero { padding: 3rem 1.5rem 4.5rem; }
       .container { padding: 0 1.25rem 4rem; }
       .progress-hero { padding: 1.5rem; }
@@ -212,6 +223,16 @@
     <span>💾</span>
     <span><strong>Seu progresso fica salvo neste navegador.</strong> Se trocar de dispositivo ou limpar o cache, ele não aparece. Anote seus módulos concluídos caso precise acessar de outro aparelho.</span>
     <button class="ls-banner-close" onclick="this.parentElement.style.display='none'" aria-label="Fechar aviso">✕</button>
+  </div>
+
+  <!-- RETOMAR CARD — aparece quando há progresso em andamento -->
+  <div class="retomar-card" id="retomarCard" style="display:none">
+    <div class="retomar-card-left">
+      <span class="retomar-card-eyebrow">Continue de onde parou</span>
+      <span class="retomar-card-title" id="retomarTitle">Módulo 00</span>
+      <span class="retomar-card-desc" id="retomarDesc"></span>
+    </div>
+    <a href="#" class="retomar-card-btn" id="retomarBtn">▶ Retomar agora</a>
   </div>
 
   <!-- PROGRESS HERO -->
@@ -256,7 +277,7 @@
   <div class="section-head">
     <div>
       <div class="section-label">Recursos do curso</div>
-      <h2>Atalhos pros 8 OAs</h2>
+      <h2>Suas 8 ferramentas práticas</h2>
     </div>
     <a href="recursos.html" class="section-head-right" style="color:var(--gold);text-decoration:none;font-weight:600">Ver todos →</a>
   </div>
@@ -426,7 +447,13 @@
     document.getElementById('nextActionText').innerHTML = next.text;
     const btn = document.getElementById('nextActionBtn');
     btn.href = next.url;
-    btn.textContent = next.isCert ? '🏆 Gerar certificado' : (doneCount === 0 ? '▶ Começar agora' : '▶ Continuar');
+    if (next.isCert) {
+      btn.textContent = '🏆 Gerar certificado';
+    } else if (doneCount === 0) {
+      btn.textContent = '▶ Começar pelo Módulo 00';
+    } else {
+      btn.textContent = `▶ Continuar — Módulo ${next.module.n}`;
+    }
 
     // Modules
     document.getElementById('modulesGrid').innerHTML = MODULES.map(mod => {
@@ -478,6 +505,16 @@
       document.getElementById('certTitle').textContent = `Falta ${missing} vídeo${missing > 1 ? 's' : ''} pra liberar`;
       document.getElementById('certDesc').textContent = 'Quando você marcar todos os 18 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.';
       certBtn.textContent = `🔒 ${missing} restante${missing > 1 ? 's' : ''}`;
+    }
+
+    // Retomar card — aparece quando há progresso em andamento
+    const retomarCard = document.getElementById('retomarCard');
+    if (doneCount > 0 && doneCount < TOTAL_LESSONS) {
+      const nextR = getNextAction(progress);
+      retomarCard.style.display = 'flex';
+      document.getElementById('retomarTitle').textContent = `Módulo ${nextR.module.n} — ${nextR.module.title}`;
+      document.getElementById('retomarDesc').textContent = `Próximo vídeo: ${nextR.video.title} (${nextR.video.dur})`;
+      document.getElementById('retomarBtn').href = nextR.module.file;
     }
   }
 
