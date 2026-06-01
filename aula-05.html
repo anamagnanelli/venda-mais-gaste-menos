@@ -118,7 +118,7 @@
     .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; }
     .nav-hamburger:hover { color: #fff; }
     .video-placeholder.show-notice::before { content: none; }
-    .video-placeholder.show-notice::after { content: '🎬 Vídeo em breve — leia o conteúdo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+    .video-placeholder.show-notice::after { content: '📖 Conteúdo escrito completo logo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-hamburger { display: block; } nav { position: relative; } .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 200; background: var(--dark); flex-direction: column; padding: 1.25rem 2rem 1.75rem; gap: 1.25rem; border-bottom: 2px solid rgba(212,168,83,.25); } .nav-links.open { display: flex; } }
     @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box, .cert-teaser { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
   </style>
@@ -147,11 +147,11 @@
 
 <section class="aula-header">
   <div class="aula-header-inner">
-    <span class="aula-pill">🏆 Aula 05 · Cases reais · 3 vídeos · ~70min + atividade</span>
+    <span class="aula-pill">🏆 Aula 05 · Cases reais · 3 lições · ~70min + atividade</span>
     <h1>Cases reais e <span class="gold">próximos passos.</span></h1>
     <p>3 empreendedoras que aplicaram o método e mediram resultados. Você vai ver com detalhes O QUE elas fizeram, COMO mediram e QUAIS números conquistaram. No final, monta seu plano de 90 dias e gera seu certificado.</p>
     <div class="aula-meta">
-      <div class="aula-meta-item">📹 <strong>3 vídeos</strong> · ~70min</div>
+      <div class="aula-meta-item">📖 <strong>3 lições</strong> · ~70min</div>
       <div class="aula-meta-item">🎯 <strong>Plano de 90 dias</strong></div>
       <div class="aula-meta-item">🏆 <strong>Certificado liberado</strong></div>
     </div>
@@ -168,14 +168,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">5.1</div>
             <div>
-              <div class="lesson-tag">Vídeo 5.1 · Aula 05</div>
+              <div class="lesson-tag">Lição 5.1 · Aula 05</div>
               <h2>Case Maria — Loja de moda online (+180% engajamento)</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v5-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 5.1</span><button class="play-btn">▶</button><span class="video-duration">25:00</span>
+          <span class="video-label">📖 Lição 5.1</span><button class="play-btn">↓</button><span class="video-duration">25:00</span>
         </div>
         <div class="lesson-content">
           <h3>O ponto de partida</h3>
@@ -218,14 +218,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">5.2</div>
             <div>
-              <div class="lesson-tag">Vídeo 5.2 · Aula 05</div>
+              <div class="lesson-tag">Lição 5.2 · Aula 05</div>
               <h2>Case Carlos — Loja física + e-commerce (CAC -50%)</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v5-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 5.2</span><button class="play-btn">▶</button><span class="video-duration">25:00</span>
+          <span class="video-label">📖 Lição 5.2</span><button class="play-btn">↓</button><span class="video-duration">25:00</span>
         </div>
         <div class="lesson-content">
           <h3>O ponto de partida</h3>
@@ -268,14 +268,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">5.3</div>
             <div>
-              <div class="lesson-tag">Vídeo 5.3 · Aula 05</div>
+              <div class="lesson-tag">Lição 5.3 · Aula 05</div>
               <h2>Case Letícia — Designer freelance (4x entregas/mês)</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v5-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 5.3</span><button class="play-btn">▶</button><span class="video-duration">20:00</span>
+          <span class="video-label">📖 Lição 5.3</span><button class="play-btn">↓</button><span class="video-duration">20:00</span>
         </div>
         <div class="lesson-content">
           <h3>O ponto de partida</h3>
@@ -345,7 +345,7 @@
       <!-- CERTIFICADO TEASER -->
       <section class="cert-teaser">
         <h2>🏆 Hora do certificado!</h2>
-        <p>Você concluiu o curso completo: 6 módulos, 18 vídeos, todas as atividades práticas. Hora de gerar seu certificado oficial Saint Paul e comemorar.</p>
+        <p>Você concluiu o curso completo: 6 módulos, 18 lições, todas as atividades práticas. Hora de gerar seu certificado oficial Saint Paul e comemorar.</p>
         <a href="oa-08-certificado.html">🏆 Gerar meu Certificado →</a>
       </section>
 

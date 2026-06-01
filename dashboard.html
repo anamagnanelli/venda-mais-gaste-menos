@@ -256,7 +256,7 @@
         </svg>
         <div class="progress-circle-text">
           <div class="progress-pct"><span id="pctNum">0</span>%</div>
-          <div class="progress-label"><span id="doneNum">0</span>/18 vídeos</div>
+          <div class="progress-label"><span id="doneNum">0</span>/18 lições</div>
         </div>
       </div>
     </div>
@@ -268,7 +268,7 @@
       <div class="section-label">Seus módulos</div>
       <h2>Continue de onde parou</h2>
     </div>
-    <div class="section-head-right">📚 6 módulos · 18 vídeos · ~4h20 total</div>
+    <div class="section-head-right">📚 6 módulos · 18 lições · ~4h20 total</div>
   </div>
 
   <div class="modules-grid" id="modulesGrid"></div>
@@ -330,7 +330,7 @@
     <div class="cert-promo-content">
       <span class="cert-promo-pill">🏆 Seu certificado Saint Paul</span>
       <h2 id="certTitle">Conclua os 6 módulos pra liberar</h2>
-      <p id="certDesc">Quando você marcar todos os 18 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.</p>
+      <p id="certDesc">Quando você concluir todas as 18 lições, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.</p>
     </div>
     <a href="oa-08-certificado.html" class="cert-promo-btn" id="certBtn">🔒 Bloqueado</a>
   </div>
@@ -392,7 +392,7 @@
   }
 
   function getNextAction(progress) {
-    // Encontra primeiro vídeo não concluído
+    // Encontra primeira lição não concluído
     for (let mod of MODULES) {
       for (let v of mod.videos) {
         if (!progress[v.id]) {
@@ -496,14 +496,14 @@
     if (doneCount === TOTAL_LESSONS) {
       certPromo.classList.remove('locked');
       document.getElementById('certTitle').textContent = '🎉 Você está pronta!';
-      document.getElementById('certDesc').textContent = 'Você concluiu os 6 módulos e os 18 vídeos. Clique pra gerar seu certificado oficial Saint Paul em PDF.';
+      document.getElementById('certDesc').textContent = 'Você concluiu os 6 módulos e as 18 lições. Clique pra gerar seu certificado oficial Saint Paul em PDF.';
       certBtn.textContent = '🏆 Gerar agora';
       certBtn.href = 'oa-08-certificado.html';
     } else {
       certPromo.classList.add('locked');
       const missing = TOTAL_LESSONS - doneCount;
-      document.getElementById('certTitle').textContent = `Falta ${missing} vídeo${missing > 1 ? 's' : ''} pra liberar`;
-      document.getElementById('certDesc').textContent = 'Quando você marcar todos os 18 vídeos como assistidos, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.';
+      document.getElementById('certTitle').textContent = `${missing > 1 ? 'Faltam' : 'Falta'} ${missing} ${missing > 1 ? 'lições' : 'lição'} pra liberar`;
+      document.getElementById('certDesc').textContent = 'Quando você concluir todas as 18 lições, o certificado oficial Saint Paul fica liberado pra você baixar em PDF.';
       certBtn.textContent = `🔒 ${missing} restante${missing > 1 ? 's' : ''}`;
     }
 
@@ -513,7 +513,7 @@
       const nextR = getNextAction(progress);
       retomarCard.style.display = 'flex';
       document.getElementById('retomarTitle').textContent = `Módulo ${nextR.module.n} — ${nextR.module.title}`;
-      document.getElementById('retomarDesc').textContent = `Próximo vídeo: ${nextR.video.title} (${nextR.video.dur})`;
+      document.getElementById('retomarDesc').textContent = `Próxima lição: ${nextR.video.title} (${nextR.video.dur})`;
       document.getElementById('retomarBtn').href = nextR.module.file;
     }
   }

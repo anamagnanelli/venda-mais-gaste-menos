@@ -117,7 +117,7 @@
     .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; }
     .nav-hamburger:hover { color: #fff; }
     .video-placeholder.show-notice::before { content: none; }
-    .video-placeholder.show-notice::after { content: '🎬 Vídeo em breve — leia o conteúdo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+    .video-placeholder.show-notice::after { content: '📖 Conteúdo escrito completo logo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-hamburger { display: block; } nav { position: relative; } .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 200; background: var(--dark); flex-direction: column; padding: 1.25rem 2rem 1.75rem; gap: 1.25rem; border-bottom: 2px solid rgba(212,168,83,.25); } .nav-links.open { display: flex; } }
     @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box, .cert-teaser { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
   </style>
@@ -146,11 +146,11 @@
 
 <section class="aula-header">
   <div class="aula-header-inner">
-    <span class="aula-pill">📘 Módulo 04 · 3 vídeos · ~42min + atividade</span>
+    <span class="aula-pill">📘 Módulo 04 · 3 lições · ~42min + atividade</span>
     <h1>Engenharia de prompts <span class="gold">e plano de ação.</span></h1>
     <p>O que diferencia quem usa IA "às vezes" de quem usa IA com método. Você aprende a escrever prompts profissionais, iterar pra qualidade máxima e monta seu plano de marketing pra próxima semana. Última aula — onde tudo se conecta.</p>
     <div class="aula-meta">
-      <div class="aula-meta-item">📹 <strong>3 vídeos</strong> · ~42min</div>
+      <div class="aula-meta-item">📖 <strong>3 lições</strong> · ~42min</div>
       <div class="aula-meta-item">🎯 <strong>1 atividade prática</strong></div>
       <div class="aula-meta-item">🏆 <strong>Certificado de conclusão</strong></div>
     </div>
@@ -167,14 +167,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">4.1</div>
             <div>
-              <div class="lesson-tag">Vídeo 4.1 · Aula 04</div>
+              <div class="lesson-tag">Lição 4.1 · Aula 04</div>
               <h2>Engenharia de prompts: fundamentos e anatomia</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v4-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 4.1</span><button class="play-btn">▶</button><span class="video-duration">17:00</span>
+          <span class="video-label">📖 Lição 4.1</span><button class="play-btn">↓</button><span class="video-duration">17:00</span>
         </div>
         <div class="lesson-content">
           <h3>Por que 90% das pessoas usam IA do jeito errado</h3>
@@ -220,14 +220,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">4.2</div>
             <div>
-              <div class="lesson-tag">Vídeo 4.2 · Aula 04</div>
+              <div class="lesson-tag">Lição 4.2 · Aula 04</div>
               <h2>Iteração e otimização de prompts</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v4-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 4.2</span><button class="play-btn">▶</button><span class="video-duration">12:00</span>
+          <span class="video-label">📖 Lição 4.2</span><button class="play-btn">↓</button><span class="video-duration">12:00</span>
         </div>
         <div class="lesson-content">
           <h3>O segredo: ninguém acerta na primeira</h3>
@@ -276,14 +276,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">4.3</div>
             <div>
-              <div class="lesson-tag">Vídeo 4.3 · Aula 04</div>
+              <div class="lesson-tag">Lição 4.3 · Aula 04</div>
               <h2>Mini plano de marketing de 1 semana</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v4-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 4.3</span><button class="play-btn">▶</button><span class="video-duration">13:00</span>
+          <span class="video-label">📖 Lição 4.3</span><button class="play-btn">↓</button><span class="video-duration">13:00</span>
         </div>
         <div class="lesson-content">
           <h3>Sem plano, IA vira distração</h3>
@@ -359,9 +359,9 @@
       </section>
 
       <section class="cert-teaser">
-        <h2>🏆 Você chegou ao final!</h2>
-        <p>Concluiu os 4 módulos, 12 vídeos e 1 atividade prática por módulo. Hora de gerar seu certificado oficial Saint Paul.</p>
-        <a href="oa-08-certificado.html">🏆 Gerar meu Certificado →</a>
+        <h2>🏆 Quase lá — falta 1 módulo!</h2>
+        <p>Você concluiu o Módulo 04 — Engenharia de Prompts. Falta só o Módulo 05 (Cases Reais) para finalizar o curso e liberar seu certificado.</p>
+        <a href="aula-05.html">Ir para o Módulo 05 →</a>
       </section>
 
       <nav class="aula-nav">

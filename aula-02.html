@@ -109,7 +109,7 @@
     .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,.85); font-size: 1.6rem; padding: .25rem .5rem; line-height: 1; }
     .nav-hamburger:hover { color: #fff; }
     .video-placeholder.show-notice::before { content: none; }
-    .video-placeholder.show-notice::after { content: '🎬 Vídeo em breve — leia o conteúdo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+    .video-placeholder.show-notice::after { content: '📖 Conteúdo escrito completo logo abaixo ↓'; background: rgba(13,13,13,.92); z-index: 10; color: #fff; font-size: .88rem; font-weight: 600; text-align: center; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
     @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } .sidebar { position: static; } .nav-hamburger { display: block; } nav { position: relative; } .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 200; background: var(--dark); flex-direction: column; padding: 1.25rem 2rem 1.75rem; gap: 1.25rem; border-bottom: 2px solid rgba(212,168,83,.25); } .nav-links.open { display: flex; } }
     @media (max-width: 600px) { .aula-header { padding: 3rem 1.5rem 2.5rem; } .container { padding: 2rem 1.25rem 3rem; } .lesson-head, .lesson-content { padding: 1.25rem 1.5rem; } .video-placeholder { margin: 1rem 1.5rem 0; } .play-btn { width: 64px; height: 64px; font-size: 1.4rem; } .activity-box { padding: 1.75rem 1.5rem; } .aula-nav { grid-template-columns: 1fr; } }
   </style>
@@ -138,11 +138,11 @@
 
 <section class="aula-header">
   <div class="aula-header-inner">
-    <span class="aula-pill">📘 Módulo 02 · 3 vídeos · ~37min + atividade</span>
+    <span class="aula-pill">📘 Módulo 02 · 3 lições · ~37min + atividade</span>
     <h1>Persona e <span class="gold">alinhamento estratégico.</span></h1>
     <p>A base de TUDO no marketing é saber pra quem você fala. Aqui você cria sua persona com ChatGPT, mapeia dores reais e alinha persona com sua estratégia de negócio. É o módulo onde a maioria trava — não pule.</p>
     <div class="aula-meta">
-      <div class="aula-meta-item">📹 <strong>3 vídeos</strong> · ~37min</div>
+      <div class="aula-meta-item">📖 <strong>3 lições</strong> · ~37min</div>
       <div class="aula-meta-item">🎯 <strong>1 atividade prática</strong></div>
       <div class="aula-meta-item">⏱ <strong>~1h45 total</strong> com aplicação</div>
     </div>
@@ -159,14 +159,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">2.1</div>
             <div>
-              <div class="lesson-tag">Vídeo 2.1 · Aula 02</div>
+              <div class="lesson-tag">Lição 2.1 · Aula 02</div>
               <h2>O que é persona e como criar com ChatGPT</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v2-1')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 2.1</span><button class="play-btn">▶</button><span class="video-duration">15:00</span>
+          <span class="video-label">📖 Lição 2.1</span><button class="play-btn">↓</button><span class="video-duration">15:00</span>
         </div>
         <div class="lesson-content">
           <h3>Persona ≠ público-alvo (a confusão que custa caro)</h3>
@@ -210,14 +210,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">2.2</div>
             <div>
-              <div class="lesson-tag">Vídeo 2.2 · Aula 02</div>
+              <div class="lesson-tag">Lição 2.2 · Aula 02</div>
               <h2>Mapa de dores e desejos do cliente</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v2-2')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 2.2</span><button class="play-btn">▶</button><span class="video-duration">12:00</span>
+          <span class="video-label">📖 Lição 2.2</span><button class="play-btn">↓</button><span class="video-duration">12:00</span>
         </div>
         <div class="lesson-content">
           <h3>Por que dor vende mais que solução</h3>
@@ -258,14 +258,14 @@
           <div class="lesson-head-left">
             <div class="lesson-num">2.3</div>
             <div>
-              <div class="lesson-tag">Vídeo 2.3 · Aula 02</div>
+              <div class="lesson-tag">Lição 2.3 · Aula 02</div>
               <h2>Alinhamento persona × marketing × estratégia</h2>
             </div>
           </div>
           <div class="lesson-check" onclick="toggleLesson('v2-3')"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8L7 12L13 4" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
         <div class="video-placeholder" onclick="this.classList.add('show-notice')">
-          <span class="video-label">📹 Vídeo 2.3</span><button class="play-btn">▶</button><span class="video-duration">10:00</span>
+          <span class="video-label">📖 Lição 2.3</span><button class="play-btn">↓</button><span class="video-duration">10:00</span>
         </div>
         <div class="lesson-content">
           <h3>O erro mais caro: persona desconectada do produto</h3>
