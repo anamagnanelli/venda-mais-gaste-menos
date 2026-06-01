@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apostila Módulo 04 — Prompt Engineering · Venda Mais. Gaste Menos.</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:'Inter',sans-serif;background:#FAFAFA;color:#0D0D0D;line-height:1.7;-webkit-font-smoothing:antialiased}:root{--dark:#0D0D0D;--gold:#D4A853;--em:#0D9488;--gray:#F5F4F0;--border:#E5E7EB;--muted:#6B7280}
+    nav{background:var(--dark);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.logo{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;font-weight:700}.logo span{color:var(--gold)}.nav-links{display:flex;gap:1rem;align-items:center}.nav-cta{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);padding:.5rem 1.15rem;border-radius:999px;font-size:.82rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.1)}.print-btn{background:var(--gold);color:var(--dark);padding:.5rem 1.15rem;border-radius:999px;font-size:.82rem;font-weight:700;border:none;cursor:pointer}
+    .doc-header{background:var(--dark);color:#fff;padding:4rem 2rem 3rem;position:relative;overflow:hidden}.doc-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,83,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,83,.04) 1px,transparent 1px);background-size:60px 60px}.doc-header-inner{max-width:860px;margin:0 auto;position:relative;z-index:1}.doc-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(212,168,83,.12);border:1px solid rgba(212,168,83,.3);color:var(--gold);padding:.35rem .9rem;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.06em;margin-bottom:1.25rem}.doc-header h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;line-height:1.1;margin-bottom:1rem}.doc-header h1 em{color:var(--gold);font-style:italic}.doc-header p{color:rgba(255,255,255,.65);font-size:1rem;max-width:620px;line-height:1.7}.doc-meta{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}.doc-meta-item{font-size:.82rem;color:rgba(255,255,255,.55)}.doc-meta-item strong{color:var(--gold);display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem}
+    .doc-body{max-width:860px;margin:0 auto;padding:3rem 2rem 5rem}.lesson-section{margin-bottom:3.5rem;padding-bottom:3rem;border-bottom:2px solid var(--border)}.lesson-section:last-of-type{border-bottom:none}.lesson-num-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--em));font-family:'Playfair Display',serif;font-weight:900;color:var(--dark);font-size:1rem;margin-bottom:1rem}.lesson-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--em);margin-bottom:.5rem}.lesson-section h2{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,32px);font-weight:800;line-height:1.2;margin-bottom:1.5rem}
+    .doc-body h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin:1.75rem 0 .75rem;color:var(--dark)}.doc-body p{color:#1f2937;margin-bottom:1rem;font-size:.97rem}.doc-body ul,.doc-body ol{padding-left:1.5rem;margin-bottom:1.25rem}.doc-body li{margin-bottom:.5rem;font-size:.97rem;color:#374151;line-height:1.65}.doc-body strong{color:var(--dark)}
+    .crack-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin:1.5rem 0}
+    .crack-card{background:var(--dark);border-radius:12px;padding:1rem;text-align:center}.crack-letter{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1}.crack-word{font-size:.75rem;font-weight:700;color:#fff;margin:.3rem 0}.crack-desc{font-size:.7rem;color:rgba(255,255,255,.55);line-height:1.4}
+    .iteration-steps{display:flex;flex-direction:column;gap:.75rem;margin:1.5rem 0}
+    .step{display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem}.step-num{width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--dark);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}.step-content strong{display:block;font-size:.95rem;color:var(--dark);margin-bottom:.2rem}.step-content p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.5}
+    .key-box{background:var(--gray);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:1.5rem 0}.key-box h4{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.75rem}.key-box ul{padding-left:1.25rem}.key-box li{font-size:.9rem;color:#374151;margin-bottom:.4rem}
+    .refinement-list{display:flex;flex-direction:column;gap:.5rem;margin:1.25rem 0}
+    .ref-item{background:rgba(13,148,136,.06);border:1px solid rgba(13,148,136,.15);border-radius:8px;padding:.75rem 1rem;font-size:.9rem;color:#1f2937}
+    .ref-item strong{color:var(--em)}
+    .week-plan{display:grid;grid-template-columns:repeat(7,1fr);gap:.5rem;margin:1.5rem 0}
+    .day-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:.75rem;text-align:center}.day-name{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--em);margin-bottom:.35rem}.day-focus{font-size:.78rem;color:var(--dark);font-weight:600;line-height:1.35}
+    .prompt-section{background:var(--dark);border-radius:16px;padding:2rem;margin:2.5rem 0}.prompt-section-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:1.25rem}.prompt-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.85rem}.prompt-card-label{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:600;margin-bottom:.5rem}.prompt-text{font-family:monospace;font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.65;white-space:pre-wrap}
+    .summary-box{background:linear-gradient(135deg,rgba(212,168,83,.06),rgba(13,148,136,.04));border:1px solid rgba(212,168,83,.2);border-radius:16px;padding:2rem;margin:2.5rem 0}.summary-box h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;margin-bottom:1.25rem}.summary-list{list-style:none;padding:0}.summary-list li{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(212,168,83,.15);font-size:.95rem;color:#1f2937}.summary-list li:last-child{border-bottom:none}.summary-list li::before{content:'✦';color:var(--gold);font-weight:700;flex-shrink:0}
+    .next-oa{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}.next-oa p{font-size:.9rem;color:var(--muted)}.next-oa strong{display:block;color:var(--dark);font-size:1rem;margin-bottom:.2rem}.btn-gold{background:var(--gold);color:var(--dark);padding:.75rem 1.5rem;border-radius:999px;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}
+    @media print{nav,.print-btn{display:none}body{background:#fff}.doc-header,.prompt-section,.crack-card{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+    @media(max-width:600px){.crack-grid{grid-template-columns:repeat(3,1fr)}.week-plan{grid-template-columns:repeat(4,1fr)}}
+  </style>
+</head>
+<body>
+<nav><div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div><div class="nav-links"><a href="aula-04.html" class="nav-cta">← Voltar à Aula 04</a><button class="print-btn" onclick="window.print()">📄 Salvar como PDF</button></div></nav>
+
+<div class="doc-header"><div class="doc-header-inner"><span class="doc-pill">📚 OA 16 · Apostila · Módulo 04</span><h1>Prompt Engineering <em>e Plano de Ação</em></h1><p>Material completo do Módulo 04: estrutura CRACK de prompts, ciclo de iteração em 4 passos, frases de refinamento que sempre funcionam e o plano semanal de marketing com IA. O módulo que transforma conhecimento em resultado.</p><div class="doc-meta"><div class="doc-meta-item"><strong>Módulo</strong>04 de 04</div><div class="doc-meta-item"><strong>Lições</strong>3 (4.1 · 4.2 · 4.3)</div><div class="doc-meta-item"><strong>Leitura estimada</strong>~15 minutos</div><div class="doc-meta-item"><strong>Ferramentas</strong>ChatGPT · Qualquer LLM</div></div></div></div>
+
+<div class="doc-body">
+  <section class="lesson-section">
+    <div class="lesson-num-badge">4.1</div>
+    <div class="lesson-tag">Lição 4.1 · Módulo 04</div>
+    <h2>Fundamentos de prompt engineering — a estrutura CRACK</h2>
+    <h3>Por que prompts ruins geram resultados ruins</h3>
+    <p>A IA é tão boa quanto o prompt que você escreve. "Me dê ideias de post" gera resultado genérico. "Você é especialista em marketing para pequenas joalherias brasileiras. Crie 5 ideias de posts educativos para Instagram que respondam dúvidas reais de mulheres de 30-45 anos sobre como escolher joias para presentear. Tom: elegante mas acessível." — gera resultado que você pode publicar hoje.</p>
+    <h3>A estrutura CRACK — o prompt perfeito</h3>
+    <div class="crack-grid">
+      <div class="crack-card"><div class="crack-letter">C</div><div class="crack-word">Contexto</div><div class="crack-desc">Situa a IA no seu cenário específico</div></div>
+      <div class="crack-card"><div class="crack-letter">R</div><div class="crack-word">Role</div><div class="crack-desc">Papel que a IA deve assumir</div></div>
+      <div class="crack-card"><div class="crack-letter">A</div><div class="crack-word">Ação</div><div class="crack-desc">O que exatamente você quer</div></div>
+      <div class="crack-card"><div class="crack-letter">C</div><div class="crack-word">Critério</div><div class="crack-desc">Como avaliar a qualidade</div></div>
+      <div class="crack-card"><div class="crack-letter">K</div><div class="crack-word">Conhecimento</div><div class="crack-desc">Informações extras que ela precisa</div></div>
+    </div>
+    <p><strong>Exemplo CRACK completo:</strong> "Você é especialista em copywriting para e-commerce de moda [ROLE]. Meu negócio é uma loja online de roupas femininas para mulheres de 25-40 anos em São Paulo [CONTEXTO]. Escreva 3 versões de legenda para Instagram de um post de lançamento de coleção de outono [AÇÃO]. Cada legenda deve ter no máximo 150 palavras, incluir 1 pergunta de engajamento e terminar com CTA claro [CRITÉRIO]. Minha persona é a Maria: 32 anos, trabalha em escritório, compra online 2x/mês, gosta de moda clássica com toque moderno [CONHECIMENTO]."</p>
+    <div class="key-box"><h4>📌 Princípios do prompt perfeito</h4><ul><li>Quanto mais específico, mais específica a saída</li><li>Role muda a qualidade — sempre defina o papel da IA</li><li>Inclua exemplos quando possível (1-2 exemplos = qualidade 3x melhor)</li><li>Critério claro evita resultados que precisam ser totalmente refeitos</li></ul></div>
+  </section>
+
+  <section class="lesson-section">
+    <div class="lesson-num-badge">4.2</div>
+    <div class="lesson-tag">Lição 4.2 · Módulo 04</div>
+    <h2>Iteração e otimização de prompts</h2>
+    <h3>O segredo: ninguém acerta na primeira</h3>
+    <p>O mito do "prompt mágico de uma tentativa só" é exatamente isso — mito. Quem produz bem com IA <strong>itera</strong>. Primeiro prompt é o esboço. Resposta vem 70% boa. Você reage, ajusta, refina. Em 3-4 iterações, chega no resultado que vale ouro.</p>
+    <h3>O ciclo de iteração em 4 passos</h3>
+    <div class="iteration-steps">
+      <div class="step"><div class="step-num">1</div><div class="step-content"><strong>Prompt inicial</strong><p>O esboço com estrutura CRACK. Não precisa ser perfeito — precisa ser completo.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-content"><strong>Análise crítica</strong><p>O que ficou bom? O que faltou? O que soou artificial ou genérico?</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-content"><strong>Refinamento</strong><p>Peça à IA para ajustar com instruções específicas ("torne mais...", "remova X", "adicione Y").</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-content"><strong>Validação</strong><p>Teste o output em situação real. Você leria? Compartilharia? Clicaria? Se não, volte ao passo 2.</p></div></div>
+    </div>
+    <h3>Frases de refinamento que sempre funcionam</h3>
+    <div class="refinement-list">
+      <div class="ref-item"><strong>"Torne mais brasileiro"</strong> — substitua expressões traduzidas por equivalentes naturais em português do Brasil</div>
+      <div class="ref-item"><strong>"Reduza pela metade"</strong> mantendo o essencial — corta o que é redundante</div>
+      <div class="ref-item"><strong>"Adicione um exemplo concreto"</strong> em cada ponto — torna abstrato em real</div>
+      <div class="ref-item"><strong>"Refaça com tom mais [direto / leve / técnico]"</strong> — ajuste de voz sem mudar conteúdo</div>
+      <div class="ref-item"><strong>"Critique seu próprio output"</strong> — o que está fraco? A IA sabe identificar os próprios pontos fracos</div>
+      <div class="ref-item"><strong>"O que você mudaria pra esse texto converter mais?"</strong> — pede melhoria orientada a resultado</div>
+    </div>
+    <div class="key-box"><h4>📌 Quando parar de iterar</h4><ul><li>3-4 iterações = output excelente na maioria dos casos</li><li>Se na 4ª iteração ainda não está satisfeita, o problema é o prompt inicial — refaça com CRACK</li><li>Iterar infinitamente é desperdício de tempo — saiba quando parar</li><li>Salve a versão final + o caminho de iterações para reaproveitar depois</li></ul></div>
+  </section>
+
+  <section class="lesson-section">
+    <div class="lesson-num-badge">4.3</div>
+    <div class="lesson-tag">Lição 4.3 · Módulo 04</div>
+    <h2>Mini plano de marketing de 1 semana com IA</h2>
+    <h3>Sem plano, IA vira distração</h3>
+    <p>Você dominou as ferramentas. Dominou os prompts. Mas se não organizar isso em um plano semanal claro, a IA vira mais uma fonte de "fazer coisa demais". <strong>Plano transforma capacidade em resultado.</strong></p>
+    <h3>Estrutura do plano semanal — 5 elementos por dia</h3>
+    <ul>
+      <li><strong>Foco principal:</strong> 1 frase clara sobre o tema do dia</li>
+      <li><strong>Ações concretas:</strong> 3-5 itens com tempo estimado cada</li>
+      <li><strong>Ferramenta de IA:</strong> qual usar em cada ação específica</li>
+      <li><strong>Entregável do dia:</strong> o que precisa estar pronto até o fim</li>
+      <li><strong>Métrica:</strong> como saber se funcionou</li>
+    </ul>
+    <h3>Exemplo de semana de marketing com IA</h3>
+    <div class="week-plan">
+      <div class="day-card"><div class="day-name">Seg</div><div class="day-focus">Pesquisa e planejamento</div></div>
+      <div class="day-card"><div class="day-name">Ter</div><div class="day-focus">Criar conteúdo de valor</div></div>
+      <div class="day-card"><div class="day-name">Qua</div><div class="day-focus">Produção visual</div></div>
+      <div class="day-card"><div class="day-name">Qui</div><div class="day-focus">Criação da oferta</div></div>
+      <div class="day-card"><div class="day-name">Sex</div><div class="day-focus">Agendamento e automação</div></div>
+      <div class="day-card"><div class="day-name">Sáb</div><div class="day-focus">Análise de métricas</div></div>
+      <div class="day-card"><div class="day-name">Dom</div><div class="day-focus">Planejamento próxima semana</div></div>
+    </div>
+    <div class="key-box"><h4>📌 Como manter a consistência</h4><ul><li>Plano semanal: defina no domingo ou segunda, antes de começar a semana</li><li>Bloco fixo de "criação com IA": 1-2 horas por dia no mesmo horário</li><li>Não inspire — execute. Plano liberta da dependência de inspiração</li><li>Salve os prompts que funcionam em uma biblioteca pessoal (use o OA Biblioteca de Prompts do curso)</li></ul></div>
+  </section>
+
+  <div class="prompt-section">
+    <div class="prompt-section-label">⚡ Prompts prontos para usar — Módulo 04</div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT CRACK COMPLETO — Post de Instagram</div><div class="prompt-text">Você é especialista em copywriting para pequenos negócios brasileiros [ROLE]. Tenho uma [descreva seu negócio] em [cidade/estado] [CONTEXTO]. Escreva uma legenda para Instagram sobre [tema do post] com: hook de atenção nos 3 primeiros segundos, conteúdo de valor em 3-4 parágrafos curtos, pergunta de engajamento e CTA claro. Máximo 200 palavras. Tom: [coloquial/profissional/educativo]. Sem emojis excessivos [CRITÉRIO]. Minha persona: [descreva persona resumida] [CONHECIMENTO].</div></div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT — Plano semanal completo</div><div class="prompt-text">Crie um plano de marketing semanal para [descreva seu negócio] com foco em [objetivo desta semana: lançamento / engajamento / vendas]. Para cada dia (segunda a sexta), defina: foco principal (1 frase), 3 ações com tempo estimado, ferramenta de IA para cada ação, entregável do dia, e métrica para acompanhar. Considere que tenho 2h por dia para dedicar ao marketing.</div></div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT — Crítica e melhoria de copy</div><div class="prompt-text">Analise este texto que escrevi para [objetivo: legenda, anúncio, email]: [cole seu texto aqui]. Avalie: 1) O hook prende atenção nos primeiros 3 segundos? 2) O benefício para o leitor está claro? 3) O CTA é específico e acionável? 4) O tom está alinhado com uma persona de [descreva persona]? Depois, reescreva a versão melhorada.</div></div>
+  </div>
+
+  <div class="summary-box">
+    <h3>✦ Os 5 pontos mais importantes do Módulo 04</h3>
+    <ul class="summary-list">
+      <li>CRACK (Contexto, Role, Ação, Critério, Conhecimento) é a estrutura de qualquer prompt eficaz — quanto mais completo, melhor o output.</li>
+      <li>Primeiro prompt é esboço, não final — 3-4 iterações transformam 70% bom em excelente.</li>
+      <li>Se na 4ª iteração ainda não funciona, o problema é o prompt base: refaça com CRACK, não continue iterando.</li>
+      <li>Plano semanal com 5 elementos por dia (foco, ações, ferramenta, entregável, métrica) transforma capacidade em resultado consistente.</li>
+      <li>Você é o filtro de qualidade — a IA produz, você decide. Valide sempre em situação real antes de publicar.</li>
+    </ul>
+  </div>
+
+  <div class="next-oa"><div><strong>Parabéns! Você concluiu os 4 módulos.</strong><p>Faça o quiz final do Módulo 04 e depois gere seu certificado personalizado.</p></div><a href="oa-12-quiz-modulo-04.html" class="btn-gold">Fazer o quiz final →</a></div>
+</div>
+
+<footer style="background:var(--dark);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.82rem;margin-top:2rem"><div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.4rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div><p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p></footer>
+</body>
+</html>

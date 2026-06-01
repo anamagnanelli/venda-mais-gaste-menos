@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apostila Módulo 01 — IA e Ferramentas · Venda Mais. Gaste Menos.</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --em: #0D9488; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; }
+    nav { background: var(--dark); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 1rem; align-items: center; }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,.1); }
+    .print-btn { background: var(--gold); color: var(--dark); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 700; border: none; cursor: pointer; }
+    .print-btn:hover { background: #B8922A; }
+
+    .doc-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; position: relative; overflow: hidden; }
+    .doc-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .doc-header-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .doc-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(212,168,83,.12); border: 1px solid rgba(212,168,83,.3); color: var(--gold); padding: .35rem .9rem; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; margin-bottom: 1.25rem; }
+    .doc-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+    .doc-header h1 em { color: var(--gold); font-style: italic; }
+    .doc-header p { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 620px; line-height: 1.7; }
+    .doc-meta { display: flex; gap: 2rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.08); flex-wrap: wrap; }
+    .doc-meta-item { font-size: .82rem; color: rgba(255,255,255,.55); }
+    .doc-meta-item strong { color: var(--gold); display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .15rem; }
+
+    .doc-body { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .lesson-section { margin-bottom: 3.5rem; padding-bottom: 3rem; border-bottom: 2px solid var(--border); }
+    .lesson-section:last-of-type { border-bottom: none; }
+    .lesson-num-badge { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--gold), var(--em)); font-family: 'Playfair Display', serif; font-weight: 900; color: var(--dark); font-size: 1rem; margin-bottom: 1rem; }
+    .lesson-tag { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--em); margin-bottom: .5rem; }
+    .lesson-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(22px, 2.8vw, 32px); font-weight: 800; line-height: 1.2; margin-bottom: 1.5rem; }
+
+    .doc-body h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; margin: 1.75rem 0 .75rem; color: var(--dark); }
+    .doc-body p { color: #1f2937; margin-bottom: 1rem; font-size: .97rem; }
+    .doc-body ul, .doc-body ol { padding-left: 1.5rem; margin-bottom: 1.25rem; }
+    .doc-body li { margin-bottom: .5rem; font-size: .97rem; color: #374151; line-height: 1.65; }
+    .doc-body strong { color: var(--dark); }
+
+    .key-box { background: var(--gray); border-left: 4px solid var(--gold); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
+    .key-box h4 { font-size: .82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--gold); margin-bottom: .75rem; }
+    .key-box ul { padding-left: 1.25rem; }
+    .key-box li { font-size: .9rem; color: #374151; margin-bottom: .4rem; }
+
+    .prompt-section { background: var(--dark); border-radius: 16px; padding: 2rem; margin: 2.5rem 0; }
+    .prompt-section-label { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--gold); margin-bottom: 1.25rem; }
+    .prompt-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: .85rem; }
+    .prompt-card-label { font-size: .72rem; color: rgba(255,255,255,.45); font-weight: 600; margin-bottom: .5rem; }
+    .prompt-text { font-family: monospace; font-size: .88rem; color: rgba(255,255,255,.85); line-height: 1.65; white-space: pre-wrap; }
+
+    .summary-box { background: linear-gradient(135deg, rgba(212,168,83,.06), rgba(13,148,136,.04)); border: 1px solid rgba(212,168,83,.2); border-radius: 16px; padding: 2rem; margin: 2.5rem 0; }
+    .summary-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 1.25rem; }
+    .summary-list { list-style: none; padding: 0; }
+    .summary-list li { display: flex; gap: .75rem; align-items: flex-start; padding: .65rem 0; border-bottom: 1px solid rgba(212,168,83,.15); font-size: .95rem; color: #1f2937; }
+    .summary-list li:last-child { border-bottom: none; }
+    .summary-list li::before { content: '✦'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+
+    .next-oa { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .next-oa p { font-size: .9rem; color: var(--muted); }
+    .next-oa strong { display: block; color: var(--dark); font-size: 1rem; margin-bottom: .2rem; }
+    .btn-gold { background: var(--gold); color: var(--dark); padding: .75rem 1.5rem; border-radius: 999px; font-size: .88rem; font-weight: 700; text-decoration: none; white-space: nowrap; }
+    .btn-gold:hover { background: #B8922A; }
+
+    @media print {
+      nav, .print-btn { display: none; }
+      body { background: #fff; }
+      .doc-header { background: var(--dark) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .prompt-section { background: #111 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .key-box, .summary-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .lesson-section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+  <div class="nav-links">
+    <a href="aula-01.html" class="nav-cta">← Voltar à Aula 01</a>
+    <button class="print-btn" onclick="window.print()">📄 Salvar como PDF</button>
+  </div>
+</nav>
+
+<div class="doc-header">
+  <div class="doc-header-inner">
+    <span class="doc-pill">📚 OA 13 · Apostila · Módulo 01</span>
+    <h1>Introdução à IA e as <em>8 Ferramentas</em></h1>
+    <p>Material completo do Módulo 01: o que é IA aplicada ao negócio, o stack de ferramentas curadas e como fazer pesquisa de mercado profissional com Perplexity AI. Leia, anote e aplique.</p>
+    <div class="doc-meta">
+      <div class="doc-meta-item"><strong>Módulo</strong>01 de 04</div>
+      <div class="doc-meta-item"><strong>Lições</strong>3 (1.1 · 1.2 · 1.3)</div>
+      <div class="doc-meta-item"><strong>Leitura estimada</strong>~15 minutos</div>
+      <div class="doc-meta-item"><strong>Ferramentas</strong>ChatGPT · Perplexity AI · Stack completo</div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-body">
+
+  <!-- LIÇÃO 1.1 -->
+  <section class="lesson-section">
+    <div class="lesson-num-badge">1.1</div>
+    <div class="lesson-tag">Lição 1.1 · Módulo 01</div>
+    <h2>IA e o impulso de vendas do pequeno empreendedor</h2>
+
+    <h3>Desmistificando a IA aplicada aos negócios</h3>
+    <p>Esquece tudo que você viu em filme de ficção científica. <strong>Inteligência Artificial</strong> aplicada ao seu negócio é mais parecida com ter uma estagiária superprodutiva que trabalha 24h, nunca cansa e custa centavos por hora. Ela não pensa como humano — ela processa padrões em escala que humano nenhum conseguiria.</p>
+    <p>Para a empreendedora pequena, isso significa <strong>uma coisa só</strong>: você consegue fazer agora, sozinha, o que antes só uma equipe de marketing fazia. Persona detalhada em 3 minutos. Brief de campanha em 5. 10 posts para Instagram em 10.</p>
+
+    <h3>3 casos reais que mostram o impacto</h3>
+    <p><strong>Caso 1 — Loja de moda online (perfil Maria, 32).</strong> Antes da IA: 10h por semana criando conteúdo, posts genéricos, conversão de 0,8%. Depois: 2h por semana, conteúdo segmentado por persona, conversão de 2,1%. Aumento de 162% em vendas.</p>
+    <p><strong>Caso 2 — Carlos, loja física + e-commerce.</strong> Tinha pavor de "internet". Em 30 dias usando ChatGPT para anúncios e Perplexity para pesquisar concorrência, montou a primeira campanha de Google Ads sozinho. ROI de 4,2x no primeiro mês.</p>
+    <p><strong>Caso 3 — Ana, designer freelancer, 28.</strong> Sufocada com prazos. Implementou Biblioteca de Prompts e ElevenLabs para narração de portfólio. Quadruplicou entregas mensais com a mesma qualidade.</p>
+
+    <div class="key-box">
+      <h4>📌 Principais aprendizados</h4>
+      <ul>
+        <li>IA é ferramenta de <strong>amplificação</strong>, não substituição. Você continua sendo a estratégia.</li>
+        <li>O ganho está na <strong>velocidade + segmentação</strong>, não em "qualidade superior".</li>
+        <li>Quem ganha com IA é quem aplica <strong>método</strong> — não quem só abre o ChatGPT às vezes.</li>
+        <li>Casos reais mostram retorno em <strong>30 dias</strong>, não em 6 meses.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LIÇÃO 1.2 -->
+  <section class="lesson-section">
+    <div class="lesson-num-badge">1.2</div>
+    <div class="lesson-tag">Lição 1.2 · Módulo 01</div>
+    <h2>Tour pelas 8 ferramentas curadas do curso</h2>
+
+    <h3>A cadeia completa: ideia → texto → imagem → vídeo → voz → trilha</h3>
+    <p>O curso não defende uma ferramenta única — defende um <strong>stack de 8 ferramentas integradas</strong> que cobrem toda a cadeia de produção de marketing. <strong>7 são gratuitas</strong>. Você não precisa de TODAS para começar — mas é bom saber o que existe.</p>
+
+    <h3>As 8 ferramentas em ordem de prioridade</h3>
+    <ul>
+      <li><strong>ChatGPT</strong> (OpenAI · gratuito) — texto, ideias, personas, copy. Comece aqui. Sempre.</li>
+      <li><strong>Perplexity AI</strong> (gratuito) — pesquisa com fontes reais. Substitui o Google para pesquisa de mercado.</li>
+      <li><strong>Canva AI</strong> (gratuito) — design de posts, banners, vídeos curtos. Funciona com prompts.</li>
+      <li><strong>Leonardo AI</strong> (gratuito · 150 tokens/dia) — imagens originais para campanhas e posts.</li>
+      <li><strong>HeyGen</strong> (gratuito · 3 vídeos/mês) — vídeos com avatar virtual. Para quem tem medo de gravar.</li>
+      <li><strong>ElevenLabs</strong> (gratuito · 10k caracteres/mês) — clonagem de voz e narração ultra-realista.</li>
+      <li><strong>Suno AI</strong> (gratuito · 50 créditos/dia) — música original para seus vídeos. 100% royalty-free.</li>
+      <li><strong>Jasper AI</strong> (pago · US$59/mês) — copy automatizado em escala. Só vale quando você produz 30+ conteúdos/mês.</li>
+    </ul>
+
+    <div class="key-box">
+      <h4>📌 Princípio do stack — sequência de adoção</h4>
+      <ul>
+        <li><strong>Semanas 1-2:</strong> ChatGPT + Canva AI. Domine esses dois antes de qualquer outra.</li>
+        <li><strong>Semana 3:</strong> Perplexity AI entra quando começar a planejar campanhas.</li>
+        <li><strong>Semana 4+:</strong> Leonardo / HeyGen / ElevenLabs / Suno para produção de vídeos.</li>
+        <li><strong>Jasper:</strong> Apenas quando você produz mais de 30 conteúdos/mês.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- LIÇÃO 1.3 -->
+  <section class="lesson-section">
+    <div class="lesson-num-badge">1.3</div>
+    <div class="lesson-tag">Lição 1.3 · Módulo 01</div>
+    <h2>IA para pesquisa de mercado e tendências</h2>
+
+    <h3>Por que a maioria nunca fez pesquisa de mercado</h3>
+    <p>Não é preguiça. É porque pesquisa de mercado profissional sempre foi <strong>cara</strong> (R$5-50k) ou <strong>demorada</strong> (3-6 meses). Empreendedora pequena nunca teve essa opção — então tomava decisão por intuição. Com Perplexity AI, você faz pesquisa estruturada de mercado <strong>em 10 minutos</strong>, com fontes citadas, por zero real.</p>
+
+    <h3>O método das 3 perguntas</h3>
+    <p>Toda boa pesquisa de mercado responde 3 perguntas fundamentais. Use estes prompts no Perplexity:</p>
+    <ul>
+      <li><strong>1. Concorrentes diretos:</strong> "Liste 5 concorrentes diretos de [seu nicho] no Brasil, com link e Instagram de cada."</li>
+      <li><strong>2. Tamanho do mercado:</strong> "Qual o tamanho do mercado brasileiro de [nicho] em faturamento e número de empresas? Cite fontes."</li>
+      <li><strong>3. Tendências emergentes:</strong> "Quais as 3 maiores tendências de [nicho] nos últimos 12 meses, com dados verificáveis?"</li>
+    </ul>
+
+    <h3>O que fazer com os resultados</h3>
+    <p>Pesquisa sem ação é entretenimento. Depois de cada bloco de pesquisa, faça <strong>uma pergunta-ponte no ChatGPT</strong>:</p>
+    <p style="background:var(--gray);padding:1rem 1.25rem;border-radius:10px;font-style:italic;color:#1f2937;margin:1rem 0">"Com base nesta pesquisa: [cola o dado] — qual minha estratégia de posicionamento em 3 frases?"</p>
+
+    <div class="key-box">
+      <h4>📌 Regra de ouro da pesquisa</h4>
+      <ul>
+        <li>Pesquisa de mercado é <strong>mensal</strong>, não anual. Mercado muda rápido.</li>
+        <li>Use Perplexity para dados verificáveis. Use ChatGPT para transformar dados em ação.</li>
+        <li>Se um dado parece bom demais — <strong>peça a fonte</strong>. IA pode alucinar.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROMPTS PRONTOS -->
+  <div class="prompt-section">
+    <div class="prompt-section-label">⚡ Prompts prontos para usar — Módulo 01</div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-label">PROMPT 1 — Entender IA para o seu negócio</div>
+      <div class="prompt-text">Você é um especialista em marketing digital para pequenas empresas brasileiras. Explique como a Inteligência Artificial pode ajudar um negócio de [descreva seu negócio] a: 1) Criar conteúdo mais rápido, 2) Entender melhor os clientes, 3) Aumentar vendas. Seja prático, use exemplos reais e linguagem simples.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-label">PROMPT 2 — Pesquisa de mercado com Perplexity</div>
+      <div class="prompt-text">Faça uma pesquisa de mercado sobre [seu nicho] no Brasil. Inclua: 1) Os 5 maiores concorrentes com Instagram e site, 2) Tamanho estimado do mercado em faturamento anual, 3) As 3 principais tendências dos últimos 12 meses, 4) O perfil do consumidor típico desse mercado. Cite fontes para cada dado.</div>
+    </div>
+
+    <div class="prompt-card">
+      <div class="prompt-card-label">PROMPT 3 — Transformar dados em estratégia</div>
+      <div class="prompt-text">Com base nesta pesquisa de mercado: [cole os dados do Perplexity aqui]. Sugira: 1) Meu diferencial de posicionamento em 1 frase, 2) O nicho específico em que devo focar para ter menos concorrência, 3) A primeira ação de marketing que devo tomar essa semana com base nesses dados.</div>
+    </div>
+  </div>
+
+  <!-- RESUMO -->
+  <div class="summary-box">
+    <h3>✦ Os 5 pontos mais importantes do Módulo 01</h3>
+    <ul class="summary-list">
+      <li>IA é amplificação, não substituição — você é a estratégia, a IA é a ferramenta de execução em escala.</li>
+      <li>Comece pelo ChatGPT e Canva AI. Domine-os nas 2 primeiras semanas antes de adicionar qualquer outra ferramenta.</li>
+      <li>7 das 8 ferramentas do stack são 100% gratuitas — o custo para começar é zero.</li>
+      <li>Pesquisa de mercado com Perplexity leva 10 minutos e entrega dados com fontes verificáveis. Faça mensalmente.</li>
+      <li>Casos reais mostram retorno em 30 dias — não em 6 meses. O segredo é método, não ferramenta.</li>
+    </ul>
+  </div>
+
+  <div class="next-oa">
+    <div>
+      <strong>Próximo passo: Quiz de Verificação</strong>
+      <p>Teste se você absorveu o conteúdo do Módulo 01 com 8 perguntas e feedback imediato.</p>
+    </div>
+    <a href="oa-09-quiz-modulo-01.html" class="btn-gold">Fazer o quiz →</a>
+  </div>
+
+</div>
+
+<footer style="background:var(--dark);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.82rem;margin-top:2rem">
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.4rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+</body>
+</html>

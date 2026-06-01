@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apostila Módulo 03 — Campanhas e Conteúdo · Venda Mais. Gaste Menos.</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:'Inter',sans-serif;background:#FAFAFA;color:#0D0D0D;line-height:1.7;-webkit-font-smoothing:antialiased}:root{--dark:#0D0D0D;--gold:#D4A853;--em:#0D9488;--gray:#F5F4F0;--border:#E5E7EB;--muted:#6B7280}
+    nav{background:var(--dark);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.logo{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;font-weight:700}.logo span{color:var(--gold)}.nav-links{display:flex;gap:1rem;align-items:center}.nav-cta{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);padding:.5rem 1.15rem;border-radius:999px;font-size:.82rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.1)}.print-btn{background:var(--gold);color:var(--dark);padding:.5rem 1.15rem;border-radius:999px;font-size:.82rem;font-weight:700;border:none;cursor:pointer}
+    .doc-header{background:var(--dark);color:#fff;padding:4rem 2rem 3rem;position:relative;overflow:hidden}.doc-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,83,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,83,.04) 1px,transparent 1px);background-size:60px 60px}.doc-header-inner{max-width:860px;margin:0 auto;position:relative;z-index:1}.doc-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(212,168,83,.12);border:1px solid rgba(212,168,83,.3);color:var(--gold);padding:.35rem .9rem;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.06em;margin-bottom:1.25rem}.doc-header h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;line-height:1.1;margin-bottom:1rem}.doc-header h1 em{color:var(--gold);font-style:italic}.doc-header p{color:rgba(255,255,255,.65);font-size:1rem;max-width:620px;line-height:1.7}.doc-meta{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}.doc-meta-item{font-size:.82rem;color:rgba(255,255,255,.55)}.doc-meta-item strong{color:var(--gold);display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem}
+    .doc-body{max-width:860px;margin:0 auto;padding:3rem 2rem 5rem}.lesson-section{margin-bottom:3.5rem;padding-bottom:3rem;border-bottom:2px solid var(--border)}.lesson-section:last-of-type{border-bottom:none}.lesson-num-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--em));font-family:'Playfair Display',serif;font-weight:900;color:var(--dark);font-size:1rem;margin-bottom:1rem}.lesson-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--em);margin-bottom:.5rem}.lesson-section h2{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,32px);font-weight:800;line-height:1.2;margin-bottom:1.5rem}
+    .doc-body h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin:1.75rem 0 .75rem;color:var(--dark)}.doc-body p{color:#1f2937;margin-bottom:1rem;font-size:.97rem}.doc-body ul,.doc-body ol{padding-left:1.5rem;margin-bottom:1.25rem}.doc-body li{margin-bottom:.5rem;font-size:.97rem;color:#374151;line-height:1.65}.doc-body strong{color:var(--dark)}
+    .key-box{background:var(--gray);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:1.5rem 0}.key-box h4{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.75rem}.key-box ul{padding-left:1.25rem}.key-box li{font-size:.9rem;color:#374151;margin-bottom:.4rem}
+    .format-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:1.5rem 0}
+    .format-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.25rem}.format-card h5{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.4rem}.format-card p{font-size:.85rem;color:var(--muted);margin:0;line-height:1.55}.format-card .tag{display:inline-block;font-size:.68rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;margin-bottom:.5rem;background:rgba(13,148,136,.1);color:var(--em)}
+    .prompt-section{background:var(--dark);border-radius:16px;padding:2rem;margin:2.5rem 0}.prompt-section-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:1.25rem}.prompt-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.85rem}.prompt-card-label{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:600;margin-bottom:.5rem}.prompt-text{font-family:monospace;font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.65;white-space:pre-wrap}
+    .summary-box{background:linear-gradient(135deg,rgba(212,168,83,.06),rgba(13,148,136,.04));border:1px solid rgba(212,168,83,.2);border-radius:16px;padding:2rem;margin:2.5rem 0}.summary-box h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;margin-bottom:1.25rem}.summary-list{list-style:none;padding:0}.summary-list li{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(212,168,83,.15);font-size:.95rem;color:#1f2937}.summary-list li:last-child{border-bottom:none}.summary-list li::before{content:'✦';color:var(--gold);font-weight:700;flex-shrink:0}
+    .next-oa{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}.next-oa p{font-size:.9rem;color:var(--muted)}.next-oa strong{display:block;color:var(--dark);font-size:1rem;margin-bottom:.2rem}.btn-gold{background:var(--gold);color:var(--dark);padding:.75rem 1.5rem;border-radius:999px;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}
+    @media print{nav,.print-btn{display:none}body{background:#fff}.doc-header,.prompt-section{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+  </style>
+</head>
+<body>
+<nav><div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div><div class="nav-links"><a href="aula-03.html" class="nav-cta">← Voltar à Aula 03</a><button class="print-btn" onclick="window.print()">📄 Salvar como PDF</button></div></nav>
+
+<div class="doc-header"><div class="doc-header-inner"><span class="doc-pill">📚 OA 15 · Apostila · Módulo 03</span><h1>Campanhas e <em>Conteúdo</em></h1><p>Material completo do Módulo 03: como montar campanhas do zero com IA, a regra 80/20 de conteúdo, formatos por algoritmo e criação de imagens e vídeos com Leonardo, HeyGen e ElevenLabs.</p><div class="doc-meta"><div class="doc-meta-item"><strong>Módulo</strong>03 de 04</div><div class="doc-meta-item"><strong>Lições</strong>3 (3.1 · 3.2 · 3.3)</div><div class="doc-meta-item"><strong>Leitura estimada</strong>~15 minutos</div><div class="doc-meta-item"><strong>Ferramentas</strong>ChatGPT · Leonardo AI · HeyGen · ElevenLabs · Suno</div></div></div></div>
+
+<div class="doc-body">
+  <section class="lesson-section">
+    <div class="lesson-num-badge">3.1</div>
+    <div class="lesson-tag">Lição 3.1 · Módulo 03</div>
+    <h2>Campanha de marketing do zero com IA</h2>
+    <h3>O que é uma campanha e por que a maioria falha</h3>
+    <p>Campanha não é "postar todo dia". Campanha é uma sequência coordenada de comunicações com <strong>objetivo, público, mensagem e janela de tempo definidos</strong>. Sem esses 4 elementos, você está apenas produzindo conteúdo sem estratégia.</p>
+    <p>A maioria das empreendedoras falha porque pula direto para "o que postar?" sem antes definir "para quem, com qual objetivo, em qual período?"</p>
+    <h3>Estrutura de campanha em 5 elementos</h3>
+    <ol>
+      <li><strong>Objetivo:</strong> O que você quer? (seguidores, leads, vendas, tráfego)</li>
+      <li><strong>Público:</strong> Quem é a persona que essa campanha quer atingir?</li>
+      <li><strong>Mensagem central:</strong> O que você quer que a pessoa sinta/pense/faça?</li>
+      <li><strong>Período:</strong> Por quanto tempo? (7, 14, 30 dias)</li>
+      <li><strong>Formatos:</strong> Quais formatos vão entregar a mensagem? (Reels, carrossel, stories)</li>
+    </ol>
+    <h3>Estruturas de copy que funcionam</h3>
+    <ul>
+      <li><strong>AIDA:</strong> Atenção → Interesse → Desejo → Ação. A estrutura clássica de anúncios.</li>
+      <li><strong>PAS:</strong> Problema → Agitação → Solução. Começa pela dor, amplia a urgência, apresenta a saída.</li>
+      <li><strong>Hook + Valor + CTA:</strong> Gancho de atenção nos 3 primeiros segundos + conteúdo de valor + chamada para ação clara.</li>
+    </ul>
+    <div class="key-box"><h4>📌 Do briefing ao rascunho em 10 minutos</h4><ul><li>Defina os 5 elementos da campanha</li><li>Cole o briefing no ChatGPT com o prompt de campanha</li><li>Peça 3 variações de copy (direto, emocional, curioso)</li><li>Escolha a melhor, itere 1-2 vezes, publique</li></ul></div>
+  </section>
+
+  <section class="lesson-section">
+    <div class="lesson-num-badge">3.2</div>
+    <div class="lesson-tag">Lição 3.2 · Módulo 03</div>
+    <h2>Conteúdo para redes: a regra do valor vs. venda</h2>
+    <h3>A regra 80/20 — o único equilíbrio que funciona</h3>
+    <p>Quem só vende perde audiência. Quem só dá valor não monetiza. O equilíbrio testado: <strong>8 posts de valor para cada 2 posts de venda</strong>. Em 10 posts do mês, 2 são de oferta direta — o resto educa, inspira, conta história, dá dica prática.</p>
+    <h3>Tipos de post de valor — para alternar</h3>
+    <ul>
+      <li><strong>Educativo:</strong> Ensina algo específico ("3 erros que você comete ao...")</li>
+      <li><strong>Inspiração:</strong> Frases ou histórias que motivam</li>
+      <li><strong>Bastidores:</strong> Mostra o "como" do trabalho</li>
+      <li><strong>Caso real:</strong> Depoimento ou transformação de cliente</li>
+      <li><strong>Tutorial:</strong> Passo a passo visual</li>
+      <li><strong>Q&A:</strong> Responde dúvida real do público</li>
+      <li><strong>Lista:</strong> Top 5 / Top 10 de algo relevante</li>
+    </ul>
+    <h3>Formatos por algoritmo</h3>
+    <div class="format-grid">
+      <div class="format-card"><span class="tag">Alcance</span><h5>Reels</h5><p>Algoritmo distribui para não seguidores. Topo de funil. Meta: novos seguidores.</p></div>
+      <div class="format-card"><span class="tag">Autoridade</span><h5>Carrossel</h5><p>Algoritmo prioriza salvamentos. Meio de funil. Meta: posicionamento de especialista.</p></div>
+      <div class="format-card"><span class="tag">Relacionamento</span><h5>Stories</h5><p>Engajamento direto com quem já te segue. Fundo de funil. Meta: conversão e fidelização.</p></div>
+      <div class="format-card"><span class="tag">Simplicidade</span><h5>Foto</h5><p>Boa legenda faz toda a diferença. Use para mensagens diretas e fortes.</p></div>
+    </div>
+    <p><strong>Distribuição recomendada:</strong> 50% Reels · 30% Carrossel · 15% Foto · 5% Stories destaque</p>
+    <div class="key-box"><h4>📌 O princípio do reaproveitamento</h4><ul><li>1 post bom = 4 conteúdos diferentes (Reels + Carrossel + Stories + Email)</li><li>Use ChatGPT para "traduzir" um mesmo conteúdo entre formatos</li><li>Calendário editorial mensal: planeja 30 dias em 30 minutos</li></ul></div>
+  </section>
+
+  <section class="lesson-section">
+    <div class="lesson-num-badge">3.3</div>
+    <div class="lesson-tag">Lição 3.3 · Módulo 03</div>
+    <h2>Imagens e vídeos com Leonardo AI + HeyGen</h2>
+    <h3>Leonardo AI — imagens originais sem banco de imagem</h3>
+    <p>Plano gratuito: <strong>150 tokens por dia</strong> — suficiente para ~10 imagens originais, livres para uso comercial. Você descreve o que quer e o Leonardo gera.</p>
+    <p><strong>Prompt que funciona:</strong> "[Sujeito] [ação] em [ambiente], estilo [fotografia natural / ilustração flat / 3D realista], iluminação [suave / dramática / natural], cores [paleta], proporção [vertical 9:16 / quadrada 1:1]"</p>
+    <h3>HeyGen — vídeos com avatar para quem não quer aparecer</h3>
+    <p>Avatar virtual realista fala o seu roteiro. <strong>Plano gratuito: 3 vídeos por mês</strong>, até 1 minuto cada. Escreva o texto, escolha avatar + voz, espere 5 minutos. Resultado: vídeo profissional sem você ter gravado.</p>
+    <p><strong>Quando usar HeyGen:</strong> vídeos curtos de produto, tutoriais técnicos, vídeos de venda. <strong>Quando NÃO usar:</strong> quando você QUER mostrar autenticidade pessoal (Stories, bastidores). Para esses, grave com seu celular mesmo.</p>
+    <h3>ElevenLabs + Suno — voz e trilha sonora</h3>
+    <ul>
+      <li><strong>ElevenLabs:</strong> Narração ultra-realista ou clonagem de voz (10k caracteres/mês grátis). Para narrar Reels sem precisar gravar áudio.</li>
+      <li><strong>Suno AI:</strong> Música original royalty-free (50 créditos/dia). Trilhas para vídeos sem risco de copyright.</li>
+    </ul>
+    <div class="key-box"><h4>📌 Quando usar cada ferramenta visual</h4><ul><li>Post feed com imagem original → Leonardo AI</li><li>Vídeo de produto sem aparecer → HeyGen</li><li>Narração de Reels → ElevenLabs</li><li>Trilha sonora para vídeo → Suno AI</li><li>Design de post/banner → Canva AI</li></ul></div>
+  </section>
+
+  <div class="prompt-section">
+    <div class="prompt-section-label">⚡ Prompts prontos para usar — Módulo 03</div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT 1 — Briefing completo de campanha</div><div class="prompt-text">Crie um briefing completo para uma campanha de marketing de [objetivo: vendas/leads/seguidores] para o negócio de [descreva seu negócio]. Público-alvo: [persona]. Período: [X dias]. Inclua: mensagem central em 1 frase, 3 hooks de atenção diferentes, 5 temas de conteúdo alinhados com a campanha, e 2 posts de venda diretos (formato AIDA e PAS).</div></div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT 2 — Gerar 10 ideias de conteúdo de valor</div><div class="prompt-text">Para o negócio de [descreva seu negócio] com persona [descreva a persona], crie 10 ideias de conteúdo de valor para Instagram (8 de valor + 2 de venda). Para cada ideia: formato (Reels/Carrossel/Foto), hook de abertura, objetivo (alcance/autoridade/conversão), e CTA sugerido. Tom: [coloquial/profissional/educativo].</div></div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT 3 — Prompt para Leonardo AI (imagem)</div><div class="prompt-text">Empreendedora brasileira sorrindo trabalhando no notebook em home office moderno e organizado, estilo fotografia editorial natural, iluminação suave de janela, cores neutras com toque de verde, proporção quadrada 1:1, alta resolução, sem texto na imagem.</div></div>
+  </div>
+
+  <div class="summary-box">
+    <h3>✦ Os 5 pontos mais importantes do Módulo 03</h3>
+    <ul class="summary-list">
+      <li>Campanha tem 5 elementos: objetivo, público, mensagem central, período e formatos. Sem isso, é só conteúdo sem estratégia.</li>
+      <li>Regra 80/20: 8 posts de valor para 2 de venda. Quem só vende perde audiência; quem só dá valor não monetiza.</li>
+      <li>Reels para alcance, Carrossel para autoridade, Stories para relacionamento — cada formato tem um papel no funil.</li>
+      <li>1 conteúdo bom = 4 formatos diferentes (reaproveitamento). Planeje 30 dias em 30 minutos.</li>
+      <li>Leonardo (imagens) + HeyGen (vídeos) + ElevenLabs (voz) + Suno (trilha) = produção completa sem aparecer e sem custo.</li>
+    </ul>
+  </div>
+
+  <div class="next-oa"><div><strong>Próximo passo: Quiz de Verificação</strong><p>8 perguntas sobre campanhas, formatos e ferramentas visuais com feedback imediato.</p></div><a href="oa-11-quiz-modulo-03.html" class="btn-gold">Fazer o quiz →</a></div>
+</div>
+
+<footer style="background:var(--dark);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.82rem;margin-top:2rem"><div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.4rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div><p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p></footer>
+</body>
+</html>

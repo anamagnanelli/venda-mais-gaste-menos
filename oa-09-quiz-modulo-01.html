@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Módulo 01 — IA e Ferramentas · Venda Mais. Gaste Menos.</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: #FAFAFA; color: #0D0D0D; line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+    :root { --dark: #0D0D0D; --gold: #D4A853; --gold-dk: #B8922A; --em: #0D9488; --em-lt: #0FB8A9; --white: #FAFAFA; --gray: #F5F4F0; --border: #E5E7EB; --muted: #6B7280; --correct: #059669; --wrong: #DC2626; }
+    nav { background: var(--dark); border-bottom: 1px solid rgba(255,255,255,.06); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-family: 'Playfair Display', serif; color: #fff; font-size: 1.05rem; font-weight: 700; }
+    .logo span { color: var(--gold); }
+    .nav-cta { background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); padding: .5rem 1.15rem; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; transition: all .2s; border: 1px solid rgba(255,255,255,.1); }
+    .nav-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+    .oa-header { background: var(--dark); color: #fff; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+    .oa-header::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.04) 1px, transparent 1px); background-size: 60px 60px; }
+    .oa-header-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
+    .oa-pill { display: inline-flex; align-items: center; gap: .5rem; background: rgba(13,148,136,.12); border: 1px solid rgba(13,148,136,.3); color: var(--em-lt); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 600; letter-spacing: .04em; margin-bottom: 1.5rem; }
+    .oa-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 46px); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+    .oa-header h1 .gold { color: var(--gold); font-style: italic; }
+    .oa-header p { color: rgba(255,255,255,.65); font-size: 1rem; max-width: 560px; margin: 0 auto; line-height: 1.65; }
+    .progress-wrap { max-width: 720px; margin: 0 auto; padding: 1.5rem 2rem; position: sticky; top: 57px; background: rgba(250,250,250,.95); backdrop-filter: blur(10px); z-index: 50; border-bottom: 1px solid var(--border); }
+    .progress-label { display: flex; justify-content: space-between; margin-bottom: .5rem; font-size: .82rem; color: var(--muted); font-weight: 600; }
+    .progress-label strong { color: var(--dark); }
+    .progress-bar { width: 100%; height: 8px; background: var(--gray); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--em)); border-radius: 999px; transition: width .35s ease; }
+    .container { max-width: 720px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .intro-screen { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 3rem 2.5rem; text-align: center; }
+    .intro-screen .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .intro-screen h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; margin-bottom: 1rem; font-weight: 800; }
+    .intro-screen p { color: #374151; font-size: 1rem; margin-bottom: 1.5rem; line-height: 1.75; }
+    .intro-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; padding: 1.5rem; background: var(--gray); border-radius: 16px; }
+    .intro-feat { text-align: center; }
+    .intro-feat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
+    .intro-feat-label { font-size: .75rem; color: var(--muted); margin-top: .2rem; font-weight: 500; }
+    .question-card { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 2.5rem 2rem; display: none; }
+    .question-card.active { display: block; animation: fadeIn .3s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .q-num { display: inline-block; background: var(--gold); color: var(--dark); padding: .3rem .85rem; border-radius: 999px; font-family: 'Playfair Display', serif; font-weight: 800; font-size: .78rem; letter-spacing: .05em; margin-bottom: 1rem; }
+    .q-title { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.2vw, 24px); font-weight: 700; line-height: 1.35; margin-bottom: 2rem; color: var(--dark); }
+    .answers { display: flex; flex-direction: column; gap: .85rem; }
+    .answer-btn { width: 100%; text-align: left; padding: 1.1rem 1.35rem; background: #fff; border: 2px solid var(--border); border-radius: 14px; font-family: 'Inter', sans-serif; font-size: .96rem; color: var(--dark); font-weight: 500; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 1rem; }
+    .answer-btn:not(.locked):hover { border-color: var(--gold); background: rgba(212,168,83,.04); transform: translateY(-1px); }
+    .answer-btn.selected { border-color: var(--em); background: rgba(13,148,136,.06); }
+    .answer-btn.correct { border-color: var(--correct); background: rgba(5,150,105,.08); }
+    .answer-btn.wrong { border-color: var(--wrong); background: rgba(220,38,38,.06); }
+    .answer-btn.locked { cursor: default; }
+    .a-marker { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .8rem; color: var(--muted); flex-shrink: 0; transition: all .2s; }
+    .answer-btn.selected .a-marker { background: var(--em); color: #fff; border-color: var(--em); }
+    .answer-btn.correct .a-marker { background: var(--correct); color: #fff; border-color: var(--correct); }
+    .answer-btn.wrong .a-marker { background: var(--wrong); color: #fff; border-color: var(--wrong); }
+    .feedback-box { margin-top: 1.25rem; padding: 1rem 1.25rem; border-radius: 12px; font-size: .9rem; line-height: 1.6; display: none; }
+    .feedback-box.correct { background: rgba(5,150,105,.08); border: 1px solid rgba(5,150,105,.25); color: #065f46; }
+    .feedback-box.wrong { background: rgba(220,38,38,.06); border: 1px solid rgba(220,38,38,.2); color: #991b1b; }
+    .feedback-box.show { display: block; animation: fadeIn .3s ease; }
+    .nav-buttons { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+    .btn { padding: .9rem 1.75rem; border-radius: 999px; font-family: 'Inter', sans-serif; font-size: .92rem; font-weight: 700; cursor: pointer; transition: all .2s; display: inline-flex; align-items: center; gap: .4rem; border: none; }
+    .btn-gold { background: var(--gold); color: var(--dark); }
+    .btn-gold:hover:not(:disabled) { background: var(--gold-dk); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { background: var(--gray); color: var(--dark); }
+    .btn:disabled { opacity: .35; cursor: not-allowed; }
+    .result-screen { display: none; }
+    .result-screen.active { display: block; animation: fadeIn .5s ease; }
+    .result-hero { background: var(--dark); color: #fff; border-radius: 24px; padding: 3rem 2.5rem; text-align: center; position: relative; overflow: hidden; margin-bottom: 1.5rem; }
+    .result-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(212,168,83,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(212,168,83,.05) 1px, transparent 1px); background-size: 50px 50px; }
+    .result-hero-inner { position: relative; z-index: 1; }
+    .result-pill { display: inline-block; background: rgba(212,168,83,.15); color: var(--gold); border: 1px solid rgba(212,168,83,.35); padding: .4rem 1rem; border-radius: 999px; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; }
+    .result-score { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; line-height: 1; margin-bottom: .5rem; background: linear-gradient(135deg, var(--gold), var(--em-lt)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .result-score-total { color: rgba(255,255,255,.45); font-size: 1rem; margin-bottom: 1.5rem; }
+    .result-level { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; font-style: italic; color: #fff; margin-bottom: 1rem; }
+    .result-desc { color: rgba(255,255,255,.7); font-size: 1rem; line-height: 1.7; max-width: 460px; margin: 0 auto; }
+    .review-card { background: #fff; border: 1px solid var(--border); border-radius: 22px; padding: 2rem; margin-bottom: 1.5rem; }
+    .review-card h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 1.25rem; }
+    .review-item { padding: .85rem 0; border-bottom: 1px solid var(--border); display: flex; gap: .75rem; align-items: flex-start; font-size: .9rem; }
+    .review-item:last-child { border-bottom: none; }
+    .review-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .review-item strong { display: block; color: var(--dark); margin-bottom: .15rem; }
+    .review-item span { color: var(--muted); font-size: .85rem; }
+    .result-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; padding-top: 1rem; }
+    footer { background: var(--dark); color: rgba(255,255,255,.5); padding: 2rem; text-align: center; font-size: .82rem; margin-top: 4rem; }
+    @media (max-width: 600px) { .intro-features { grid-template-columns: 1fr; } .question-card { padding: 1.75rem 1.25rem; } .nav-buttons { flex-direction: column-reverse; } .nav-buttons .btn { width: 100%; justify-content: center; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div>
+    <a href="aula-01.html" class="nav-cta">← Voltar à Aula 01</a>
+  </div>
+</nav>
+
+<section class="oa-header">
+  <div class="oa-header-inner">
+    <span class="oa-pill">✅ OA 09 · Quiz de Verificação · Módulo 01</span>
+    <h1>Você aprendeu o <span class="gold">Módulo 01?</span></h1>
+    <p>8 perguntas sobre IA, ferramentas e pesquisa de mercado. Cada resposta tem feedback imediato. Você precisa entender o porquê, não só acertar.</p>
+  </div>
+</section>
+
+<div class="progress-wrap" id="progressWrap" style="display:none">
+  <div class="progress-label">
+    <span>Pergunta <strong id="qCurrent">1</strong> de <strong id="qTotal">8</strong></span>
+    <span><strong id="qPct">0</strong>% completo</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+</div>
+
+<div class="container">
+  <section class="intro-screen" id="introScreen">
+    <div class="icon">✅</div>
+    <h2>Hora de verificar o aprendizado</h2>
+    <p>Este quiz testa o conteúdo específico do Módulo 01: IA aplicada ao negócio, o stack de 8 ferramentas e pesquisa de mercado com Perplexity. Não é diagnóstico — é confirmação. Cada resposta mostra o raciocínio certo.</p>
+    <div class="intro-features">
+      <div class="intro-feat"><span class="intro-feat-num">8</span><span class="intro-feat-label">perguntas</span></div>
+      <div class="intro-feat"><span class="intro-feat-num">~4min</span><span class="intro-feat-label">de duração</span></div>
+      <div class="intro-feat"><span class="intro-feat-num">100%</span><span class="intro-feat-label">feedback imediato</span></div>
+    </div>
+    <div class="nav-buttons" style="justify-content:center;border-top:none;padding-top:1rem">
+      <button class="btn btn-gold" onclick="startQuiz()">Começar quiz →</button>
+    </div>
+  </section>
+
+  <div id="quizArea"></div>
+
+  <section class="result-screen" id="resultScreen">
+    <div class="result-hero">
+      <div class="result-hero-inner">
+        <span class="result-pill">Módulo 01 — Concluído</span>
+        <div class="result-score" id="resultScore">0</div>
+        <div class="result-score-total">de 8 acertos</div>
+        <div class="result-level" id="resultLevel">—</div>
+        <p class="result-desc" id="resultDesc">—</p>
+      </div>
+    </div>
+    <div class="review-card">
+      <h3>📋 Revisão das respostas</h3>
+      <div id="reviewList"></div>
+    </div>
+    <div class="result-actions">
+      <button class="btn btn-ghost" onclick="resetQuiz()">↻ Refazer</button>
+      <a href="aula-02.html" class="btn btn-gold">Próximo módulo →</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.4rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div>
+  <p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {
+    title: "O que melhor descreve IA aplicada ao pequeno negócio?",
+    answers: ["Uma tecnologia cara apenas para grandes empresas","Uma estagiária superprodutiva que trabalha 24h por centavos por hora","Um sistema que pensa exatamente como um ser humano","Uma substituição completa do profissional de marketing"],
+    correct: 1,
+    feedback: "Correto! IA não pensa como humano — ela processa padrões em escala. Para o pequeno empreendedor, é como ter uma equipe de marketing disponível 24h sem custo de contratação."
+  },
+  {
+    title: "Quantas das 8 ferramentas do stack do curso são completamente gratuitas?",
+    answers: ["4 ferramentas","5 ferramentas","6 ferramentas","7 ferramentas"],
+    correct: 3,
+    feedback: "7 de 8 são gratuitas! Apenas o Jasper AI é pago (US$59/mês) — e só vale a pena quando você produz mais de 30 conteúdos/mês."
+  },
+  {
+    title: "Qual ferramenta é recomendada para COMEÇAR no primeiro mês do stack?",
+    answers: ["HeyGen — vídeos com avatar","Leonardo AI — imagens originais","ChatGPT — texto, ideias, personas, copy","Jasper AI — copy em escala"],
+    correct: 2,
+    feedback: "ChatGPT SEMPRE. É a base de tudo: persona, copy, estratégia. Domine o ChatGPT nas 2 primeiras semanas antes de adicionar qualquer outra ferramenta."
+  },
+  {
+    title: "Para que serve o Perplexity AI no contexto deste curso?",
+    answers: ["Design de posts e banners para Instagram","Pesquisa de mercado com fontes reais e verificáveis","Geração de imagens originais para campanhas","Criação de vídeos com avatar virtual"],
+    correct: 1,
+    feedback: "Perplexity substitui o Google para pesquisa de mercado — com fontes citadas (link clicável). Em 10 minutos você faz pesquisa profissional que antes custava R$5-50k."
+  },
+  {
+    title: "Qual foi o aumento de conversão da loja de moda (Maria, 32) após aplicar IA?",
+    answers: ["De 0,5% para 1,2%","De 0,8% para 2,1%","De 1,0% para 3,0%","De 0,8% para 1,5%"],
+    correct: 1,
+    feedback: "De 0,8% para 2,1% — aumento de 162% em vendas. O segredo: conteúdo segmentado por persona em vez de posts genéricos, reduzindo tempo de criação de 10h para 2h/semana."
+  },
+  {
+    title: "Quando faz sentido pagar pelo Jasper AI?",
+    answers: ["Desde o primeiro dia — mais caro = melhor","Quando o negócio tem orçamento disponível","Apenas quando você produz mais de 30 conteúdos por mês","Para substituir o ChatGPT nas tarefas diárias"],
+    correct: 2,
+    feedback: "Jasper só faz sentido em escala. Se você produz menos de 30 conteúdos/mês, o ChatGPT gratuito entrega o mesmo resultado. Escale antes de pagar."
+  },
+  {
+    title: "O método das 3 perguntas com Perplexity serve para:",
+    answers: ["Criar personas detalhadas com o ChatGPT","Pesquisar concorrentes, tamanho de mercado e tendências emergentes","Gerar prompts de imagem para o Leonardo AI","Automatizar posts no Instagram"],
+    correct: 1,
+    feedback: "As 3 perguntas: 1) Quem são meus concorrentes diretos? 2) Qual o tamanho real do meu mercado? 3) Quais tendências estão emergindo? Cada uma com dados verificáveis e fontes citadas."
+  },
+  {
+    title: "Qual é a definição correta de IA como ferramenta de negócio?",
+    answers: ["IA substituirá todos os profissionais de marketing em 2026","IA é uma ferramenta de amplificação — você continua sendo a estratégia","IA funciona melhor sem orientação humana","IA só entrega qualidade superior, não velocidade"],
+    correct: 1,
+    feedback: "Amplificação, não substituição. O ganho está em velocidade + segmentação. Quem ganha com IA é quem aplica método — não quem só abre o ChatGPT às vezes."
+  }
+];
+
+let current = 0;
+let userAnswers = new Array(QUESTIONS.length).fill(null);
+let answered = new Array(QUESTIONS.length).fill(false);
+
+function startQuiz() {
+  document.getElementById('introScreen').style.display = 'none';
+  document.getElementById('progressWrap').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const area = document.getElementById('quizArea');
+  area.innerHTML = '';
+  const q = QUESTIONS[current];
+  const card = document.createElement('div');
+  card.className = 'question-card active';
+
+  const letters = ['A','B','C','D'];
+  const isAnswered = answered[current];
+
+  card.innerHTML = `
+    <div class="q-num">Pergunta ${current + 1} de ${QUESTIONS.length}</div>
+    <div class="q-title">${q.title}</div>
+    <div class="answers">
+      ${q.answers.map((a, i) => `
+        <button class="answer-btn ${isAnswered ? 'locked' : ''} ${isAnswered && i === q.correct ? 'correct' : ''} ${isAnswered && userAnswers[current] === i && i !== q.correct ? 'wrong' : ''} ${!isAnswered && userAnswers[current] === i ? 'selected' : ''}"
+          onclick="${isAnswered ? '' : `selectAnswer(${i})`}"
+          ${isAnswered ? 'disabled' : ''}>
+          <span class="a-marker">${isAnswered ? (i === q.correct ? '✓' : (userAnswers[current] === i ? '✗' : letters[i])) : letters[i]}</span>
+          ${a}
+        </button>
+      `).join('')}
+    </div>
+    ${isAnswered ? `<div class="feedback-box ${userAnswers[current] === q.correct ? 'correct' : 'wrong'} show">${userAnswers[current] === q.correct ? '✅ ' : '❌ '}${q.feedback}</div>` : ''}
+    <div class="nav-buttons">
+      <button class="btn btn-ghost" onclick="prevQ()" ${current === 0 ? 'disabled' : ''}>← Anterior</button>
+      <button class="btn btn-gold" id="nextBtn" onclick="${current < QUESTIONS.length - 1 ? 'nextQ()' : 'showResult()'}" ${!isAnswered && userAnswers[current] === null ? 'disabled' : ''}>
+        ${current < QUESTIONS.length - 1 ? 'Próxima →' : 'Ver resultado →'}
+      </button>
+    </div>
+  `;
+  area.appendChild(card);
+  updateProgress();
+}
+
+function selectAnswer(i) {
+  userAnswers[current] = i;
+  answered[current] = true;
+  renderQuestion();
+}
+
+function nextQ() { if (current < QUESTIONS.length - 1) { current++; renderQuestion(); } }
+function prevQ() { if (current > 0) { current--; renderQuestion(); } }
+
+function updateProgress() {
+  const pct = Math.round(((current + 1) / QUESTIONS.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('qCurrent').textContent = current + 1;
+  document.getElementById('qTotal').textContent = QUESTIONS.length;
+  document.getElementById('qPct').textContent = pct;
+}
+
+function showResult() {
+  document.getElementById('quizArea').innerHTML = '';
+  document.getElementById('progressWrap').style.display = 'none';
+  const correct = userAnswers.filter((a, i) => a === QUESTIONS[i].correct).length;
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+
+  const levels = [
+    { min: 0, max: 3, label: 'Revise o Módulo 01', desc: 'Alguns conceitos ainda precisam de atenção. Releia as lições e refaça o quiz — o conteúdo é a base de tudo que vem a seguir.' },
+    { min: 4, max: 5, label: 'Bom começo!', desc: 'Você captou os pontos principais. Revise as perguntas que errou antes de avançar para o Módulo 02.' },
+    { min: 6, max: 7, label: 'Muito bem!', desc: 'Sólido domínio do conteúdo. Pode avançar com confiança para o Módulo 02 — persona e estratégia.' },
+    { min: 8, max: 8, label: 'Domínio total!', desc: 'Perfeito! Você internalizou todos os conceitos do Módulo 01. Está pronto para aplicar e avançar.' }
+  ];
+  const level = levels.find(l => correct >= l.min && correct <= l.max);
+
+  document.getElementById('resultScore').textContent = correct;
+  document.getElementById('resultLevel').textContent = level.label;
+  document.getElementById('resultDesc').textContent = level.desc;
+
+  const reviewList = document.getElementById('reviewList');
+  QUESTIONS.forEach((q, i) => {
+    const ok = userAnswers[i] === q.correct;
+    const div = document.createElement('div');
+    div.className = 'review-item';
+    div.innerHTML = `<span class="review-icon">${ok ? '✅' : '❌'}</span><div><strong>${q.title}</strong><span>Resposta correta: ${q.answers[q.correct]}</span></div>`;
+    reviewList.appendChild(div);
+  });
+
+  const rs = document.getElementById('resultScreen');
+  rs.classList.add('active');
+  rs.scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  current = 0;
+  userAnswers = new Array(QUESTIONS.length).fill(null);
+  answered = new Array(QUESTIONS.length).fill(false);
+  document.getElementById('resultScreen').classList.remove('active');
+  document.getElementById('progressWrap').style.display = 'block';
+  renderQuestion();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apostila Módulo 02 — Persona e Estratégia · Venda Mais. Gaste Menos.</title>
+  <link rel="stylesheet" href="fonts.css">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{font-size:16px}body{font-family:'Inter',sans-serif;background:#FAFAFA;color:#0D0D0D;line-height:1.7;-webkit-font-smoothing:antialiased}:root{--dark:#0D0D0D;--gold:#D4A853;--em:#0D9488;--gray:#F5F4F0;--border:#E5E7EB;--muted:#6B7280}
+    nav{background:var(--dark);padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}.logo{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;font-weight:700}.logo span{color:var(--gold)}.nav-links{display:flex;gap:1rem;align-items:center}.nav-cta{background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);padding:.5rem 1.15rem;border-radius:999px;font-size:.82rem;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,.1)}.print-btn{background:var(--gold);color:var(--dark);padding:.5rem 1.15rem;border-radius:999px;font-size:.82rem;font-weight:700;border:none;cursor:pointer}
+    .doc-header{background:var(--dark);color:#fff;padding:4rem 2rem 3rem;position:relative;overflow:hidden}.doc-header::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,83,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,83,.04) 1px,transparent 1px);background-size:60px 60px}.doc-header-inner{max-width:860px;margin:0 auto;position:relative;z-index:1}.doc-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(212,168,83,.12);border:1px solid rgba(212,168,83,.3);color:var(--gold);padding:.35rem .9rem;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.06em;margin-bottom:1.25rem}.doc-header h1{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;line-height:1.1;margin-bottom:1rem}.doc-header h1 em{color:var(--gold);font-style:italic}.doc-header p{color:rgba(255,255,255,.65);font-size:1rem;max-width:620px;line-height:1.7}.doc-meta{display:flex;gap:2rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap}.doc-meta-item{font-size:.82rem;color:rgba(255,255,255,.55)}.doc-meta-item strong{color:var(--gold);display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.15rem}
+    .doc-body{max-width:860px;margin:0 auto;padding:3rem 2rem 5rem}.lesson-section{margin-bottom:3.5rem;padding-bottom:3rem;border-bottom:2px solid var(--border)}.lesson-section:last-of-type{border-bottom:none}.lesson-num-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--em));font-family:'Playfair Display',serif;font-weight:900;color:var(--dark);font-size:1rem;margin-bottom:1rem}.lesson-tag{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--em);margin-bottom:.5rem}.lesson-section h2{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,32px);font-weight:800;line-height:1.2;margin-bottom:1.5rem}
+    .doc-body h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin:1.75rem 0 .75rem;color:var(--dark)}.doc-body p{color:#1f2937;margin-bottom:1rem;font-size:.97rem}.doc-body ul,.doc-body ol{padding-left:1.5rem;margin-bottom:1.25rem}.doc-body li{margin-bottom:.5rem;font-size:.97rem;color:#374151;line-height:1.65}.doc-body strong{color:var(--dark)}
+    .key-box{background:var(--gray);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:1.25rem 1.5rem;margin:1.5rem 0}.key-box h4{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);margin-bottom:.75rem}.key-box ul{padding-left:1.25rem}.key-box li{font-size:.9rem;color:#374151;margin-bottom:.4rem}
+    .prompt-section{background:var(--dark);border-radius:16px;padding:2rem;margin:2.5rem 0}.prompt-section-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);margin-bottom:1.25rem}.prompt-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem 1.25rem;margin-bottom:.85rem}.prompt-card-label{font-size:.72rem;color:rgba(255,255,255,.45);font-weight:600;margin-bottom:.5rem}.prompt-text{font-family:monospace;font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.65;white-space:pre-wrap}
+    .summary-box{background:linear-gradient(135deg,rgba(212,168,83,.06),rgba(13,148,136,.04));border:1px solid rgba(212,168,83,.2);border-radius:16px;padding:2rem;margin:2.5rem 0}.summary-box h3{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;margin-bottom:1.25rem}.summary-list{list-style:none;padding:0}.summary-list li{display:flex;gap:.75rem;align-items:flex-start;padding:.65rem 0;border-bottom:1px solid rgba(212,168,83,.15);font-size:.95rem;color:#1f2937}.summary-list li:last-child{border-bottom:none}.summary-list li::before{content:'✦';color:var(--gold);font-weight:700;flex-shrink:0}
+    .next-oa{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}.next-oa p{font-size:.9rem;color:var(--muted)}.next-oa strong{display:block;color:var(--dark);font-size:1rem;margin-bottom:.2rem}.btn-gold{background:var(--gold);color:var(--dark);padding:.75rem 1.5rem;border-radius:999px;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}
+    @media print{nav,.print-btn{display:none}body{background:#fff}.doc-header,.prompt-section{-webkit-print-color-adjust:exact;print-color-adjust:exact}.lesson-section{page-break-inside:avoid}}
+  </style>
+</head>
+<body>
+<nav><div class="logo">✦ Venda Mais. <span>Gaste Menos.</span></div><div class="nav-links"><a href="aula-02.html" class="nav-cta">← Voltar à Aula 02</a><button class="print-btn" onclick="window.print()">📄 Salvar como PDF</button></div></nav>
+
+<div class="doc-header"><div class="doc-header-inner"><span class="doc-pill">📚 OA 14 · Apostila · Módulo 02</span><h1>Persona e <em>Estratégia</em></h1><p>Material completo do Módulo 02: criação de persona com ChatGPT, mapeamento de dores e desejos, e alinhamento entre persona, produto e marketing. Leia, anote e aplique.</p><div class="doc-meta"><div class="doc-meta-item"><strong>Módulo</strong>02 de 04</div><div class="doc-meta-item"><strong>Lições</strong>3 (2.1 · 2.2 · 2.3)</div><div class="doc-meta-item"><strong>Leitura estimada</strong>~15 minutos</div><div class="doc-meta-item"><strong>Ferramentas</strong>ChatGPT · Mapa de Empatia</div></div></div></div>
+
+<div class="doc-body">
+  <section class="lesson-section">
+    <div class="lesson-num-badge">2.1</div>
+    <div class="lesson-tag">Lição 2.1 · Módulo 02</div>
+    <h2>O que é persona e como criar com ChatGPT</h2>
+    <h3>Por que persona muda tudo</h3>
+    <p>Persona é uma <strong>representação fictícia e detalhada do seu cliente ideal</strong>, baseada em dados reais e comportamentos observados. Não é "todo mundo que pode comprar". É uma pessoa específica com nome, idade, profissão, dores, desejos, canais preferidos e objeções reais.</p>
+    <p>Sem persona, você faz marketing "para todo mundo" — que na prática é para ninguém. Com persona, cada post, anúncio e oferta fala diretamente com a pessoa certa. A diferença em conversão é de 3-5x.</p>
+    <h3>Como criar persona com ChatGPT em 3 minutos</h3>
+    <p>Abra o ChatGPT e use este prompt base (adapte para o seu negócio):</p>
+    <p style="background:var(--gray);padding:1rem 1.25rem;border-radius:10px;font-style:italic;color:#1f2937;margin:1rem 0">"Crie uma persona detalhada para um negócio de [descreva seu negócio]. A persona deve ter: nome, idade, profissão, renda mensal, onde mora, rotina diária, dores principais (3), desejos profundos (3), canais que usa, objeções para comprar [seu produto], frase que ela diria sobre [seu problema]."</p>
+    <h3>Do genérico ao específico</h3>
+    <p>Persona ruim: "Mulheres de 25-45 anos interessadas em moda". Persona boa: "Maria, 32 anos, dona de loja de roupas online em São Paulo, fatura R$8k/mês, passa 10h/semana criando conteúdo manualmente, sonha em contratar uma assistente mas não tem verba, tem pavor de aparecer em vídeo."</p>
+    <div class="key-box"><h4>📌 Princípio da persona específica</h4><ul><li>Específica o suficiente para o ICP se reconhecer na hora</li><li>Ampla o suficiente para o mercado ser grande</li><li>Baseada em dados e observação, não em achismo</li><li>Atualizada a cada 3-6 meses — o cliente muda</li></ul></div>
+  </section>
+
+  <section class="lesson-section">
+    <div class="lesson-num-badge">2.2</div>
+    <div class="lesson-tag">Lição 2.2 · Módulo 02</div>
+    <h2>Mapa de dores e desejos</h2>
+    <h3>Dores superficiais vs. dores profundas</h3>
+    <p>Dor superficial: "não tenho tempo para criar conteúdo". Dor profunda: "sinto que meu negócio está ficando para trás porque não consigo me comunicar como os grandes e isso me dá ansiedade e vergonha". O marketing que toca a dor profunda converte 3-5x mais.</p>
+    <p>Para encontrar a dor profunda: pergunte "por que isso te incomoda?" três vezes seguidas. Na terceira resposta, você chega na dor real.</p>
+    <h3>Os 3 desejos profundos</h3>
+    <p>Toda persona busca três camadas de desejo:</p>
+    <ul>
+      <li><strong>O que ela quer SER:</strong> "quero me sentir uma empreendedora competente e profissional"</li>
+      <li><strong>O que ela quer TER:</strong> "quero ter um negócio organizado que funcione sem eu estar presente"</li>
+      <li><strong>O que ela quer SENTIR:</strong> "quero sentir segurança financeira e orgulho do que construí"</li>
+    </ul>
+    <h3>Como usar o mapa nas campanhas</h3>
+    <p>As <strong>frases reais da persona</strong> (coletadas em comentários, DMs, reviews de concorrentes) viram diretamente os títulos dos seus anúncios e posts. Exemplo: se a persona diz "fico horas no Canva e o post sai feio", sua headline é: "Crie posts profissionais em 10 minutos — sem saber design".</p>
+    <div class="key-box"><h4>📌 Aplicação prática imediata</h4><ul><li>Leia os comentários dos concorrentes no Instagram para encontrar dores reais em linguagem real</li><li>Headlines = frases REAIS da persona, não suas</li><li>Posts de valor = mostram dor + agitam consequência</li><li>Posts de venda = revelam solução + mostram desejo realizado</li></ul></div>
+  </section>
+
+  <section class="lesson-section">
+    <div class="lesson-num-badge">2.3</div>
+    <div class="lesson-tag">Lição 2.3 · Módulo 02</div>
+    <h2>Alinhamento persona × marketing × estratégia</h2>
+    <h3>O erro mais caro: persona desconectada do produto</h3>
+    <p>A empreendedora cria persona linda. Cria produto separado. Cria marketing separado. Cada coisa de um lado. Resultado: posts não convertem, anúncios não funcionam, vendas não fecham — porque persona, marketing e estratégia não conversam.</p>
+    <h3>O teste de alinhamento em 3 perguntas</h3>
+    <p>Para cada decisão de produto, marketing ou estratégia, responda:</p>
+    <ol>
+      <li><strong>Faz sentido para MINHA persona?</strong> (não para "todo mundo")</li>
+      <li><strong>Resolve UMA das dores mapeadas?</strong> (especificamente — qual delas?)</li>
+      <li><strong>Atinge UM dos desejos profundos?</strong> (qual?)</li>
+    </ol>
+    <p>Se as 3 respostas forem "sim", siga. Se qualquer uma for "não", repense. Este teste sozinho economiza 80% do tempo desperdiçado em coisa que não converte.</p>
+    <h3>Persona define canal, tom e oferta</h3>
+    <ul>
+      <li>Maria (moda, 32) → Instagram + Reels + linguagem coloquial-direta</li>
+      <li>Carlos (loja física, 45) → WhatsApp + Facebook + linguagem mais formal e didática</li>
+      <li>Ana (freelance, 28) → LinkedIn + email + tom mais técnico-prático</li>
+    </ul>
+    <div class="key-box"><h4>📌 Princípio do alinhamento</h4><ul><li>Persona é a bússola de toda decisão de marketing</li><li>Canais não são "Instagram + Facebook + TikTok + tudo" — são onde SUA persona está</li><li>Tom de voz vem da persona, não da "moda do mercado"</li><li>Produto que não resolve dor da persona não vende — por mais bonito que seja</li></ul></div>
+  </section>
+
+  <div class="prompt-section">
+    <div class="prompt-section-label">⚡ Prompts prontos para usar — Módulo 02</div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT 1 — Criar persona completa</div><div class="prompt-text">Você é especialista em marketing para pequenas empresas. Crie uma persona detalhada para um negócio de [descreva seu negócio] no Brasil. Inclua: nome, idade, profissão, renda, cidade, rotina, 3 dores principais com intensidade (1-10), 3 desejos profundos (SER, TER, SENTIR), canais digitais que usa, 3 objeções para comprar, frase exata que ela diria descrevendo sua maior frustração com [seu nicho].</div></div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT 2 — Mapa de dores profundas</div><div class="prompt-text">Para a persona [nome da sua persona], aprofunde o mapeamento de dores. Para cada dor superficial abaixo, encontre a dor profunda (causa raiz emocional), o gatilho que ativa essa dor, a consequência se não for resolvida, e a frase exata que ela usaria pra descrever. Dores superficiais: [liste 3 dores da sua persona].</div></div>
+    <div class="prompt-card"><div class="prompt-card-label">PROMPT 3 — Teste de alinhamento produto × persona</div><div class="prompt-text">Analise se [descreva seu produto/serviço] está alinhado com a persona [nome] que tem as seguintes dores: [liste as dores] e desejos: [liste os desejos]. Responda: 1) Faz sentido pra essa persona? Por quê? 2) Qual dor específica resolve? 3) Qual desejo profundo atinge? 4) O que ajustar para ter mais alinhamento?</div></div>
+  </div>
+
+  <div class="summary-box">
+    <h3>✦ Os 5 pontos mais importantes do Módulo 02</h3>
+    <ul class="summary-list">
+      <li>Persona específica converte 3-5x mais que marketing genérico — "para todo mundo" é para ninguém.</li>
+      <li>Dor profunda (causa raiz emocional) é mais poderosa que dor superficial — pergunte "por quê?" 3 vezes.</li>
+      <li>Os 3 desejos profundos (SER, TER, SENTIR) transformam a venda em identidade, não em transação.</li>
+      <li>O teste de 3 perguntas (faz sentido? resolve dor? atinge desejo?) economiza 80% do tempo desperdiçado.</li>
+      <li>Persona define canal, tom e oferta — mesma mensagem, entregues de formas completamente diferentes.</li>
+    </ul>
+  </div>
+
+  <div class="next-oa"><div><strong>Próximo passo: Quiz de Verificação</strong><p>8 perguntas sobre persona e estratégia com feedback imediato em cada resposta.</p></div><a href="oa-10-quiz-modulo-02.html" class="btn-gold">Fazer o quiz →</a></div>
+</div>
+
+<footer style="background:var(--dark);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.82rem;margin-top:2rem"><div style="font-family:'Playfair Display',serif;color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:.4rem">✦ Venda Mais. <span style="color:var(--gold)">Gaste Menos.</span></div><p>© 2026 · Projeto Extensionista · Saint Paul Escola de Negócios</p></footer>
+</body>
+</html>
